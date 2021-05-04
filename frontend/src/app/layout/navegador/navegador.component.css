@@ -1,0 +1,111 @@
+/* Navegador lateral */
+
+.navbar-global {
+    background-color: indigo;
+  }
+  
+  .navbar-global .navbar-brand {
+    color: white;
+  }
+  
+  .navbar-global .navbar-user > li > a
+  {
+    color: white;
+  }
+  
+  .navbar-primary {
+    background-color: rgb(8, 15, 39);
+    bottom: 0px;
+    left: 0px;
+    position: fixed !important;
+    top: 0px;
+    padding-top: 48px;
+    width: 12%;
+    z-index: 8;
+    overflow: hidden;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+  }
+  
+  .navbar-primary.collapsed {
+    width: 80px;
+  }
+  
+  .navbar-primary.collapsed .glyphicon {
+    font-size: 22px;
+  }
+  
+  .navbar-primary.collapsed .nav-label {
+    display: none;
+  }
+  
+  .btn-expand-collapse {
+      position: absolute;
+      display: block;
+      left: 0px;
+      bottom:0;
+      width: 100%;
+      padding: 8px 0;
+      border-top:solid 1px #666;
+      color: white;
+      font-size: 20px;
+      text-align: center;
+      border-radius: 7px;
+  }
+  
+  .btn-expand-collapse:hover {
+      background-color: rgba(4, 193, 239, 0.20);
+      color: white;
+      border-radius: 7px;
+  }
+  
+  .btn-expand-collapse:active {
+      background-color: #111;
+  }
+  
+  .navbar-primary-menu,
+  .navbar-primary-menu li {
+    margin:0; padding:0;
+    list-style: none;
+  }
+  
+  .navbar-primary-menu li a {
+    display: block;
+    padding: 9px 18px;
+    margin: 8px;
+    text-align: left;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .navbar-primary-menu li a:hover {
+    background-color: rgba(4, 193, 239, 0.20);
+    text-decoration: none;
+    color: white;
+    border-radius: 7px;
+  }
+  
+  .navbar-primary-menu li a .glyphicon {
+    margin-right: 6px;
+  }
+  
+  .navbar-primary-menu li a:hover .glyphicon {
+    color: orchid;
+  }
+  
+  .main-content {
+    margin-top: 60px;
+    margin-left: 200px;
+    padding: 20px;
+  }
+  
+  .collapsed + .main-content {
+    margin-left: 60px;
+  }
+  
+  .diferenciar-nav {
+      border-bottom: solid 1px #444;
+      padding: 14px 0px; 
+  }
+  /* FIN Navegador lateral */

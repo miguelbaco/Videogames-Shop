@@ -1,0 +1,43 @@
+<div class="col-2 desplegable">
+    <nav class="navbar-primary">
+      <a href="#" class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left icono-caretLeft"></span></a>
+      <ul class="navbar-primary-menu">
+          <li>
+          <a href="#"><span class="icono-cart"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Carrito</p></span></a>
+        </li>
+        <li>
+          <a href="#"><span class="icono-heart"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Lista de deseos</p></span></a>
+        </li>
+          <div class="span6 diferenciar-nav">
+            </div>
+        <li>
+          <a href="#"><span class="icono-market"></span><span class="nav-label px-2 ml-0 pl-0"><p class="list-inline-item mb-0 pb-0">Inicio</p></span></a>
+          </li>
+          <li>
+          <a href="#"><span class="icono-eye"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Novedades</p></span></a>
+        </li>
+        <li>
+          <a href="#"><span class="icono-play"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Juegos</p></span></a>
+        </li>
+        <div class="span6 diferenciar-nav">
+        </div>
+        <li>
+          <a href="#"><span class="icono-tag"></span><span class="nav-label px-2 ml-0 pl-0">Categorías</span></a>
+        </li>
+        <li>
+          <a href="#"><span class="nav-label px-2">Prueba</span></a>
+        </li>
+      </ul>
+    </nav>
+</div>
+
+<script type="text/javascript">
+  $('.btn-expand-collapse').click(function(e) {
+    $('.navbar-primary').toggleClass('collapsed');
+    $('.glyphicon-menu-left').toggleClass('icono-caretLeft');
+    $('.glyphicon-menu-left').toggleClass('icono-caretRight');
+    $('.contenido').toggleClass('col-10');
+    $('.contenido').toggleClass('position-relative');
+    $('.desplegable').toggleClass('col-1');
+  });
+</script>

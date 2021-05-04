@@ -1,0 +1,39 @@
+html {
+	overflow-x:hidden;
+}
+
+body {
+	background-color: rgb(6, 11, 29) !important;
+}
+
+h2, p, h4, h5 {
+	color: white;
+}
+
+@keyframes ampliar {
+    0% {transform: scale(1.0);}
+    50% {transform: scale(1.2);}
+    0% {transform: scale(1.0);}
+}
+
+.contenido {
+	background-color: rgba(67, 89, 142, 0.35);
+	border-radius: 7px;
+	padding: 17px;
+  right: 100px;
+}
+
+.contenidointerior {
+  background-color: rgba(57, 79, 130, 0.35);
+  border-radius: 7px;
+  padding: 15px;
+  margin-right: 20px;
+}
+
+.row {
+	background-color: rgb(6, 11, 29);
+}
+
+.span6 {
+    height: 38px;
+}

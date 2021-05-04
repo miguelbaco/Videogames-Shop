@@ -1,0 +1,144 @@
+.checked {
+color: orange;
+}
+
+.fa-star {
+width: 25px !important;
+height: 25px !important;
+}
+
+/* Boton de añadir a carrito / deseos */
+
+.anadir {
+background-color: #4BA5FF !important;
+color: white !important;
+border-radius: 7px;
+}
+
+.anadir:hover {
+background-color: #9BCDFF !important;
+text-decoration: none;
+color: white !important;
+border-radius: 7px;
+color: black !important;
+}
+
+/* Ver unico juego */
+
+.caratulajuego h5, p {
+margin: 0px;
+margin: 0px 3px;
+}
+
+.caratulaimagenjuego {
+background-size: cover;
+}
+
+.spancaratulajuego {
+height: 90%;
+}
+
+.caratulajuego {
+width: 320px;
+height: 485px;
+/*box-shadow: 0px 4px 5px 6px black;*/
+background: linear-gradient(0deg, rgb(6, 11, 29) 0%, rgba(6, 11, 29,0.4) 50%, rgba(0,0,0,0) 100%);
+box-shadow:
+    6px 7px 8px 3px rgba(0,0,0,0.68),
+    inset #333 0 0 0 1px,
+    inset rgba(255,255,255, 0.5) 0 0 0 1px;
+}
+
+.botones {
+margin-top: 14px;
+}
+
+.caratulaimagenjuego {
+background-size: cover;
+}
+
+.caratulajuego:hover {
+animation: ampliar 3s;
+}
+
+.fa {
+transform: scale(1.8);
+}
+
+.logo {
+position: relative;
+top: 14px;
+left: 100px;
+transform: scale(2.6);
+}
+
+.estrellas {
+position: relative;
+left: 100px;
+border-radius: 8px;
+background-color: #E8F4FF;
+}
+
+.notadejuego {
+position: relative;
+bottom: 16px;
+left: 15px;
+}
+
+.notamaxima {
+position: relative;
+top: 9px;
+left: 13px;
+}
+
+.totalvotos {
+position: relative;
+bottom: 13px;
+left: 15px;
+border-left: solid 1px #666;
+padding-left: 45px;
+}
+
+.separar {
+margin-left: 20px;
+}
+
+.diferenciar-nav {
+	border-bottom: solid 1px #444;
+	padding: 14px 0px; 
+}
+
+.span6 {
+	height: 38px;
+}
+
+.section_footer {
+	margin-top: 3rem;
+	align-items: center;
+	text-align: center;
+}
+
+.footercarrito {
+    position: relative;
+    top: 30px;
+  }
+
+.juegocarritotext {
+   margin: 15px 40px;
+} 
+
+.contenido {
+	background-color: rgba(67, 89, 142, 0.35);
+	border-radius: 7px;
+	padding: 17px;
+  right: 160px;
+}
+
+.checked {
+    color: orange;
+  }
+  
+  .fa-star {
+    width: 25px !important;
+    height: 25px !important;
+  }

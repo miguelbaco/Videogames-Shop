@@ -1,0 +1,99 @@
+.star {
+    margin: 0px 20px;
+  }
+
+.rating-stars ul {
+list-style-type:none;
+padding:0;
+-moz-user-select:none;
+-webkit-user-select:none;
+}
+
+.rating-stars ul > li.star {
+display:inline-block;
+}
+
+/* Idle State of the stars LO DEJO ASÍ PARA QUE SE VEA QUE ES COPIADO*/
+.rating-stars ul > li.star > i.fa {
+    font-size:1.6em; /* Change the size of the stars */
+    color:#ccc; /* Color on idle state */
+  }
+  
+  /* Hover state of the stars */
+  .rating-stars ul > li.star.hover > i.fa {
+    color:#FFCC36;
+  }
+  
+  /* Selected state of the stars */
+  .rating-stars ul > li.star.selected > i.fa {
+    color:#FF912C;
+  }
+  
+  
+  /* Tamaño de las estrellas de otras valoraciones */
+  
+.otraval {
+font-size:1em !important; 
+}
+
+.otravals{
+margin: 0px 4px;
+}
+
+
+.valoraciones {
+width: 90%;
+margin-bottom: 15px;
+}
+
+
+.contenido {
+	background-color: rgba(67, 89, 142, 0.35);
+	border-radius: 7px;
+	padding: 17px;
+  right: 100px;
+}
+
+.contenidointerior {
+  background-color: rgba(57, 79, 130, 0.35);
+  border-radius: 7px;
+  padding: 15px;
+  margin-right: 20px;
+}
+
+.row {
+	background-color: rgb(6, 11, 29);
+
+}
+
+h2, p, h4, h5 {
+	color: white;
+}
+
+.checked {
+  color: orange;
+}
+
+.fa-star {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.separar {
+  margin-left: 20px;
+}
+
+.section_footer {
+	margin-top: 3rem;
+	align-items: center;
+	text-align: center;
+}
+
+.juegocarrito {
+  margin: 40px 30px;
+}
+
+.igualar {
+  position: relative;
+  right: 160px;
+}
