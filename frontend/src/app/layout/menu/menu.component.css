@@ -2,6 +2,8 @@
 	background-color: rgb(8, 15, 39);
 	height: 48px;
   z-index: 9;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .color-icons {

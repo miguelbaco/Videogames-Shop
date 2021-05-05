@@ -29,6 +29,9 @@ display:inline-block;
     color:#FF912C;
   }
   
+  .fa {
+    transform: scale(1.8);
+  }
   
   /* Tamaño de las estrellas de otras valoraciones */
   
@@ -39,7 +42,6 @@ font-size:1em !important;
 .otravals{
 margin: 0px 4px;
 }
-
 
 .valoraciones {
 width: 90%;

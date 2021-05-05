@@ -10,6 +10,9 @@ import { JuegoComponent } from './contenido/juego/juego.component';
 import { ValoracionComponent } from './contenido/juego/valoracion/valoracion.component';
 import { ListarjuegosComponent } from './contenido/listarjuegos/listarjuegos.component';
 import { CarritoComponent } from './contenido/carrito/carrito.component';
+import { DeseosComponent } from './contenido/deseos/deseos.component';
+import { ComprasComponent } from './contenido/compras/compras.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,13 @@ import { CarritoComponent } from './contenido/carrito/carrito.component';
     JuegoComponent,
     ValoracionComponent,
     ListarjuegosComponent,
-    CarritoComponent
+    CarritoComponent,
+    DeseosComponent,
+    ComprasComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

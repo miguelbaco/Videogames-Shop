@@ -16,6 +16,11 @@ h2, p, h4, h5 {
     0% {transform: scale(1.0);}
 }
 
+@keyframes desampliar {
+  from {transform: scale(1.2);}
+  to {transform: scale(1.0);}
+}
+
 .contenido {
 	background-color: rgba(67, 89, 142, 0.35);
 	border-radius: 7px;

@@ -72,13 +72,6 @@ left: 100px;
 transform: scale(2.6);
 }
 
-.estrellas {
-position: relative;
-left: 100px;
-border-radius: 8px;
-background-color: #E8F4FF;
-}
-
 .notadejuego {
 position: relative;
 bottom: 16px;

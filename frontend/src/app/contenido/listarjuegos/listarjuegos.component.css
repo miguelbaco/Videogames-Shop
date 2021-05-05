@@ -7,7 +7,22 @@
     6px 7px 8px 3px rgba(0,0,0,0.68),
     inset #333 0 0 0 1px,
     inset rgba(255,255,255, 0.5) 0 0 0 1px;
+    animation: desampliar forwards;
+    -webkit-transition: all 1s ease-out;
+   -moz-transition: all 1s ease-out;
+   -o-transition: all 1s ease-out;
+   -ms-transition: all 1s ease-out;
+   transition: all 1s ease-out;
 }
+
+.caratula:hover {
+    transition:all 0.3s ease;
+	animation: ampliar 3s forwards !important;
+}
+
+.caratula:hover::after{
+    animation: desampliar !important;
+    }
 
 .caratula h5, p {
 	margin: 0px;
@@ -20,10 +35,6 @@
 
 .spanjuego {
 	height: 60%;
-}
-
-.caratula:hover {
-	animation: ampliar 3s;
 }
 
 .section_footer {
@@ -64,3 +75,9 @@
 	background-color: #f1601c;
 }
 
+.contenido {
+	background-color: rgba(67, 89, 142, 0.35);
+	border-radius: 7px;
+	padding: 17px;
+  right: 100px;
+}
