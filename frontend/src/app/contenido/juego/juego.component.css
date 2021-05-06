@@ -128,10 +128,10 @@ margin-left: 20px;
 }
 
 .checked {
-    color: orange;
-  }
+  color: orange;
+}
   
-  .fa-star {
-    width: 25px !important;
-    height: 25px !important;
-  }
+.fa-star {
+  width: 25px !important;
+  height: 25px !important;
+}

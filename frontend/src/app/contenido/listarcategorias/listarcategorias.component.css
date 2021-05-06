@@ -1,0 +1,87 @@
+.caratula {
+	width: 205px;
+	height: 137px;
+	/*box-shadow: 0px 4px 5px 6px black;*/
+	background: linear-gradient(0deg, rgb(6, 11, 29) 0%, rgba(6, 11, 29,0.4) 50%, rgba(0,0,0,0) 100%);
+	box-shadow:
+    6px 7px 8px 3px rgba(0,0,0,0.68),
+    inset #333 0 0 0 1px,
+    inset rgba(255,255,255, 0.5) 0 0 0 1px;
+    animation: desampliar forwards;
+    -webkit-transition: all 1s ease-out;
+   -moz-transition: all 1s ease-out;
+   -o-transition: all 1s ease-out;
+   -ms-transition: all 1s ease-out;
+   transition: all 1s ease-out;
+}
+
+.caratula:hover {
+    transition:all 0.3s ease;
+	animation: ampliar 3s forwards !important;
+}
+
+.caratula:hover::after{
+    animation: desampliar !important;
+    }
+
+.caratula h5, p {
+	margin: 0px;
+	margin: 0px 3px;
+}
+
+.caratulaimagen {
+	background-size: cover;
+}
+
+.spanjuego {
+	height: 60%;
+}
+
+.section_footer {
+	margin-top: 3rem;
+	align-items: center;
+	text-align: center;
+}
+
+.pagination {
+	    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pagination_btn {
+	background-color: rgba(255,255,255,0.1);
+    color: #fff;
+    cursor: pointer;
+    padding: .5rem .8rem;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    line-height: 1rem;
+    width: auto;
+    color: white;
+    border: 0;
+}
+
+.pagination_btn:hover {
+	background-color: #f1601c !important;
+    color: #fff;
+    -webkit-box-shadow: 0 0 10px var(--color-primary);
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.pagination_btn:active {
+	background-color: #f1601c;
+}
+
+.contenido {
+	background-color: rgba(67, 89, 142, 0.35);
+	border-radius: 7px;
+	padding: 17px;
+  right: 100px;
+}
+
+.row {
+    background-color: unset !important;
+}
