@@ -1,0 +1,36 @@
+.color-menus {
+	background-color: rgb(4, 193, 239);
+	height: 48px;
+  z-index: 9;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.color-icons {
+	border-style: none;
+	border-color: rgb(8, 15, 39);
+}
+
+.botonlogin {
+    position: relative;
+    top: 10px;
+    z-index: 10px !important;
+  }
+  
+.interiorbotonlogin {
+    position: relative;
+    bottom: 12px;
+  }
+  
+.contenidologin {
+    background-color: rgba(57, 79, 130, 1);
+    border-radius: 7px;
+    padding: 23px;
+}
+
+.logo {
+  position: relative;
+  top: 14px;
+  left: 100px;
+  transform: scale(2.6);
+}

@@ -12,6 +12,9 @@ import { BusquedaComponent } from './contenido/busqueda/busqueda.component';
 import { UsuarioComponent } from './contenido/usuario/usuario.component';
 import { InicioComponent } from './contenido/inicio/inicio.component';
 import { ErrorpageComponent } from './layout/errorpage/errorpage.component';
+import { JuegosadminComponent } from './admin/contenido/juegosadmin/juegosadmin.component';
+import { CategoriasadminComponent } from './admin/contenido/categoriasadmin/categoriasadmin.component';
+import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuariosadmin.component';
 
 
 const routes: Routes = [
@@ -27,8 +30,12 @@ const routes: Routes = [
   {path : 'usuario', component: UsuarioComponent},
   {path : 'notfound', component: ErrorpageComponent},
 
+  {path : 'adminjuegos', component: JuegosadminComponent},
+  {path : 'admincategorias', component: CategoriasadminComponent},
+  {path : 'adminusuarios', component: UsuariosadminComponent},
+
   {path: '', component: InicioComponent},
-  {path : '**' ,component: ErrorpageComponent}
+  {path : '**', component: ErrorpageComponent, data: { estado: 404 }, pathMatch: 'full' }
 ];
 
 @NgModule({

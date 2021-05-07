@@ -22,6 +22,12 @@ import { ListarcategoriasComponent } from './contenido/listarcategorias/listarca
 import { CategoriaComponent } from './contenido/categoria/categoria.component';
 import { UsuarioComponent } from './contenido/usuario/usuario.component';
 import { ErrorpageComponent } from './layout/errorpage/errorpage.component';
+import { JuegosadminComponent } from './admin/contenido/juegosadmin/juegosadmin.component';
+import { NavegadoradminComponent } from './admin/layout/navegadoradmin/navegadoradmin.component';
+import { MenuadminComponent } from './admin/layout/menuadmin/menuadmin.component';
+import { AdminComponent } from './admin/admin.component';
+import { CategoriasadminComponent } from './admin/contenido/categoriasadmin/categoriasadmin.component';
+import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuariosadmin.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,13 @@ import { ErrorpageComponent } from './layout/errorpage/errorpage.component';
     ListarcategoriasComponent,
     CategoriaComponent,
     UsuarioComponent,
-    ErrorpageComponent
+    ErrorpageComponent,
+    JuegosadminComponent,
+    NavegadoradminComponent,
+    MenuadminComponent,
+    AdminComponent,
+    CategoriasadminComponent,
+    UsuariosadminComponent,
   ],
   imports: [
     BrowserModule,
