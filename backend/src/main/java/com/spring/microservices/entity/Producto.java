@@ -15,11 +15,12 @@ public class Producto {
 	@Column(name="nombre_producto")
 	private String nombre;
 	
+	@Column(name="descripcion_producto")
 	private String descripcion;
 	
 	private Double precio;
 	
-	private Double stock;
+	private int stock;
 	
 	private String imagen;
 	
@@ -27,6 +28,34 @@ public class Producto {
 	private Long idcategoria;
 
 	
+	
+	public int getStock() {
+	
+		return stock;
+	}
+
+
+	
+	public void setStock(int stock) {
+	
+		this.stock = stock;
+	}
+
+
+	
+	public String getImagen() {
+	
+		return imagen;
+	}
+
+
+	
+	public void setImagen(String imagen) {
+	
+		this.imagen = imagen;
+	}
+
+
 	public long getId() {
 	
 		return id;
@@ -72,6 +101,22 @@ public class Producto {
 	public void setPrecio(Double precio) {
 	
 		this.precio = precio;
+	}
+
+
+
+	
+	public Long getIdcategoria() {
+	
+		return idcategoria;
+	}
+
+
+
+	
+	public void setIdcategoria(Long idcategoria) {
+	
+		this.idcategoria = idcategoria;
 	}
 
 }

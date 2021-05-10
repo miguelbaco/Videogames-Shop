@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {APP_BASE_HREF} from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import * as $ from "jquery";
 
 import { AppComponent } from './app.component';
@@ -58,7 +59,8 @@ import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuarios
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 <div class="col-9 contenido float-right mt-5">
     <h2 class="mr-5 mt-4"><span class="icono-play"></span>Juegos</h2>
     <p class="text-secondary mb-5">Estos son algunos de los juegos que tenemos en la tienda ;)</p>
-    <div> <!-- Div que contiene cada uno de los divs juegos -->
+    <!--<div> Div que contiene cada uno de los divs juegos
         <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/isaac.jpg');">
             <div class="caratula">
                 <div class="spanjuego"></div>
@@ -10,7 +10,23 @@
                 <p class="text-warning m-0 p-0 d-flex flex-row-reverse fs-4">15€</p>
             </div>
         </div>
+    </div> -->
+    <div *ngIf="listajuegos.length > 0"><p>hola</p></div>
+
+
+    <div *ngFor="let juego of listajuegos; let i = index">
+        <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego[i].imagen}}');">
+            <div class="caratula">
+                <div class="spanjuego"></div>
+                <h5>{{juego[i].nombre}}</h5>
+                <p class="text-secondary">{{juego[i].idcategoria}}</p>
+                <p class="text-warning m-0 p-0 d-flex flex-row-reverse fs-4">{{juego[i].precio}}€</p>
+            </div>
+        </div>
     </div>
+
+
+
 
     <footer class="section_footer">
         <div class="pagination">
