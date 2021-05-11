@@ -81,3 +81,7 @@
 	padding: 17px;
   right: 100px;
 }
+
+.row {
+    background-color: unset;
+}

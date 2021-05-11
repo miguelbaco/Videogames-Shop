@@ -21,7 +21,7 @@ const routes: Routes = [
   {path : 'carrito', component: CarritoComponent},
   {path : 'lista-de-deseos', component: DeseosComponent},
   {path : 'juegos', component: ListarjuegosComponent},
-  {path : 'juego', component: JuegoComponent},
+  {path : 'juego/:id', component: JuegoComponent},
   {path : 'compras', component: ComprasComponent},
   {path : 'novedades', component: NovedadesComponent},
   {path : 'categorias', component: ListarcategoriasComponent},

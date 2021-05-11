@@ -26,6 +26,7 @@ public class JuegosController {
 	@Autowired
 	JuegoService juegoService;
 	
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/juegos")
 	public ResponseEntity<ResponseDTO> allJuegos() {
 		
@@ -58,7 +59,7 @@ public class JuegosController {
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
 		}
-		responseDTO.setData(juego);
+		responseDTO.setData(juego.get());
 		return ResponseEntity.ok(responseDTO);
 	}
 }

@@ -1,7 +1,7 @@
 <div class="col-9 contenido float-right mt-5">
-    <div class="d-flex flex-row juegocarrito">
+    <div *ngIf="juegoboolean" class="d-flex flex-row juegocarrito">
         <div>
-            <div class="caratulajuego caratulaimagenjuego" style="background-image: url('../../../assets/juegos/isaac.jpg');">
+            <div class="caratulajuego caratulaimagenjuego" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
                 <div class="caratulajuego">
                     <div class="spancaratulajuego"></div>
                 </div>
@@ -13,8 +13,8 @@
         </div>
         <div>
             <div class="w-75">
-                <h2 class="juegocarritotext ml-5 pl-5">The Binding of Isaac</h2>
-                <p class="juegocarritotext pb-3">Esto es una descripcion de prueba firhghfdh rgr mgh h h hthtrhtjhrtjh d fh hthtrjhh ht hth th tyht hj tjh trjh th tjht jt hrtte ht ht ht hrt ht ht ht ht ht yht htr h</p>
+                <h2 class="juegocarritotext ml-5 pl-5">{{juego.nombre}}</h2>
+                <p class="juegocarritotext pb-3">{{juego.descripcion}}</p>
                 <h4 class="juegocarritotext mt-5">Puntuación de los usuarios</h4>
                 <div class="estrellas d-flex flex-row mr-5">
                     <i class="fa fs-4 fa-star checked d-flex flex-row ml-5"></i>
@@ -24,8 +24,8 @@
                 </div>
             </div>
             <footer class="section_footer footercarrito">
-                <p class="text-secondary fs-4 d-flex flex-row juegocarritotext">Acción</p>
-                <p class="text-warning fs-1 mr-5 pr-5 text-right juegocarritotext">15€</p>
+                <p class="text-secondary fs-4 d-flex flex-row juegocarritotext">{{juego.idcategoria}}</p>
+                <p class="text-warning fs-1 mr-5 pr-5 text-right juegocarritotext">{{juego.precio}}</p>
             </footer>
         </div>
     </div>

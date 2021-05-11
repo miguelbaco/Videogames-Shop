@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JuegosService {
-  
 
   constructor(private http: HttpClient) {
   }
@@ -18,5 +17,13 @@ export class JuegosService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
     headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
     return this.http.get<ResponseData>(`${environment.apiUrl}/juegos`, { headers: headers });
+  }
+
+  public juego(id: number): Observable<ResponseData> {
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
+    let strin = `${environment.apiUrl}/juego/` + id;
+    return this.http.get<ResponseData>(`${environment.apiUrl}/juego/` + id, { headers: headers });
   }
 }

@@ -25,14 +25,13 @@ export class ListarjuegosComponent implements OnInit {
       (response) => {
         for(let juego of response.data) {
           this.nuevojuego = new Producto;
+          this.nuevojuego.id = juego.id;
           this.nuevojuego.nombre = juego.nombre;
           this.nuevojuego.precio = juego.precio;
           this.nuevojuego.imagen = juego.imagen;
-          this.nuevojuego.descripcion = juego.descripcion;
           this.nuevojuego.idcategoria = juego.idcategoria;
           this.listajuegos.push(this.nuevojuego);
         }
-        this.listajuegos = response.data;
       }, (error) => {
  
       }, () => {

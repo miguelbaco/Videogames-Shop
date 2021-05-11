@@ -29,6 +29,7 @@ import { MenuadminComponent } from './admin/layout/menuadmin/menuadmin.component
 import { AdminComponent } from './admin/admin.component';
 import { CategoriasadminComponent } from './admin/contenido/categoriasadmin/categoriasadmin.component';
 import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuariosadmin.component';
+import { RandomOrderPipe } from './pipes/random-order.pipe';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuarios
     AdminComponent,
     CategoriasadminComponent,
     UsuariosadminComponent,
+    RandomOrderPipe,
   ],
   imports: [
     BrowserModule,
