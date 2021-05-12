@@ -7,30 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spring.microservices.entity.Producto;
-import com.spring.microservices.repository.JuegoRepository;
+import com.spring.microservices.entity.Usuario;
+import com.spring.microservices.repository.UsuarioRepository;
 
 @Service
-public class JuegoServiceImpl implements JuegoService {
+public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Autowired
-	JuegoRepository repository;
+	UsuarioRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<Producto> allJuegos() {
+	public List<Usuario> allUsuarios() {
 		return repository.findAll();
 	}
 	
 	@Transactional
-	public Producto save(Producto producto) {
+	public Usuario save(Usuario producto) {
 		return repository.save(producto);
 	}
 	
 	@Transactional(readOnly = true)
-	public Optional<Producto> findById(Long id) {
+	public Optional<Usuario> findById(Long id) {
 		return repository.findById(id);
-	}
-	
-	
+	}	
 	
 }

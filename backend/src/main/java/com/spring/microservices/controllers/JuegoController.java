@@ -19,14 +19,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
-public class JuegosController {
+public class JuegoController {
 	
-	private static final Logger log = LoggerFactory.getLogger(JuegosController.class);
+	private static final Logger log = LoggerFactory.getLogger(JuegoController.class);
 	
 	@Autowired
 	JuegoService juegoService;
 	
-	//@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/juegos")
 	public ResponseEntity<ResponseDTO> allJuegos() {
 		

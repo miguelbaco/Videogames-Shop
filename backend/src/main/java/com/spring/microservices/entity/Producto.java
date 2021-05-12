@@ -1,9 +1,20 @@
 package com.spring.microservices.entity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Producto {
@@ -12,22 +23,24 @@ public class Producto {
 	@Column(name="id_producto")
 	private long id;
 	
-	@Column(name="nombre_producto")
+	@Column(name="nombre_producto", length = 25)
 	private String nombre;
 	
-	@Column(name="descripcion_producto")
+	@Column(name="descripcion_producto", length = 250)
 	private String descripcion;
 	
 	private Double precio;
 	
 	private int stock;
 	
+	@Column(length = 25)
 	private String imagen;
 	
 	@Column(name="id_categoria")
 	private Long idcategoria;
-
 	
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Deseo> listadeseos = new ArrayList<>();
 	
 	public int getStock() {
 	

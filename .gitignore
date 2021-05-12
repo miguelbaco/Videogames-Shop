@@ -82,3 +82,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+backend/.metadata/
+backend/.attach_pid**
