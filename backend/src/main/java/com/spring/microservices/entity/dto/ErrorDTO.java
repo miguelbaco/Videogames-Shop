@@ -1,4 +1,4 @@
-package com.spring.microservices.entity;
+package com.spring.microservices.entity.dto;
 
 import org.slf4j.Logger;
 

@@ -1,4 +1,4 @@
-package com.spring.microservices.entity;
+package com.spring.microservices.entity.dto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

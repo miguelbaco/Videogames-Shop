@@ -11,4 +11,6 @@ public interface UsuarioService {
 	public Usuario save(Usuario producto);
 
 	public Optional<Usuario> findById(Long id);
+	
+	public Optional<Usuario> findByEmail(String email);
 }

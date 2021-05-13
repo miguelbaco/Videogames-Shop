@@ -29,6 +29,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Transactional(readOnly = true)
 	public Optional<Usuario> findById(Long id) {
 		return repository.findById(id);
-	}	
+	}
 	
+	public Optional<Usuario> findByEmail(String email) {
+		return repository.findByEmail(email);
+	}
 }

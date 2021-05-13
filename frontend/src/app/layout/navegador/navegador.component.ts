@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-navegador',
@@ -7,6 +8,9 @@ import * as $ from "jquery";
   styleUrls: ['./navegador.component.css']
 })
 export class NavegadorComponent implements OnInit {
+
+  logeado: boolean;
+  idusuario: string;
 
   constructor() { }
 
@@ -19,6 +23,13 @@ export class NavegadorComponent implements OnInit {
       $('.contenido').toggleClass('position-relative');
       $('.desplegable').toggleClass('col-1');
     });
+
+    this.logeado = false;
+
+    if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
+      this.idusuario = sessionStorage.getItem("usuarioIDgamepoint");
+      this.logeado = true;
+    }
   }
 
 }

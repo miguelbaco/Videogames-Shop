@@ -2,7 +2,6 @@ package com.spring.microservices.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring.microservices.entity.Deseo;
-import com.spring.microservices.entity.ErrorDTO;
-import com.spring.microservices.entity.Producto;
-import com.spring.microservices.entity.ResponseDTO;
+import com.spring.microservices.entity.dto.ErrorDTO;
+import com.spring.microservices.entity.dto.ResponseDTO;
 import com.spring.microservices.services.DeseoService;
-import com.spring.microservices.services.JuegoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

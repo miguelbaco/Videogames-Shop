@@ -34,3 +34,7 @@
   left: 100px;
   transform: scale(2.6);
 }
+
+.cerrarsesion {
+  list-style: unset;
+}

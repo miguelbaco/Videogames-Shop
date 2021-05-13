@@ -10,10 +10,18 @@
             </div>
             <div class="col-9 d-flex flex-row-reverse color-menus">
                 <div class="ml-0 w-50 h-50 list-inline d-flex flex-row-reverse">
-                    <button type="button" class="btn btn--transparent btn--font-12 menu-icon ion-navicon-round list-inline-item d-flex flex-row-reverse botonlogin" data-toggle="modal" data-target="#login">
-                        <div class="icono-user list-inline-item interiorbotonlogin"></div>
-                        <p class="list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin">Iniciar sesión</p>
-                    </button>
+                    <div *ngIf="logeado; else noLogeado">
+                        <button type="button" class="btn btn--transparent btn--font-12 menu-icon ion-navicon-round list-inline-item d-flex flex-row-reverse botonlogin">
+                            <div class="icono-user list-inline-item interiorbotonlogin"></div>
+                            <p class="list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin">Buenas {{datosService.usuariologeado.nombre}}, <a class="cerrarsesion" (click)="cerrarsesion()">cerrar sesión</a></p>
+                        </button>
+                    </div>
+                    <ng-template #noLogeado>
+                        <button type="button" class="btn btn--transparent btn--font-12 menu-icon ion-navicon-round list-inline-item d-flex flex-row-reverse botonlogin" data-toggle="modal" data-target="#login">
+                            <div class="icono-user list-inline-item interiorbotonlogin"></div>
+                            <p class="list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin">Iniciar sesión</p>
+                        </button>
+                    </ng-template>
                     <app-buscador></app-buscador>
                 </div>
             </div>
@@ -21,4 +29,6 @@
     </header>
 </div>
 
-<app-login></app-login>
+<div *ngIf="!logeado">
+    <app-login></app-login>
+</div>

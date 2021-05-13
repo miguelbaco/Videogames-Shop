@@ -30,6 +30,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CategoriasadminComponent } from './admin/contenido/categoriasadmin/categoriasadmin.component';
 import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuariosadmin.component';
 import { RandomOrderPipe } from './pipes/random-order.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { RandomOrderPipe } from './pipes/random-order.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]
