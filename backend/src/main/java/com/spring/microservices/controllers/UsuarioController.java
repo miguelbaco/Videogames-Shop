@@ -52,9 +52,9 @@ public class UsuarioController {
 	public ResponseEntity<ResponseDTO> encontrarUsuario(@PathVariable int idusuario) {
 		
 		ResponseDTO responseDTO = new ResponseDTO();
-		Optional<Usuario> juego = usuarioService.findById(Long.valueOf(idusuario));
+		Optional<Usuario> usuario = usuarioService.findById(Long.valueOf(idusuario));
 		
-		if(!juego.isPresent()) {
+		if(!usuario.isPresent()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
 			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO, log);
 			List<ErrorDTO> errors = new ArrayList<>();
@@ -62,7 +62,7 @@ public class UsuarioController {
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
 		}
-		responseDTO.setData(juego.get());
+		responseDTO.setData(usuario.get());
 		return ResponseEntity.ok(responseDTO);
 	}
 	
@@ -93,4 +93,24 @@ public class UsuarioController {
 		return ResponseEntity.ok(responseDTO);
 	}
 	
+	@PostMapping("/registrarusuario")
+	public ResponseEntity<ResponseDTO> registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+		ResponseDTO responseDTO = new ResponseDTO();
+		
+		Optional<Usuario> usuarioyaregistrado = usuarioService.findByEmail(usuarioDTO.getEmail());
+		
+		if(usuarioyaregistrado.isPresent()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "Ya existe un usuario con ese correo electrónico", ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);
+		}
+		
+		Usuario nuevoUsuario = 	usuarioService.usuarioDTOtoUsuario(usuarioDTO);
+		Usuario usregistrado = usuarioService.save(nuevoUsuario);
+		responseDTO.setData(usregistrado);
+		return ResponseEntity.ok(responseDTO);
+	}
 }

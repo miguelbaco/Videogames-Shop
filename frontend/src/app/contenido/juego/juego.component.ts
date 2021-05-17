@@ -1,6 +1,7 @@
 import { Component, OnInit, Provider } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
+import { DeseosService } from 'src/app/services/deseos.service';
 import { JuegosService } from '../../services/juegos.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class JuegoComponent implements OnInit {
   juego : Producto;
   juegoboolean: boolean;
 
-  constructor(private ruta: ActivatedRoute, private juegosService: JuegosService) { }
+  constructor(private ruta: ActivatedRoute, private juegosService: JuegosService, private deseoService: DeseosService) { }
 
   ngOnInit(): void {
     this.juegoboolean = false;
@@ -36,6 +37,13 @@ export class JuegoComponent implements OnInit {
  
       }
     );
+  }
+
+  anadirdeseo() {
+    if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
+      let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
+      this.deseoService.anadirDeseo(idusuario, this.ruta.snapshot.params.id).subscribe();
+    }
   }
 
 }

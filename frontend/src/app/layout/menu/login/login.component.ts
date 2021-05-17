@@ -4,7 +4,6 @@ import { Usuario } from 'src/app/models/usuario';
 import { DatosService } from 'src/app/services/datos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import * as $ from "jquery";
-import { MenuComponent } from '../menu.component';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +12,15 @@ import { MenuComponent } from '../menu.component';
 })
 export class LoginComponent implements OnInit {
 
+  /* Parametros de login */
   public usuario : Usuario;
   public notificarError: Error;
   public errorlogin : boolean;
+
+  /* Parametros de registro */
+  public usuarioregistrar : Usuario;
+  public repitecontrasena: string;
+  public registroexitoso: boolean;
 
   constructor(private usuarioService: UsuariosService, private datosService: DatosService) {
   }
@@ -24,9 +29,14 @@ export class LoginComponent implements OnInit {
     this.usuario = new Usuario;
     this.notificarError = new Error;
     this.errorlogin = false;
+
+    this.usuarioregistrar = new Usuario;
+    this.registroexitoso = false;
   }
 
   public loginUsuario(): void {
+
+    this.usuarioregistrar.id = null;
 
     this.usuarioService.loginUsuario(this.usuario).subscribe(
       (response) => {
@@ -44,6 +54,26 @@ export class LoginComponent implements OnInit {
  
       }
     );
+  }
+
+  public signinUsuario() : void {
+
+    this.usuarioService.registrarUsuario(this.usuarioregistrar).subscribe(
+      (response) => {
+        if(response.data != null) {
+          this.registroexitoso = true;
+        }
+      }, (error) => {
+        this.notificarError = error.error.error[0];
+        this.errorlogin = true;
+      }, () => {
+ 
+      }
+    );
+  }
+
+  public reload() {
+    window.location.reload();
   }
 
 }
