@@ -37,6 +37,11 @@
 	height: 60%;
 }
 
+.infojuego {
+    position: absolute;
+    bottom: 0;
+}
+
 .section_footer {
 	margin-top: 3rem;
 	align-items: center;

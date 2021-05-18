@@ -6,4 +6,5 @@ export class Producto {
     stock: number;
     imagen: string;
     idcategoria: number;
+    nombrecategoria: string;
 }

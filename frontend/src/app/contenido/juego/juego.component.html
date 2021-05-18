@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="w-100 botones">
-                <button (click)="anadirdeseo()" class="btn anadir w-100 mb-1">Añadir a lista de deseos</button>
+                <button (click)="anadirdeseo()" class="btn anadir w-100 mb-1 popover-warning" placement="right" ngbPopover="{{notificarPopover}}">Añadir a lista de deseos</button>
                 <button class="btn anadir w-100">Añadir al carrito</button>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <footer class="section_footer footercarrito">
-                <p class="text-secondary fs-4 d-flex flex-row juegocarritotext">{{juego.idcategoria}}</p>
+                <p class="text-secondary fs-4 d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
                 <p class="text-warning fs-1 mr-5 pr-5 text-right juegocarritotext">{{juego.precio}}</p>
             </footer>
         </div>

@@ -3,6 +3,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
 import { DeseosService } from 'src/app/services/deseos.service';
 import { JuegosService } from '../../services/juegos.service';
+import { Error } from 'src/app/models/error';
+import * as $ from "jquery";
+import { DatosService } from 'src/app/services/datos.service';
 
 @Component({
   selector: 'app-juego',
@@ -14,11 +17,16 @@ export class JuegoComponent implements OnInit {
   juego : Producto;
   juegoboolean: boolean;
 
-  constructor(private ruta: ActivatedRoute, private juegosService: JuegosService, private deseoService: DeseosService) { }
+  public notificarError: Error;
+  notificarPopover: string;
+
+  constructor(private ruta: ActivatedRoute, private datosService: DatosService, private juegosService: JuegosService, private deseoService: DeseosService) { }
 
   ngOnInit(): void {
     this.juegoboolean = false;
     this.mostrarjuego();
+    this.notificarError = new Error;
+    this.notificarPopover = "Añadido a tu lista de deseos";
   }
 
   mostrarjuego() {
@@ -30,6 +38,8 @@ export class JuegoComponent implements OnInit {
           this.juego.idcategoria = response.data.idcategoria;
           this.juego.descripcion = response.data.descripcion;
           this.juego.nombre = response.data.nombre;
+          this.datosService.categorias.find(x => x.id == this.juego.idcategoria);
+          this.juego.nombrecategoria = this.datosService.categorias.find(x => x.id == this.juego.idcategoria).nombre;
           this.juegoboolean = true;
       }, (error) => {
  
@@ -42,8 +52,18 @@ export class JuegoComponent implements OnInit {
   anadirdeseo() {
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
-      this.deseoService.anadirDeseo(idusuario, this.ruta.snapshot.params.id).subscribe();
+      this.deseoService.anadirDeseo(idusuario, this.ruta.snapshot.params.id).subscribe(
+        (response) => {
+          if(response.data != null) {
+            this.notificarPopover = "Añadido a tu lista de deseos";
+          }
+        }, (error) => {
+          this.notificarError = error.error.error[0];
+          this.notificarPopover = this.notificarError.title;
+        }, () => {
+   
+        }
+      );
     }
   }
-
 }

@@ -7,7 +7,7 @@
         </div>
         <div class="modal-header contenidologin">
           <form role="form" (ngSubmit)="loginUsuario()" #loginForm="ngForm" id="loginForm">
-            <div *ngIf="errorlogin"class="warning alert-warning alert-dismissible fade show">
+            <div *ngIf="errorlogin" class="bg-danger alert-dismissible fade show">
               <p>{{notificarError.title}}</p>
             </div>
             <div class="form-group">

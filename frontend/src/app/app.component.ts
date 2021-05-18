@@ -1,7 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import { Router } from '@angular/router';
-import { DatosService } from './services/datos.service';
-import { UsuariosService } from './services/usuarios.service';
 
 @Component({
   selector: 'app-root',
@@ -15,5 +13,4 @@ export class AppComponent {
   constructor(public router: Router) {
 
   }
-
 }

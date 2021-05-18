@@ -31,6 +31,7 @@ import { CategoriasadminComponent } from './admin/contenido/categoriasadmin/cate
 import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuariosadmin.component';
 import { RandomOrderPipe } from './pipes/random-order.pipe';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]
