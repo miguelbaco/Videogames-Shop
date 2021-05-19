@@ -31,7 +31,7 @@ public class UsuarioController {
 	UsuarioService usuarioService;
 	
 	@GetMapping("/usuarios")
-	public ResponseEntity<ResponseDTO> allJuegos() {
+	public ResponseEntity<ResponseDTO> allUsuarios() {
 		
 		ResponseDTO responseDTO = new ResponseDTO();
 		List<Usuario> listausuarios = usuarioService.allUsuarios();

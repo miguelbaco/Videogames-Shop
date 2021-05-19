@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Usuario {
@@ -19,18 +20,23 @@ public class Usuario {
 	private long id;
 	
 	@Column(name="email", length = 50)
+	@Size(max = 50)
 	private String email;
 	
 	@Column(name="password", length = 50)
+	@Size(max = 50)
 	private String password;
 	
 	@Column(length = 25)
+	@Size(max = 25)
 	private String nombre;
 	
 	@Column(length = 50)
+	@Size(max = 50)
 	private String apellidos;
 	
 	@Column(length = 250)
+	@Size(max = 250)
 	private String direccion;
 	
 	private boolean admin;

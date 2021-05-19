@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Categoria {
@@ -13,9 +14,11 @@ public class Categoria {
 	private long id;
 
 	@Column(name="nombre_categoria", length = 20)
+	@Size(max = 20)
 	private String nombre;
 	
 	@Column(name="descripcion_categoria", length = 250)
+	@Size(max = 250)
 	private String descripcion;
 
 

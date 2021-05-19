@@ -1,20 +1,18 @@
 package com.spring.microservices.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Producto {
@@ -24,16 +22,22 @@ public class Producto {
 	private long id;
 	
 	@Column(name="nombre_producto", length = 25)
+	@Size(max = 25)
 	private String nombre;
 	
-	@Column(name="descripcion_producto", length = 250)
+	@Column(name="descripcion_producto", length = 255)
+	@Size(max = 255)
 	private String descripcion;
 	
+	@DecimalMin(value = "0.01")
+	@DecimalMin(value = "9999.99")
 	private Double precio;
 	
+	@Min(value = 1)
+	@Max(value = 999)
 	private int stock;
 	
-	@Column(length = 25)
+	@Size(max = 100)
 	private String imagen;
 	
 	@Column(name="id_categoria")
