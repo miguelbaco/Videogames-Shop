@@ -3,32 +3,33 @@
     <p class="text-secondary">Estos son los productos que quieres comprar</p>
 
     <div> <!-- Div que contiene cada uno de los divs juegos -->
-        <div class="d-flex flex-row juegocarrito">
-            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/isaac.jpg');">
+        <div *ngFor="let juego of listajuegos; let i = index" class="d-flex flex-row juegocarrito">
+            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
                 <div class="caratula">
                     <div class="spanjuego"></div>
                 </div>
             </div>
             <div>
                 <div class="w-75">
-                    <h4 class="juegocarritotext">The Binding of Isaac</h4>
-                    <p class="juegocarritotext">Esto es una descripcion de prueba firhghfdh rgr mgh h h hthtrhtjhrtjh d fh hthtrjhh ht hth th tyht hj tjh trjh th tjht jt hrtte ht ht ht hrt ht ht ht ht ht yht htr h</p>
+                    <h4 class="juegocarritotext" routerLink="/juego/{{juego.id}}">{{juego.nombre}}</h4>
+                    <p class="juegocarritotext">{{juego.descripcion}}</p>
                 </div>
                 <footer class="section_footer footercarrito">
-                    <p class="text-secondary d-flex flex-row juegocarritotext">Acción</p>
-                    <p class="text-warning ml-5 pl-5 fs-4 text-centerjuegocarritotext">15€</p>
-                    <button class="btn btn-danger pagination_btn">Eliminar del carrito</button>
+                    <p class="text-secondary d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
+                    <p class="ml-5 pl-5 fs-4 text-center juegocarritotext">Cantidad: {{juego.cantidad}}</p>
+                    <p class="text-warning ml-5 pl-5 fs-4 text-center juegocarritotext">{{juego.precio}}€</p>
+                    <button (click)="eliminarcarrito(juego.id)" class="btn btn-danger pagination_btn">Eliminar del carrito</button>
                 </footer>
             </div>
-        </div>
-        <div class="w-100 d-flex justify-content-center">
-            <div class="span6 diferenciar-nav w-50 text-center">
-            
+            <div class="w-100 d-flex justify-content-center">
+                <div class="span6 diferenciar-nav w-50 text-center">
+                
+                </div>
             </div>
         </div>
     </div>
     <div class="d-flex flex-row juegocarrito sectioncarritofinal float-right">
-        <p class="preciototal">Coste total: 80€</p>
+        <p class="preciototal">Coste total: {{preciocarrito}}€</p>
         <a class="comprarboton"><button class="btn  comprarboton">Comprar ahora</button></a>
     </div>
 </div>

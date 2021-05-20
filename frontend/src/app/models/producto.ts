@@ -7,4 +7,5 @@ export class Producto {
     imagen: string;
     idcategoria: number;
     nombrecategoria: string;
+    cantidad: number;
 }

@@ -7,28 +7,28 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class DeseosService {
+export class PedidosService {
 
   constructor(private http: HttpClient) { }
 
-  public deseosUsuario(idusuario: number): Observable<ResponseData> {
+  public carritoActual(idusuario: number): Observable<ResponseData> {
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
-    return this.http.get<ResponseData>(`${environment.apiUrl}/deseos/${idusuario}`, { headers: headers });
+    return this.http.get<ResponseData>(`${environment.apiUrl}/carritoactual/${idusuario}`, { headers: headers });
   }
 
-  public anadirDeseo(idusuario: number, idjuego: number): Observable<ResponseData> {
+  public anadirCarrito(idusuario: number, idjuego: number): Observable<ResponseData> {
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
-    return this.http.get<ResponseData>(`${environment.apiUrl}/anadirdeseo/${idusuario}/${idjuego}`, { headers: headers });
+    return this.http.get<ResponseData>(`${environment.apiUrl}/anadircarrito/${idusuario}/${idjuego}`, { headers: headers });
   }
 
-  public eliminarDeseo(idusuario: number, idjuego: number): Observable<ResponseData> {
+  public eliminarCarrito(idusuario: number, idjuego: number): Observable<ResponseData> {
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
-    return this.http.get<ResponseData>(`${environment.apiUrl}/eliminardeseo/${idusuario}/${idjuego}`, { headers: headers });
+    return this.http.get<ResponseData>(`${environment.apiUrl}/eliminarcarrito/${idusuario}/${idjuego}`, { headers: headers });
   }
 }

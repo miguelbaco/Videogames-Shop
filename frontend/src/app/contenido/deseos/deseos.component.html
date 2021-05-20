@@ -18,7 +18,7 @@
                     <p class="text-secondary d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
                     <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{juego.precio}}€</p>
                     <button (click)="eliminardeseo(juego.id)" class="btn btn-danger pagination_btn">Quitar de la lista</button>
-                    <button class="btn anadir pagination_btn">Añadir al carrito</button>
+                    <button (click)="anadirCarrito(juego.id)" class="btn anadir pagination_btn mb-1 popover-warning" placement="right" ngbPopover="{{notificarPopoverCarrito}}">Añadir al carrito</button>
                 </footer>
             </div>
         </div>

@@ -3,10 +3,10 @@
     <p class="text-secondary mb-3">Estas son las categorías de las que disponemos en nuestra página</p>
 
     <div class="row">
-        <div class="col-md-2 ml-2 mr-2 mt-4">
+        <div *ngFor="let categoria of listacategorias;" class="col-md-2 ml-2 mr-2 mt-4">
             <div class="caratula caratulaimagen" style="background-image: url('../../../assets/categoria.jpg');">
                 <div class="caratula align-items-center text-center d-flex justify-content-center">
-                    <h5 class="text-center">Acción</h5>
+                    <h5 class="text-center">{{categoria.nombre}}</h5>
                 </div>
             </div>
         </div>

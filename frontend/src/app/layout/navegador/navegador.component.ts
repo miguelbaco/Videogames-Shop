@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from "jquery";
-import { Usuario } from 'src/app/models/usuario';
+import { Categoria } from 'src/app/models/categoria';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { DatosService } from 'src/app/services/datos.service';
 
 @Component({
   selector: 'app-navegador',
@@ -11,8 +13,11 @@ export class NavegadorComponent implements OnInit {
 
   logeado: boolean;
   idusuario: string;
+  categoriasboolean: boolean;
+  categoriastotales: Categoria[];
+  categoriasmenu: Categoria[];
 
-  constructor() { }
+  constructor(private datosService: DatosService, private categoriasService: CategoriasService) { }
 
   ngOnInit(): void {
     $('.btn-expand-collapse').click(function() {
@@ -25,11 +30,53 @@ export class NavegadorComponent implements OnInit {
     });
 
     this.logeado = false;
+    this.categoriasboolean = false;
 
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
       this.idusuario = sessionStorage.getItem("usuarioIDgamepoint");
       this.logeado = true;
     }
+
+    this.categoriastotales = [];
+    this.categoriasmenu = [];
+    this.categorias();
+  }
+
+  categorias() {
+    if(this.datosService.categorias == undefined) {
+      this.categoriasService.allCategorias().subscribe(
+        (response) => {
+          this.datosService.categorias = response.data;
+          this.categoriastotales = response.data;
+          this.insertarEnMenu();
+        }, (error) => {
+        }, () => {
+
+        }
+      );
+    }
+  }
+
+  insertarEnMenu() {
+    this.categoriasmenu.push(this.categoriastotales[Math.floor(Math.random() * (this.categoriastotales.length))]);
+    let cantidadcategorias = 3;
+
+    if(this.categoriastotales.length = 2) {
+      cantidadcategorias = 2;
+    } else if(this.categoriastotales.length = 1) {
+      cantidadcategorias = 1;
+    } else if(this.categoriastotales.length = 0) {
+      cantidadcategorias = 0;
+    }
+
+    while(this.categoriasmenu.length != cantidadcategorias) {
+      let categoria : Categoria;
+      categoria = this.categoriastotales[Math.floor(Math.random() * (this.categoriastotales.length))];
+      if(!this.categoriasmenu.includes(categoria)) {
+        this.categoriasmenu.push(categoria);
+      }
+    }
+    this.categoriasboolean = true;
   }
 
 }

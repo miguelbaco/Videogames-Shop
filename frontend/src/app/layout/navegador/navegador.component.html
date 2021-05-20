@@ -26,9 +26,11 @@
         <li routerLink="/categorias">
           <a><span class="icono-tag"></span><span class="nav-label px-2 ml-0 pl-0">Categorías</span></a>
         </li>
-        <li>
-          <a><span class="nav-label px-2">Prueba</span></a>
-        </li>
+        <div *ngFor="let categoriamenu of categoriasmenu">
+          <li *ngIf="categoriasboolean">
+            <a routerLink="/categoria/{{categoriamenu.id}}"><span class="nav-label px-2">{{categoriamenu.nombre}}</span></a>
+          </li>
+        </div>
       </ul>
     </nav>
 </div>

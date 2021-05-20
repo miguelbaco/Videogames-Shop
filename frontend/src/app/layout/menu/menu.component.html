@@ -13,7 +13,7 @@
                     <div *ngIf="logeado; else noLogeado">
                         <button type="button" class="btn btn--transparent btn--font-12 menu-icon ion-navicon-round list-inline-item d-flex flex-row-reverse botonlogin">
                             <div class="icono-user list-inline-item interiorbotonlogin"></div>
-                            <p class="list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin">Buenas <a class="link-danger" routerLink="/usuario">{{datosService.usuariologeado.nombre}}</a>, <a class="cerrarsesion" (click)="cerrarsesion()">cerrar sesión</a></p>
+                            <p class="list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin">Buenas <a class="link-danger" routerLink="/usuario">{{nombreusuario}}</a>, <a class="cerrarsesion" (click)="cerrarsesion()">cerrar sesión</a></p>
                         </button>
                     </div>
                     <ng-template #noLogeado>

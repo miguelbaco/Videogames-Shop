@@ -14,6 +14,7 @@ export class MenuComponent implements OnInit {
   constructor(private datosService: DatosService, private usuarioService: UsuariosService) { }
 
   ngOnInit(): void {
+    this.nombreusuario = "";
     this.logeado = false;
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");

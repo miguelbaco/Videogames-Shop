@@ -6,6 +6,7 @@ import { JuegosService } from '../../services/juegos.service';
 import { Error } from 'src/app/models/error';
 import * as $ from "jquery";
 import { DatosService } from 'src/app/services/datos.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
 
 @Component({
   selector: 'app-juego',
@@ -18,15 +19,17 @@ export class JuegoComponent implements OnInit {
   juegoboolean: boolean;
 
   public notificarError: Error;
-  notificarPopover: string;
+  notificarPopoverDeseo: string;
+  notificarPopoverCarrito: string;
 
-  constructor(private ruta: ActivatedRoute, private datosService: DatosService, private juegosService: JuegosService, private deseoService: DeseosService) { }
+  constructor(private ruta: ActivatedRoute, private datosService: DatosService, private juegosService: JuegosService, private deseoService: DeseosService, private pedidosService : PedidosService) { }
 
   ngOnInit(): void {
     this.juegoboolean = false;
     this.mostrarjuego();
     this.notificarError = new Error;
-    this.notificarPopover = "Añadido a tu lista de deseos";
+    this.notificarPopoverDeseo = "Añadido a tu lista de deseos";
+    this.notificarPopoverCarrito = "Añadido al carrito";
   }
 
   mostrarjuego() {
@@ -49,17 +52,35 @@ export class JuegoComponent implements OnInit {
     );
   }
 
-  anadirdeseo() {
+  anadirDeseo() {
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
       this.deseoService.anadirDeseo(idusuario, this.ruta.snapshot.params.id).subscribe(
         (response) => {
           if(response.data != null) {
-            this.notificarPopover = "Añadido a tu lista de deseos";
+            this.notificarPopoverDeseo = "Añadido a tu lista de deseos";
           }
         }, (error) => {
           this.notificarError = error.error.error[0];
-          this.notificarPopover = this.notificarError.title;
+          this.notificarPopoverDeseo = this.notificarError.title;
+        }, () => {
+   
+        }
+      );
+    }
+  }
+
+  anadirCarrito() {
+    if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
+      let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
+      this.pedidosService.anadirCarrito(idusuario, this.ruta.snapshot.params.id).subscribe(
+        (response) => {
+          if(response.data != null) {
+            this.notificarPopoverCarrito = "Añadido al carrito";
+          }
+        }, (error) => {
+          this.notificarError = error.error.error[0];
+          this.notificarPopoverCarrito = this.notificarError.title;
         }, () => {
    
         }

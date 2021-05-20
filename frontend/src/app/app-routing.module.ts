@@ -25,7 +25,7 @@ const routes: Routes = [
   {path : 'compras', component: ComprasComponent},
   {path : 'novedades', component: NovedadesComponent},
   {path : 'categorias', component: ListarcategoriasComponent},
-  {path : 'categoria', component: CategoriaComponent},
+  {path : 'categoria/:id', component: CategoriaComponent},
   {path : 'busqueda', component: BusquedaComponent},
   {path : 'usuario', component: UsuarioComponent},
   {path : 'notfound', component: ErrorpageComponent},
