@@ -1,5 +1,6 @@
 package com.spring.microservices.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +36,18 @@ public class DetallePedidoServiceImpl implements DetallePedidoService {
 	@Transactional
 	public void delete(DetallePedido detallePedido) {
 		repository.delete(detallePedido);
+	}
+
+	public List<Producto> productosComprados(List<Pedido> pedidos) {
+		List<Producto> productos = new ArrayList<Producto>();
+		for(Pedido pedido : pedidos) {
+			List<DetallePedido> detalles = findByIdPedido(pedido.getId());
+			for(DetallePedido detalle: detalles) {
+				for (int i = 0; i < detalle.getCantidad(); i++) {
+					productos.add(detalle.getProducto());
+				}
+			}
+		}
+		return productos;
 	}
 }

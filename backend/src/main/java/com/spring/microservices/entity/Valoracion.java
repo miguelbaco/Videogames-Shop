@@ -37,7 +37,7 @@ public class Valoracion {
 	private int puntuacion;
 	
 	@Size(max = 300)
-	private boolean comentario;
+	private String comentario;
 	
 	public Usuario getUsuario() {
 	
@@ -78,15 +78,18 @@ public class Valoracion {
 
 
 	
-	public boolean isComentario() {
+	public String getComentario() {
 	
 		return comentario;
 	}
 
 
 	
-	public void setComentario(boolean comentario) {
+	public void setComentario(String comentario) {
 	
 		this.comentario = comentario;
 	}
+
+
+	
 }

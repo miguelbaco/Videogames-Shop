@@ -41,7 +41,7 @@ public class Producto {
 	private String imagen;
 	
 	@Column(name="id_categoria")
-	private Long idcategoria;
+	private Long idCategoria;
 	
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Deseo> listadeseos = new ArrayList<>();
@@ -125,7 +125,7 @@ public class Producto {
 	
 	public Long getIdcategoria() {
 	
-		return idcategoria;
+		return idCategoria;
 	}
 
 
@@ -133,7 +133,7 @@ public class Producto {
 	
 	public void setIdcategoria(Long idcategoria) {
 	
-		this.idcategoria = idcategoria;
+		this.idCategoria = idcategoria;
 	}
 
 }

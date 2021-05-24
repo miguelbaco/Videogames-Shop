@@ -82,6 +82,73 @@ public class DetallePedidoController {
 		responseDTO.setData(productos);
 		return ResponseEntity.ok(responseDTO);
 	}
+	
+	@GetMapping("realizarcompra/{idusuario}")
+	public ResponseEntity<ResponseDTO> comprarCarrito(@PathVariable int idusuario) {
+
+		ResponseDTO responseDTO = new ResponseDTO();
+
+		Optional<Usuario> usuario = usuarioService.findById(Long.valueOf(idusuario));
+
+		if (!usuario.isPresent()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO,
+			        log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+
+		Optional<Pedido> pedido = pedidoService.findByIdUsuarioAndComprado(usuario.get().getId(), false);
+
+		if (!pedido.isPresent()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No hay nada en tu carrito todavía", ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+
+		pedidoService.realizarCompra(pedido.get());
+		
+		return ResponseEntity.ok(responseDTO);
+	}
+	
+	@GetMapping("juegoscomprados/{idusuario}")
+	public ResponseEntity<ResponseDTO> comprasRealizadas(@PathVariable int idusuario) {
+
+		ResponseDTO responseDTO = new ResponseDTO();
+
+		Optional<Usuario> usuario = usuarioService.findById(Long.valueOf(idusuario));
+
+		if (!usuario.isPresent()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO,
+			        log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+
+		List<Pedido> pedidos = pedidoService.pedidosRealizados(usuario.get().getId());
+
+		if (pedidos.isEmpty()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No has comprado nada todavia", ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+
+		List<Producto> productos = detallePedidoService.productosComprados(pedidos);
+
+		responseDTO.setData(productos);
+		return ResponseEntity.ok(responseDTO);
+	}
 
 	@GetMapping("anadircarrito/{idusuario}/{idjuego}")
 	public ResponseEntity<ResponseDTO> anadirCarrito(@PathVariable int idusuario, @PathVariable int idjuego) {

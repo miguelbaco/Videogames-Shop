@@ -19,11 +19,17 @@ export class JuegosService {
     return this.http.get<ResponseData>(`${environment.apiUrl}/juegos`, { headers: headers });
   }
 
-  public juego(id: number): Observable<ResponseData> {
+  public juego(idjuego: number): Observable<ResponseData> {
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
-    let strin = `${environment.apiUrl}/juego/` + id;
-    return this.http.get<ResponseData>(`${environment.apiUrl}/juego/` + id, { headers: headers });
+    return this.http.get<ResponseData>(`${environment.apiUrl}/juego/` + idjuego, { headers: headers });
+  }
+
+  public juegosCategoria(idcategoria: number): Observable<ResponseData> {
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
+    return this.http.get<ResponseData>(`${environment.apiUrl}/juegosporcategoria/` + idcategoria, { headers: headers });
   }
 }

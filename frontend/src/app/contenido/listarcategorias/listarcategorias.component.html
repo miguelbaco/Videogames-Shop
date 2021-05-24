@@ -4,7 +4,7 @@
 
     <div class="row">
         <div *ngFor="let categoria of listacategorias;" class="col-md-2 ml-2 mr-2 mt-4">
-            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/categoria.jpg');">
+            <div routerLink="/categoria/{{categoria.id}}" class="caratula caratulaimagen" style="background-image: url('../../../assets/categoria.jpg');">
                 <div class="caratula align-items-center text-center d-flex justify-content-center">
                     <h5 class="text-center">{{categoria.nombre}}</h5>
                 </div>

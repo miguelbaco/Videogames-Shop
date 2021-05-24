@@ -96,4 +96,10 @@ export class CarritoComponent implements OnInit {
     }
   }
 
+  realizarCompra() {
+    let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
+    this.pedidosService.realizarCompra(idusuario).subscribe();
+    this.listajuegos = [];
+  }
+
 }

@@ -1,13 +1,13 @@
 <div class="col-9 contenido float-right mt-5">
-    <h2 class="mr-5 mt-4"><span class="icono-search mr-4"></span>Categoría: Arcade</h2>
+    <h2 class="mr-5 mt-4"><span class="icono-search mr-4"></span>Categoría: {{categorianombre}}</h2>
     <p class="text-secondary mb-5">En esta sección puedes encontrar todos los juegos disponibles relacionados a la categoria: Arcade</p>
-    <div> <!-- Div que contiene cada uno de los divs juegos -->
-        <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/isaac.jpg');">
+    <div *ngFor="let juego of listajuegos; let i = index" routerLink="/juego/{{juego.id}}"> <!-- Div que contiene cada uno de los divs juegos -->
+        <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
             <div class="caratula">
                 <div class="spanjuego"></div>
-                <h5>The Binding of Isaac</h5>
-                <p class="text-secondary">Acción</p>
-                <p class="text-warning m-0 p-0 d-flex flex-row-reverse fs-4">15€</p>
+                <h5>{{juego.nombre}}</h5>
+                <p class="text-secondary">{{juego.nombrecategoria}}</p>
+                <p class="text-warning m-0 p-0 d-flex flex-row-reverse fs-4">{{juego.precio}}€</p>
             </div>
         </div>
     </div>

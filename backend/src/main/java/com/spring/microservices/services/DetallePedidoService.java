@@ -16,4 +16,6 @@ public interface DetallePedidoService {
 	public Optional<DetallePedido> findByPedidoAndProducto(Pedido pedido, Producto producto);
 	
 	public void delete(DetallePedido detallePedido);
+	
+	public List<Producto> productosComprados(List<Pedido> pedidos);
 }

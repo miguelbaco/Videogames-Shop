@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { JuegosService } from '../../services/juegos.service';
+import { Error } from '../../models/error';
+import { Producto } from '../../models/producto';
+import { DatosService } from 'src/app/services/datos.service';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-categoria',
@@ -7,9 +14,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriaComponent implements OnInit {
 
-  constructor() { }
+  error: Error;
+  listajuegos: Producto[] = []
+  public nuevojuego: Producto;
+  public categorianombre: string;
+
+  route: string;
+
+  constructor(location: Location, router: Router, private ruta: ActivatedRoute, private juegosService: JuegosService, private datosService: DatosService, private categoriasService: CategoriasService) {
+    router.events.subscribe(val => {
+      if (val instanceof NavigationStart) {
+        this.listajuegos = [];
+        this.mostrarjuegos();
+    }
+    });
+  }
 
   ngOnInit(): void {
+    if(this.listajuegos.length == 0) {
+      this.listajuegos = [];
+      this.mostrarjuegos();
+    }
+  }
+
+  mostrarjuegos() {
+    this.categorias();
+    this.juegosService.juegosCategoria(this.ruta.snapshot.params.id).subscribe(
+      (response) => {
+        for(let juego of response.data) {
+          this.nuevojuego = new Producto;
+          this.nuevojuego.id = juego.id;
+          this.nuevojuego.nombre = juego.nombre;
+          this.nuevojuego.precio = juego.precio;
+          this.nuevojuego.imagen = juego.imagen;
+          this.nuevojuego.idcategoria = juego.idcategoria;
+          this.nuevojuego.nombrecategoria = this.datosService.categorias.find(x => x.id == this.nuevojuego.idcategoria).nombre;
+          this.listajuegos.push(this.nuevojuego);
+        }
+      }, (error) => {
+ 
+      }, () => {
+ 
+      }
+    );
+  }
+
+  categorias() {
+    if(this.datosService.categorias == undefined) {
+      this.categoriasService.allCategorias().subscribe(
+        (response) => {
+          this.datosService.categorias = response.data;
+        }, (error) => {
+        }, () => {
+
+        }
+      );
+    }
+
+    this.categorianombre = this.datosService.categorias.find(x => x.id ==this.ruta.snapshot.params.id).nombre;
   }
 
 }
