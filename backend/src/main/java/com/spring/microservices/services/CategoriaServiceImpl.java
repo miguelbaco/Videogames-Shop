@@ -12,25 +12,29 @@ import com.spring.microservices.repository.CategoriaRepository;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
-	
+
 	@Autowired
 	CategoriaRepository repository;
 
+	@Override
 	@Transactional(readOnly = true)
 	public List<Categoria> allCategorias() {
+
 		return repository.findAll();
 	}
-	
+
+	@Override
 	@Transactional
-	public Categoria save(Categoria producto) {
-		return repository.save(producto);
+	public Categoria save(Categoria categoria) {
+
+		return repository.save(categoria);
 	}
-	
+
+	@Override
 	@Transactional(readOnly = true)
 	public Optional<Categoria> findById(Long id) {
+
 		return repository.findById(id);
 	}
-	
-	
-	
+
 }

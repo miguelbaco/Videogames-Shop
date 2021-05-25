@@ -14,10 +14,12 @@ import { Location } from "@angular/common";
 })
 export class CategoriaComponent implements OnInit {
 
-  error: Error;
   listajuegos: Producto[] = []
   public nuevojuego: Producto;
   public categorianombre: string;
+
+  public notificarError: Error;
+  public noHayJuegos: boolean;
 
   route: string;
 
@@ -31,6 +33,8 @@ export class CategoriaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.notificarError = new Error;
+    this.noHayJuegos = false;
     if(this.listajuegos.length == 0) {
       this.listajuegos = [];
       this.mostrarjuegos();
@@ -52,10 +56,9 @@ export class CategoriaComponent implements OnInit {
           this.listajuegos.push(this.nuevojuego);
         }
       }, (error) => {
- 
-      }, () => {
- 
-      }
+          this.notificarError = error.error.error[0];
+          this.noHayJuegos = true;
+        }
     );
   }
 
@@ -64,9 +67,6 @@ export class CategoriaComponent implements OnInit {
       this.categoriasService.allCategorias().subscribe(
         (response) => {
           this.datosService.categorias = response.data;
-        }, (error) => {
-        }, () => {
-
         }
       );
     }

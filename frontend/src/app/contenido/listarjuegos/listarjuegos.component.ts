@@ -16,9 +16,14 @@ export class ListarjuegosComponent implements OnInit {
   listajuegos: Producto[] = []
   public nuevojuego: Producto;
 
+  public notificarError: Error;
+  public noHayJuegos: boolean;
+
   constructor(private juegosService: JuegosService, private datosService: DatosService, private categoriasService: CategoriasService) { }
 
   ngOnInit(): void {
+    this.notificarError = new Error;
+    this.noHayJuegos = false;
     this.mostrarjuegos();
   }
 
@@ -37,9 +42,8 @@ export class ListarjuegosComponent implements OnInit {
           this.listajuegos.push(this.nuevojuego);
         }
       }, (error) => {
- 
-      }, () => {
- 
+        this.notificarError = error.error.error[0];
+          this.noHayJuegos = true;
       }
     );
   }
@@ -49,9 +53,6 @@ export class ListarjuegosComponent implements OnInit {
       this.categoriasService.allCategorias().subscribe(
         (response) => {
           this.datosService.categorias = response.data;
-        }, (error) => {
-        }, () => {
-
         }
       );
     }

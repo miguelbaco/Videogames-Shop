@@ -3,6 +3,7 @@ import { CategoriasService } from 'src/app/services/categorias.service';
 import { DatosService } from 'src/app/services/datos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Producto } from '../../models/producto';
+import { Error } from '../../models/error';
 
 @Component({
   selector: 'app-carrito',
@@ -17,7 +18,13 @@ export class CarritoComponent implements OnInit {
   listajuegos: Producto[] = []
   preciocarrito: number;
 
+  public notificarError: Error;
+  public noHayCarrito: boolean;
+
   ngOnInit(): void {
+    this.notificarError = new Error;
+    this.notificarError.title = "No tienes nada dentro del carrito";
+    this.noHayCarrito = false;
    this.mostrarjuegos();
    this.preciocarrito = 0;
   }
@@ -53,8 +60,8 @@ export class CarritoComponent implements OnInit {
           }
           this.preciototal();
         }, (error) => {
-        }, () => {
-  
+          this.notificarError = error.error.error[0];
+          this.noHayCarrito = true;
         }
       );
     }
@@ -67,9 +74,6 @@ export class CarritoComponent implements OnInit {
         this.listajuegos = [];
         this.mostrarjuegos();
         this.preciototal();
-      }, (error) => {
-      }, () => {
-
       }
     );
   }
@@ -79,9 +83,6 @@ export class CarritoComponent implements OnInit {
       this.categoriasService.allCategorias().subscribe(
         (response) => {
           this.datosService.categorias = response.data;
-        }, (error) => {
-        }, () => {
-
         }
       );
     }

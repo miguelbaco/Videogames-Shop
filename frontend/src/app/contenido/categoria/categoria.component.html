@@ -11,4 +11,7 @@
             </div>
         </div>
     </div>
+    <div *ngIf="noHayJuegos || listajuegos.length == 0">
+        <p>{{this.notificarError.title}}</p>
+    </div>
 </div>

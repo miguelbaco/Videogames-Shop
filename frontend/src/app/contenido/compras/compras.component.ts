@@ -4,6 +4,7 @@ import { CategoriasService } from 'src/app/services/categorias.service';
 import { DatosService } from 'src/app/services/datos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Producto } from '../../models/producto';
+import { Error } from '../../models/error';
 
 @Component({
   selector: 'app-compras',
@@ -19,7 +20,12 @@ export class ComprasComponent implements OnInit {
   public nuevojuego: Producto;
   listajuegos: Producto[] = []
 
+  public notificarError: Error;
+  public noHayJuegos: boolean;
+
   ngOnInit(): void {
+    this.notificarError = new Error;
+    this.noHayJuegos = false;
     this.usuariolog = this.datosService.usuariologeado;
     this.mostrarjuegosadquiridos();
   }
@@ -48,6 +54,8 @@ export class ComprasComponent implements OnInit {
             }
           }
         }, (error) => {
+          this.notificarError = error.error.error[0];
+          this.noHayJuegos = true;
         }, () => {
   
         }

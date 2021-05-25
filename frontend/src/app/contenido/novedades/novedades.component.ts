@@ -17,9 +17,14 @@ export class NovedadesComponent implements OnInit {
   listajuegosfinal: Producto[] = [];
   public nuevojuego: Producto;
 
+  public notificarError: Error;
+  public noHayJuegos: boolean;
+
   constructor(private juegosService: JuegosService, private datosService: DatosService, private categoriasService: CategoriasService) { }
 
   ngOnInit(): void {
+    this.notificarError = new Error;
+    this.noHayJuegos = false;
     this.mostrarjuegos();
     if(this.listajuegos != null) {
       for(let juego of this.listajuegos) {
@@ -43,9 +48,8 @@ export class NovedadesComponent implements OnInit {
           this.listajuegos.push(this.nuevojuego);
         }
       }, (error) => {
- 
-      }, () => {
- 
+        this.notificarError = error.error.error[0];
+          this.noHayJuegos = true;
       }
     );
   }

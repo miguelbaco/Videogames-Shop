@@ -4,6 +4,7 @@ import { DatosService } from 'src/app/services/datos.service';
 import { DeseosService } from 'src/app/services/deseos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { Producto } from '../../models/producto';
+import { Error } from '../../models/error';
 
 @Component({
   selector: 'app-deseos',
@@ -16,9 +17,14 @@ export class DeseosComponent implements OnInit {
   listajuegos: Producto[] = []
   notificarPopoverCarrito: string;
 
+  public notificarError: Error;
+  public noHayJuegos: boolean;
+
   constructor(private pedidosService: PedidosService, private deseosService: DeseosService, private datosService: DatosService, private categoriasService: CategoriasService) { }
 
   ngOnInit(): void {
+    this.notificarError = new Error;
+    this.noHayJuegos = false;
     this.mostrarjuegos();
     this.notificarPopoverCarrito = "Añadido al carrito";
   }
@@ -40,8 +46,8 @@ export class DeseosComponent implements OnInit {
             this.listajuegos.push(this.nuevojuego);
           }
         }, (error) => {
-        }, () => {
-  
+          this.notificarError = error.error.error[0];
+          this.noHayJuegos = true;
         }
       );
     }
@@ -53,9 +59,6 @@ export class DeseosComponent implements OnInit {
       (response) => {
         this.listajuegos = [];
         this.mostrarjuegos();
-      }, (error) => {
-      }, () => {
-
       }
     );
   }
@@ -83,9 +86,6 @@ export class DeseosComponent implements OnInit {
       this.categoriasService.allCategorias().subscribe(
         (response) => {
           this.datosService.categorias = response.data;
-        }, (error) => {
-        }, () => {
-
         }
       );
     }

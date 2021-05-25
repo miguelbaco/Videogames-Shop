@@ -22,6 +22,9 @@
                 </footer>
             </div>
         </div>
+        <div *ngIf="noHayJuegos || listajuegos.length == 0">
+            <p>{{this.notificarError.title}}</p>
+        </div>
         <div class="w-100 d-flex justify-content-center">
             <div class="span6 diferenciar-nav w-50 text-center">
             
