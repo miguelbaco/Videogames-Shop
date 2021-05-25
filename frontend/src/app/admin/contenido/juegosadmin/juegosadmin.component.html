@@ -18,21 +18,21 @@
                 <p>Categoría</p>
             </div>
         </div>
-        <div class="row mt-2">
+        <div  *ngFor="let juego of listajuegos; let i = index" class="row mt-2">
             <div class="col-2 border-bottom border-secondary">
-                <p>The binding of isaac</p>
+                <p>{{juego.nombre}}</p>
             </div>
             <div class="col-5 border-bottom border-secondary">
-                <p>Este es un juwego de ejemplo ya añadire mas</p>
+                <p>{{juego.descripcion}}</p>
             </div>
             <div class="col-1 border-bottom border-secondary">
-                <p>15€</p>
+                <p>{{juego.precio}}€</p>
             </div>
             <div class="col-1 border-bottom border-secondary">
-                <p>65</p>
+                <p>{{juego.stock}}</p>
             </div>
             <div class="col-1 border-bottom border-secondary">
-                <p>Arcade</p>
+                <p>{{juego.nombrecategoria}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
                 <button class="btn btn-danger pagination_btn mt-1">Eliminar</button>

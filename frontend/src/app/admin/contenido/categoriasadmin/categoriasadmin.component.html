@@ -9,12 +9,12 @@
                 <p>Descripción</p>
             </div>
         </div>
-        <div class="row mt-2">
+        <div *ngFor="let categoria of listacategorias;" class="row mt-2">
             <div class="col-3 border-bottom border-secondary">
-                <p>Acción</p>
+                <p>{{categoria.nombre}}</p>
             </div>
             <div class="col-7 border-bottom border-secondary">
-                <p>Juegos destinados a provocar rapidez en el jugador</p>
+                <p>{{categoria.descripcion}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
                 <button class="btn btn-danger pagination_btn mt-1">Eliminar</button>

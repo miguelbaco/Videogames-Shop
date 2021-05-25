@@ -32,6 +32,13 @@ export class UsuariosService {
     headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
     return this.http.post<ResponseData>(`${environment.apiUrl}/registrarusuario`, usuario, { headers: headers });
   }
+
+  public allUsuarios(): Observable<ResponseData> {
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
+    return this.http.get<ResponseData>(`${environment.apiUrl}/usuarios`, { headers: headers });
+  }
 }
 
 

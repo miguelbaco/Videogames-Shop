@@ -15,18 +15,18 @@
                 <p>Dirección</p>
             </div>
         </div>
-        <div class="row mt-2">
+        <div *ngFor="let usuario of listaUsuarios; let i = index" class="row mt-2">
             <div class="col-2 border-bottom border-secondary">
-                <p>miguelbm</p>
+                <p [ngClass]="usuario.admin ? 'administrador' : 'none'">{{usuario.nombre}}</p>
             </div>
             <div class="col-4 border-bottom border-secondary">
-                <p>Miguel Ángel Baco Morillo</p>
+                <p [ngClass]="usuario.admin ? 'administrador' : 'none'">{{usuario.nombre}} {{usuario.apellidos}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
-                <p>m.a.bacomorillo@gmail.com</p>
+                <p [ngClass]="usuario.admin ? 'administrador' : 'none'">{{usuario.email}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
-                <p>Calle La Palma Nº 28</p>
+                <p [ngClass]="usuario.admin ? 'administrador' : 'none'">{{usuario.direccion}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
                 <button class="btn btn-danger pagination_btn mt-1">Eliminar</button>

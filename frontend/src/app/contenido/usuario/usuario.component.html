@@ -8,6 +8,9 @@
                 <li  class="mt-4" routerLink="/compras">
                     <button class="btn anadir pagination_btn">Mis compras</button>
                 </li>
+                <li *ngIf="usuariolog.admin" class="mt-4" routerLink="/adminjuegos">
+                    <button class="btn anadir pagination_btn">Administrar Gamepoint</button>
+                </li>
             </ul>
         </div>
         <div class="col-6">

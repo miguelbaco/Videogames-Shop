@@ -57,3 +57,7 @@
     display: flex;
     float: right;
   }
+
+.administrador {
+  color: #15ff00;
+}

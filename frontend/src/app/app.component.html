@@ -1,5 +1,9 @@
-    <!--<app-menuadmin></app-menuadmin>
-    <app-navegadoradmin></app-navegadoradmin> -->
-    <app-menu></app-menu>
-    <app-navegador></app-navegador>
+    <div *ngIf="validarpageadmin(); else noadmin">  
+        <app-menuadmin></app-menuadmin>
+        <app-navegadoradmin></app-navegadoradmin>
+    </div>
+    <ng-template #noadmin>
+        <app-menu></app-menu>
+        <app-navegador></app-navegador>
+    </ng-template>
     <router-outlet></router-outlet>
