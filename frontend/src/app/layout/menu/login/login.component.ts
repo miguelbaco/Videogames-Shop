@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
       }, (error) => {
         this.notificarError = error.error.error[0];
         this.errorlogin = true;
-      }, () => {
- 
       }
     );
   }

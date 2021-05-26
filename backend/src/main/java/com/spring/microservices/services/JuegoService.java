@@ -18,6 +18,8 @@ public interface JuegoService {
 	public List<Producto> juegosByCategoria(int idcategoria);
 
 	public List<Valoracion> valoracionesJuego(Producto producto);
+	
+	public Valoracion saveValoracion(Valoracion valoracion);
 
 	public void deleteJuego(Producto producto);
 

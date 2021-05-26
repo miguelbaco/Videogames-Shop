@@ -1,7 +1,7 @@
 package com.spring.microservices.entity.dto;
 
 public class UsuarioDTO {
-	private long id_usuario;
+	private long id;
 	private String email;
 	private String password;
 	private String nombre;
@@ -13,7 +13,7 @@ public class UsuarioDTO {
 		
 	}
 	
-	public UsuarioDTO(long id_usuario,
+	public UsuarioDTO(long id,
 	                  String email,
 	                  String password,
 	                  String nombre,
@@ -22,7 +22,7 @@ public class UsuarioDTO {
 	                  boolean admin) {
 
 		super();
-		this.id_usuario = id_usuario;
+		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.nombre = nombre;
@@ -31,15 +31,15 @@ public class UsuarioDTO {
 		this.admin = admin;
 	}
 	
-	public long getId_usuario() {
+	public long getId() {
 	
-		return id_usuario;
+		return id;
 	}
 
 	
-	public void setId_usuario(long id_usuario) {
+	public void setId(long id) {
 	
-		this.id_usuario = id_usuario;
+		this.id = id;
 	}
 
 	public String getEmail() {

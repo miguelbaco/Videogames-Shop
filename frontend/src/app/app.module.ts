@@ -30,7 +30,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CategoriasadminComponent } from './admin/contenido/categoriasadmin/categoriasadmin.component';
 import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuariosadmin.component';
 import { RandomOrderPipe } from './pipes/random-order.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -66,6 +66,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],

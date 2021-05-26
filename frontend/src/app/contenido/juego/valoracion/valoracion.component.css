@@ -99,3 +99,42 @@ h2, p, h4, h5 {
   position: relative;
   right: 160px;
 }
+
+.pagination_btn {
+	background-color: rgba(255,255,255,0.1);
+    color: #fff;
+    cursor: pointer;
+    padding: .5rem .8rem;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    line-height: 1rem;
+    width: auto;
+    color: white;
+    border: 0;
+}
+
+.anadir {
+  background-color: #4BA5FF !important;
+  color: white !important;
+  border-radius: 7px;
+}
+
+.anadir:hover {
+  background-color: #9BCDFF !important;
+  text-decoration: none;
+  color: white !important;
+  border-radius: 7px;
+  color: black !important;
+}
+
+.pagination_btn:hover {
+	background-color: #f1601c !important;
+    color: #fff;
+    -webkit-box-shadow: 0 0 10px var(--color-primary);
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.pagination_btn:active {
+	background-color: #f1601c;
+}

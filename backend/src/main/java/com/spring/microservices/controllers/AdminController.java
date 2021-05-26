@@ -180,7 +180,7 @@ public class AdminController {
 		}
 
 		if (usuario.get().isAdmin()) {
-			categoriaService.save(backendUtils.CategoriaDTOtoCategoria(categoriaDTO));
+			categoriaService.save(backendUtils.categoriaDTOtoCategoria(categoriaDTO));
 			return ResponseEntity.ok(responseDTO);
 		} else {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.FORBIDDEN.ordinal(),

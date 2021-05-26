@@ -18,6 +18,7 @@ import com.spring.microservices.entity.dto.ErrorDTO;
 import com.spring.microservices.entity.dto.ResponseDTO;
 import com.spring.microservices.entity.dto.UsuarioDTO;
 import com.spring.microservices.services.UsuarioService;
+import com.spring.microservices.utils.BackendUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,9 @@ public class UsuarioController {
 	
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Autowired
+	BackendUtils backendUtils;
 	
 	@GetMapping("/usuarios")
 	public ResponseEntity<ResponseDTO> allUsuarios() {
@@ -108,7 +112,7 @@ public class UsuarioController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);
 		}
 		
-		Usuario nuevoUsuario = 	usuarioService.usuarioDTOtoUsuario(usuarioDTO);
+		Usuario nuevoUsuario = 	backendUtils.usuarioDTOtoUsuario(usuarioDTO);
 		Usuario usregistrado = usuarioService.save(nuevoUsuario);
 		responseDTO.setData(usregistrado);
 		return ResponseEntity.ok(responseDTO);

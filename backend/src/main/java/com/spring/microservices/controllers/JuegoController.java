@@ -10,12 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.spring.microservices.entity.Producto;
 import com.spring.microservices.entity.Valoracion;
 import com.spring.microservices.entity.dto.ErrorDTO;
 import com.spring.microservices.entity.dto.ResponseDTO;
+import com.spring.microservices.entity.dto.ValoracionDTO;
 import com.spring.microservices.services.JuegoService;
+import com.spring.microservices.utils.BackendUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +31,9 @@ public class JuegoController {
 	
 	@Autowired
 	JuegoService juegoService;
+	
+	@Autowired
+	BackendUtils backendUtils;
 	
 	@GetMapping("/juegos")
 	public ResponseEntity<ResponseDTO> allJuegos() {
@@ -110,4 +118,27 @@ public class JuegoController {
 		responseDTO.setData(valoraciones);
 		return ResponseEntity.ok(responseDTO);
 	}
+	
+	@PostMapping("/anadirvaloracion")
+	public ResponseEntity<ResponseDTO> anadirValoracion(@RequestBody ValoracionDTO valoracionDTO) {
+		
+		ResponseDTO responseDTO = new ResponseDTO();
+		
+		Valoracion valoracion = backendUtils.valoracionDTOtoValoracion(valoracionDTO);
+		
+		if(valoracion == null) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "El juego o usuario de la valoración no existe", ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+		
+		Valoracion nueva = juegoService.saveValoracion(valoracion);
+		responseDTO.setData(nueva);
+		return ResponseEntity.ok(responseDTO);
+	}
+	
+	
 }

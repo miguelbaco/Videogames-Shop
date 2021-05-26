@@ -57,6 +57,12 @@ public class JuegoServiceImpl implements JuegoService {
 	}
 
 	@Override
+	public Valoracion saveValoracion(Valoracion valoracion) {
+		
+		return valoracionRepository.save(valoracion);
+	}
+
+	@Override
 	public void deleteJuego(Producto producto) {
 
 		repository.delete(producto);
@@ -66,7 +72,7 @@ public class JuegoServiceImpl implements JuegoService {
 	public void updateJuego(ProductoDTO productoDTO) {
 
 		Producto producto = repository.findById(Long.valueOf(productoDTO.getId()))
-		        .orElseThrow(NoSuchElementException::new);
+				.orElseThrow(NoSuchElementException::new);
 		producto.setDescripcion(productoDTO.getDescripcion());
 		producto.setIdcategoria(Long.valueOf(productoDTO.getIdcategoria()));
 		producto.setImagen(productoDTO.getImagen());
