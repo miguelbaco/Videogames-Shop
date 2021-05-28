@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { DatosService } from 'src/app/services/datos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-usuario',
@@ -33,7 +34,7 @@ export class UsuarioComponent implements OnInit {
         }
       );
     } else {
-      window.location.href="http://localhost:4200/notfound";
+      window.location.href= environment.url + "/notfound";
     }
   }
 

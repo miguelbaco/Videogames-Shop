@@ -20,19 +20,19 @@
         </div>
         <div  *ngFor="let juego of listajuegos; let i = index" class="row mt-2">
             <div class="col-2 border-bottom border-secondary">
-                <p>{{juego.nombre}}</p>
+                <p [ngClass]="juego.stock == 0 ? 'nostock' : 'none'">{{juego.nombre}}</p>
             </div>
             <div class="col-5 border-bottom border-secondary">
-                <p>{{juego.descripcion}}</p>
+                <p [ngClass]="juego.stock == 0 ? 'nostock' : 'none'">{{juego.descripcion}}</p>
             </div>
             <div class="col-1 border-bottom border-secondary">
-                <p>{{juego.precio}}€</p>
+                <p [ngClass]="juego.stock == 0 ? 'nostock' : 'none'">{{juego.precio}}€</p>
             </div>
             <div class="col-1 border-bottom border-secondary">
-                <p>{{juego.stock}}</p>
+                <p [ngClass]="juego.stock == 0 ? 'nostock' : 'none'">{{juego.stock}}</p>
             </div>
             <div class="col-1 border-bottom border-secondary">
-                <p>{{juego.nombrecategoria}}</p>
+                <p [ngClass]="juego.stock == 0 ? 'nostock' : 'none'">{{juego.nombrecategoria}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
                 <button class="btn btn-danger pagination_btn mt-1">Eliminar</button>

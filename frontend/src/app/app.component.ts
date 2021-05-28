@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +22,9 @@ export class AppComponent implements OnInit {
     .subscribe(
      (event: NavigationEvent) => {
        if(event instanceof NavigationStart) {
-         if(window.location.href == "http://localhost:4200/adminjuegos" ||
-           window.location.href == "http://localhost:4200/admincategorias" ||
-           window.location.href == "http://localhost:4200/adminusuarios") {
+         if(window.location.href == environment.url + "/adminjuegos" ||
+           window.location.href == environment.url + "/admincategorias" ||
+           window.location.href == environment.url + "/adminusuarios") {
              this.paginaadmin = true;
          }
        }
@@ -32,9 +33,9 @@ export class AppComponent implements OnInit {
 
   validarpageadmin(): boolean {
     this.paginaadmin = false;
-    if(window.location.href == "http://localhost:4200/adminjuegos" ||
-     window.location.href == "http://localhost:4200/admincategorias" ||
-     window.location.href == "http://localhost:4200/adminusuarios") {
+    if(window.location.href == environment.url + "/adminjuegos" ||
+     window.location.href == environment.url + "/admincategorias" ||
+     window.location.href == environment.url + "4200/adminusuarios") {
       this.paginaadmin = true; 
     }
     return this.paginaadmin;

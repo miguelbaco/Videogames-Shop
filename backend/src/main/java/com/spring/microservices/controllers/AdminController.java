@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +42,25 @@ public class AdminController {
 
 	@Autowired
 	BackendUtils backendUtils;
+	
+	@GetMapping("/adminjuegos")
+	public ResponseEntity<ResponseDTO> allJuegos() {
+		
+		ResponseDTO responseDTO = new ResponseDTO();
+		List<Producto> listajuegos = juegoService.allJuegos();
+		
+		if(listajuegos.isEmpty()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGOS, HttpStatus.NOT_FOUND.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGOS, "No se encontraron juegos disponibles", ErrorDTO.CODE_ERROR_JUEGOS, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDTO);
+		}
+		
+		responseDTO.setData(listajuegos);
+		return ResponseEntity.ok(responseDTO);
+	}
 
 	@PostMapping("/adminanadirjuego/{idusuario}")
 	public ResponseEntity<ResponseDTO> nuevojuego(@PathVariable int idusuario, @RequestBody ProductoDTO productoDTO) {

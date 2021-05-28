@@ -29,7 +29,7 @@ export class ListarjuegosComponent implements OnInit {
 
   mostrarjuegos() {
     this.categorias();
-    this.juegosService.allJuegos().subscribe(
+    this.juegosService.allJuegos(true).subscribe(
       (response) => {
         for(let juego of response.data) {
           this.nuevojuego = new Producto;

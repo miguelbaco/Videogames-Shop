@@ -3,6 +3,8 @@ import { Error } from 'src/app/models/error';
 import { Usuario } from 'src/app/models/usuario';
 import { DatosService } from 'src/app/services/datos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 import * as $ from "jquery";
 
 @Component({
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
   public repitecontrasena: string;
   public registroexitoso: boolean;
 
-  constructor(private usuarioService: UsuariosService, private datosService: DatosService) {
+  constructor(private usuarioService: UsuariosService, private datosService: DatosService, private ruta: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -45,7 +47,11 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('usuarioIDgamepoint', this.usuario.id.toString());
           this.datosService.usuariologeado = this.usuario;
           this.errorlogin = false;
-          window.location.reload();
+          if(window.location.href.includes("/juego/") || window.location.href.includes("/categoria/") ) {
+            window.location.href = environment.url;
+          } else {
+            window.location.reload();
+          }
         }
       }, (error) => {
         this.notificarError = error.error.error[0];
@@ -64,14 +70,8 @@ export class LoginComponent implements OnInit {
       }, (error) => {
         this.notificarError = error.error.error[0];
         this.errorlogin = true;
-      }, () => {
- 
       }
     );
-  }
-
-  public reload() {
-    window.location.reload();
   }
 
 }

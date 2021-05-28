@@ -75,14 +75,9 @@ export class JuegoComponent implements OnInit {
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
       this.pedidosService.anadirCarrito(idusuario, this.ruta.snapshot.params.id).subscribe(
         (response) => {
-          if(response.data != null) {
-            this.notificarPopoverCarrito = "Añadido al carrito";
-          }
         }, (error) => {
           this.notificarError = error.error.error[0];
           this.notificarPopoverCarrito = this.notificarError.title;
-        }, () => {
-   
         }
       );
     }

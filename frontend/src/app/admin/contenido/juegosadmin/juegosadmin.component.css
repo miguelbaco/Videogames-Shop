@@ -57,3 +57,7 @@
     display: flex;
     float: right;
   }
+
+.nostock {
+  color: #0070b1;
+}

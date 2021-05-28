@@ -3,6 +3,7 @@ import { Producto } from 'src/app/models/producto';
 import { JuegosService } from 'src/app/services/juegos.service';
 import { DatosService } from 'src/app/services/datos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class JuegosadminComponent implements OnInit {
   listajuegos: Producto[] = []
   public nuevojuego: Producto;
 
-  constructor(private juegosService: JuegosService, private datosService: DatosService, private categoriasService: CategoriasService) { }
+  constructor(private adminService: AdminService, private datosService: DatosService, private categoriasService: CategoriasService) { }
 
   ngOnInit(): void {
     this.mostrarjuegos();
@@ -23,7 +24,7 @@ export class JuegosadminComponent implements OnInit {
 
   mostrarjuegos() {
     this.categorias();
-    this.juegosService.allJuegos().subscribe(
+    this.adminService.allJuegos().subscribe(
       (response) => {
         for(let juego of response.data) {
           this.nuevojuego = new Producto;

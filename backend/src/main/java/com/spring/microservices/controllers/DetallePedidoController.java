@@ -70,14 +70,7 @@ public class DetallePedidoController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
 		}
 
-		List<DetallePedido> detalles = detallePedidoService.findByIdPedido(pedido.get().getId());
-
-		List<Producto> productos = new ArrayList<Producto>();
-		for (DetallePedido detalle : detalles) {
-			for (int i = 0; i < detalle.getCantidad(); i++) {
-				productos.add(detalle.getProducto());
-			}
-		}
+		List<Producto> productos = detallePedidoService.recogerCarrito(pedido.get().getId());
 
 		responseDTO.setData(productos);
 		return ResponseEntity.ok(responseDTO);
@@ -109,6 +102,23 @@ public class DetallePedidoController {
 			errors.add(error);
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+		
+		List<DetallePedido> detalles = detallePedidoService.findByIdPedido(pedido.get().getId());
+		
+		if (detalles.isEmpty()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No hay nada para comprar", ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+
+		for (DetallePedido detalle : detalles) {
+			Producto producto = detalle.getProducto();
+			producto.setStock(producto.getStock() - detalle.getCantidad());
+			juegoService.save(producto);
 		}
 
 		pedidoService.realizarCompra(pedido.get());
@@ -192,9 +202,25 @@ public class DetallePedidoController {
 			        juego.get());
 
 			if (detalleexistente.isPresent()) {
+				if(detalleexistente.get().getCantidad() == juego.get().getStock()) {
+					ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+					        ErrorDTO.CODE_ERROR_JUEGO, "No hay más en stock", ErrorDTO.CODE_ERROR_JUEGO, log);
+					List<ErrorDTO> errors = new ArrayList<>();
+					errors.add(error);
+					responseDTO.setError(errors);
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+				}
 				detalleexistente.get().setCantidad(detalleexistente.get().getCantidad() + 1);
 				detallePedido = detallePedidoService.save(detalleexistente.get());
 			} else {
+				if(juego.get().getStock() == 0) {
+					ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+					        ErrorDTO.CODE_ERROR_JUEGO, "No hay más en stock", ErrorDTO.CODE_ERROR_JUEGO, log);
+					List<ErrorDTO> errors = new ArrayList<>();
+					errors.add(error);
+					responseDTO.setError(errors);
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+				}
 				DetallePedido nuevojuego = new DetallePedido();
 				nuevojuego.setPedido(pedido.get());
 				nuevojuego.setProducto(juego.get());

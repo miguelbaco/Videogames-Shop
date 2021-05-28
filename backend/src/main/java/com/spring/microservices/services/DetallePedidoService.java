@@ -18,4 +18,6 @@ public interface DetallePedidoService {
 	public void delete(DetallePedido detallePedido);
 	
 	public List<Producto> productosComprados(List<Pedido> pedidos);
+	
+	public List<Producto> recogerCarrito(Long idPedido);
 }

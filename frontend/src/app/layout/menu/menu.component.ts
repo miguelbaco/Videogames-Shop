@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosService } from 'src/app/services/datos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-menu',
@@ -33,17 +34,20 @@ export class MenuComponent implements OnInit {
   cerrarsesion() {
     sessionStorage.removeItem("usuarioIDgamepoint");
     this.logeado = false;
+    this.datosService.logeado = false;
 
     //TODO: Adaptar para despliegue y separar parte de admin para el componente de admin
-    if(window.location.href == "http://localhost:4200/carrito" ||
-     window.location.href == "http://localhost:4200/lista-de-deseos" || 
-     window.location.href == "http://localhost:4200/usuario" ||
-     window.location.href == "http://localhost:4200/compras" ||
-     window.location.href == "http://localhost:4200/compras" ||
-     window.location.href == "http://localhost:4200/adminjuegos" ||
-     window.location.href == "http://localhost:4200/admincategorias" ||
-     window.location.href == "http://localhost:4200/adminusuarios") {
-      window.location.href="http://localhost:4200/";
+    if(window.location.href == environment.url + "/carrito" ||
+     window.location.href == environment.url + "/lista-de-deseos" || 
+     window.location.href == environment.url + "/usuario" ||
+     window.location.href == environment.url + "/compras" ||
+     window.location.href == environment.url + "/compras" ||
+     window.location.href == environment.url + "/adminjuegos" ||
+     window.location.href == environment.url + "/admincategorias" ||
+     window.location.href == environment.url + "/adminusuarios") {
+      window.location.href= environment.url;
+    } else {
+      window.location.reload();
     }
   }
 }

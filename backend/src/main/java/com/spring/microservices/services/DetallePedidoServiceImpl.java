@@ -50,4 +50,31 @@ public class DetallePedidoServiceImpl implements DetallePedidoService {
 		}
 		return productos;
 	}
+	
+	public List<Producto> recogerCarrito(Long idPedido) {
+		
+		List<DetallePedido> detalles = findByIdPedido(idPedido);
+		
+		for (DetallePedido detalle : detalles) {
+			if(detalle.getProducto().getStock() < detalle.getCantidad()) {
+				if(detalle.getProducto().getStock() == 0) {
+					delete(detalle);
+				} else {
+					detalle.setCantidad(detalle.getProducto().getStock());
+					save(detalle);
+				}
+			}
+		}
+		
+		List<DetallePedido> detallesdefinitivo = findByIdPedido(idPedido);
+
+		List<Producto> productos = new ArrayList<Producto>();
+		for (DetallePedido detalle : detallesdefinitivo) {
+			for (int i = 0; i < detalle.getCantidad(); i++) {
+					productos.add(detalle.getProducto());
+			}
+		}
+
+		return productos;
+	}
 }

@@ -1,6 +1,8 @@
 package com.spring.microservices.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +37,8 @@ public class JuegoController {
 	@Autowired
 	BackendUtils backendUtils;
 	
-	@GetMapping("/juegos")
-	public ResponseEntity<ResponseDTO> allJuegos() {
+	@GetMapping("/juegos/{aleatorio}")
+	public ResponseEntity<ResponseDTO> allJuegos(@PathVariable boolean aleatorio) {
 		
 		ResponseDTO responseDTO = new ResponseDTO();
 		List<Producto> listajuegos = juegoService.allJuegos();
@@ -49,6 +51,22 @@ public class JuegoController {
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDTO);
 		}
+		
+		Iterator<Producto> iterator = listajuegos.iterator();
+		
+		while(iterator.hasNext()) {
+			Producto producto = iterator.next();
+			if(producto.getStock() == 0) {
+				iterator.remove();
+			}
+		}
+		
+		if(aleatorio) {
+			Collections.shuffle(listajuegos); // Para mostrar juegos de forma aleatoria
+		} else {
+			Collections.reverse(listajuegos); // El orden se invierte para que los modificados ultimamente (más vendidos), salgan los primeros 
+		}
+		
 		responseDTO.setData(listajuegos);
 		return ResponseEntity.ok(responseDTO);
 	}
