@@ -1,6 +1,6 @@
 <div class="col-9 contenido float-right mt-5">
-    <h2 class="mr-5 mt-4"><span class="icono-search mr-4"></span>Categoría: {{categorianombre}}</h2>
-    <p class="text-secondary mb-5">En esta sección puedes encontrar todos los juegos disponibles relacionados a la categoria: Arcade</p>
+    <h2 class="mr-5 mt-4"><span class="icono-search mr-4"></span>Categoría: {{categoria.nombre}}</h2>
+    <p class="text-secondary mb-5">{{categoria.descripcion}}</p>
     <div *ngFor="let juego of listajuegos; let i = index" routerLink="/juego/{{juego.id}}"> <!-- Div que contiene cada uno de los divs juegos -->
         <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
             <div class="caratula">

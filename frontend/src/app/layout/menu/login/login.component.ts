@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   public repitecontrasena: string;
   public registroexitoso: boolean;
 
-  constructor(private usuarioService: UsuariosService, private datosService: DatosService, private ruta: ActivatedRoute) {
+  constructor(private usuarioService: UsuariosService, private datosService: DatosService) {
   }
 
   ngOnInit(): void {

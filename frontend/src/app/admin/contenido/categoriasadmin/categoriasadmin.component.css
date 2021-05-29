@@ -57,3 +57,45 @@
     display: flex;
     float: right;
   }
+
+.nostock {
+  color: #0070b1;
+}
+
+.botonlogin {
+  position: relative;
+  top: 10px;
+  z-index: 10px !important;
+}
+
+.interiorbotonlogin {
+  position: relative;
+  bottom: 12px;
+}
+
+.contenidologin {
+  background-color: rgba(57, 79, 130, 1);
+  border-radius: 7px;
+  padding: 23px;
+}
+
+.caratula {
+  width: 200px;
+  height: 300px;
+  /*box-shadow: 0px 4px 5px 6px black;*/
+  background: linear-gradient(0deg, rgb(6, 11, 29) 0%, rgba(6, 11, 29,0.4) 50%, rgba(0,0,0,0) 100%);
+  box-shadow:
+  6px 7px 8px 3px rgba(0,0,0,0.68),
+  inset #333 0 0 0 1px,
+  inset rgba(255,255,255, 0.5) 0 0 0 1px;
+}
+
+.caratula h5, p {
+  margin: 0px;
+  margin: 0px 3px;
+}
+
+.footercarrito {
+  position: relative;
+  top: 30px;
+}

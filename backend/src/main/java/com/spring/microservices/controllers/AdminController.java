@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.microservices.entity.Categoria;
 import com.spring.microservices.entity.Producto;
 import com.spring.microservices.entity.Usuario;
 import com.spring.microservices.entity.dto.CategoriaDTO;
 import com.spring.microservices.entity.dto.ErrorDTO;
 import com.spring.microservices.entity.dto.ProductoDTO;
 import com.spring.microservices.entity.dto.ResponseDTO;
+import com.spring.microservices.entity.dto.UsuarioDTO;
 import com.spring.microservices.services.CategoriaService;
 import com.spring.microservices.services.JuegoService;
 import com.spring.microservices.services.UsuarioService;
@@ -179,6 +184,48 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseDTO);
 		}
 	}
+	
+	@PostMapping("/admineditarcategoria/{idusuario}")
+	public ResponseEntity<ResponseDTO> editarcategoria(@PathVariable int idusuario, @RequestBody CategoriaDTO categoriaDTO) {
+
+		ResponseDTO responseDTO = new ResponseDTO();
+
+		Optional<Usuario> usuario = usuarioService.findById(Long.valueOf(idusuario));
+
+		if (!usuario.isPresent()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO,
+			        log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+
+		if (usuario.get().isAdmin()) {
+			Optional<Categoria> categoria = categoriaService.findById(Long.valueOf(categoriaDTO.getId()));
+			if (!categoria.isPresent()) {
+				ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+				        ErrorDTO.CODE_ERROR_JUEGO, "No existe la categoria que quieres modificar", ErrorDTO.CODE_ERROR_JUEGO,
+				        log);
+				List<ErrorDTO> errors = new ArrayList<>();
+				errors.add(error);
+				responseDTO.setError(errors);
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+			}
+
+			categoriaService.updateCategoria(categoriaDTO);
+			return ResponseEntity.ok(responseDTO);
+		} else {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.FORBIDDEN.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No tienes autorizacion para realizar esa acción",
+			        ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseDTO);
+		}
+	}
 
 	@PostMapping("/adminanadircategoria/{idusuario}")
 	public ResponseEntity<ResponseDTO> nuevaCategoria(
@@ -212,5 +259,67 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseDTO);
 		}
 	}
+	
+	@PostMapping("/admineditarusuario/{idusuario}")
+	public ResponseEntity<ResponseDTO> editarusuario(@PathVariable int idusuario, @RequestBody UsuarioDTO usuarioDTO) {
+
+		ResponseDTO responseDTO = new ResponseDTO();
+
+		Optional<Usuario> usuario = usuarioService.findById(Long.valueOf(idusuario));
+
+		if (!usuario.isPresent()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO,
+			        log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+
+		if (usuario.get().isAdmin()) {
+			Optional<Usuario> editousuario = usuarioService.findById(Long.valueOf(usuarioDTO.getId()));
+			
+			if (!editousuario.isPresent()) {
+				ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+				        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario a editar", ErrorDTO.CODE_ERROR_JUEGO,
+				        log);
+				List<ErrorDTO> errors = new ArrayList<>();
+				errors.add(error);
+				responseDTO.setError(errors);
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+			}
+			
+			usuarioService.updateUsuario(usuarioDTO);
+			return ResponseEntity.ok(responseDTO);
+			
+		} else {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.FORBIDDEN.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No tienes autorizacion para realizar esa acción",
+			        ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseDTO);
+		}
+	}	
+	
+	@PostMapping("/subirimagen")
+    public ResponseEntity<ResponseDTO> uploadFile(@RequestParam("file") MultipartFile file) {
+		ResponseDTO responseDTO = new ResponseDTO();
+		try {
+			juegoService.subirImagen(file);
+		} catch(FileUploadException e) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO,
+			        log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			log.error(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+        return ResponseEntity.ok(responseDTO);
+    }
 
 }

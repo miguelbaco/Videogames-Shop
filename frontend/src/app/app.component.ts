@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     this.paginaadmin = false;
     if(window.location.href == environment.url + "/adminjuegos" ||
      window.location.href == environment.url + "/admincategorias" ||
-     window.location.href == environment.url + "4200/adminusuarios") {
+     window.location.href == environment.url + "/adminusuarios") {
       this.paginaadmin = true; 
     }
     return this.paginaadmin;

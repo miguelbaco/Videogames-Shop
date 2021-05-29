@@ -1,12 +1,18 @@
 package com.spring.microservices.services;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.microservices.entity.Producto;
 import com.spring.microservices.entity.Valoracion;
@@ -22,6 +28,9 @@ public class JuegoServiceImpl implements JuegoService {
 
 	@Autowired
 	ValoracionRepository valoracionRepository;
+	
+	@Value("${upload.path}")
+    private String uploadPath;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -64,8 +73,9 @@ public class JuegoServiceImpl implements JuegoService {
 
 	@Override
 	public void deleteJuego(Producto producto) {
-
-		repository.delete(producto);
+		
+		producto.setStock(0);
+		repository.save(producto);
 	}
 
 	@Override
@@ -81,6 +91,23 @@ public class JuegoServiceImpl implements JuegoService {
 		producto.setStock(productoDTO.getStock());
 
 		repository.save(producto);
+	}
+
+	@Override
+	public void subirImagen(MultipartFile file) throws FileUploadException {
+		
+		try {
+            Path root = Paths.get(uploadPath);
+            Path resolve = root.resolve(file.getOriginalFilename());
+            if (resolve.toFile()
+                       .exists()) {
+                throw new FileUploadException("File already exists: " + file.getOriginalFilename());
+            }
+            Files.copy(file.getInputStream(), resolve);
+        } catch (Exception e) {
+            throw new FileUploadException("Could not store the file. Error: " + e.getMessage());
+        }
+		
 	}
 
 }

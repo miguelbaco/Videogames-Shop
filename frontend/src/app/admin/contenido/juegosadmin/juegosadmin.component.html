@@ -35,13 +35,82 @@
                 <p [ngClass]="juego.stock == 0 ? 'nostock' : 'none'">{{juego.nombrecategoria}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
-                <button class="btn btn-danger pagination_btn mt-1">Eliminar</button>
-                <button class="btn anadir pagination_btn mt-1 ml-3">Modificar</button>
+                <button class="btn btn-danger pagination_btn mt-1" (click)="eliminarJuego(juego)">Eliminar</button>
+                <button class="btn anadir pagination_btn mt-1 ml-3" (click)="juegoamodificar(juego)" data-toggle="modal" data-target="#modificarjuego">Modificar</button>
             </div>
         </div>
         <div class="row mt-3 justify-content-end">
             <div class="col-2">
-                <button class="btn nuevojuego pagination_btn mt-1 mr-5">Añadir juego</button>
+                <button class="btn nuevojuego pagination_btn mt-1 mr-5" data-toggle="modal" data-target="#nuevojuego">Añadir juego</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modificarjuego">
+            <div class="modal-dialog">
+              <div class="modal-content caratula w-100">
+                <div class="modal-header contenidologin">
+                  <h3 class="modal-title text-white">Modificar juego</h3>
+                  <button type="button" class="close rounded-circle" id="cerrarAnadir" data-dismiss="modal"><span class="icono-cross"></span></button>
+                </div>
+                <div class="modal-header contenidologin">
+                  <form class="w-100" role="form" (ngSubmit)="modificarjuego()" #modificarJuego="ngForm" id="modificarJuego">
+                    <!--<div *ngIf="errorlogin" class="bg-danger alert-dismissible fade show">
+                      <p>{{notificarError.title}}</p>
+                    </div> -->
+                    <div class="form-group">
+                        <label name="nombre" class="text-white">Nombre del juego</label>
+                        <input type="text" [(ngModel)]="juegomodificar.nombre" #nombre="ngModel" class="form-control" placeholder="Nombre del juego" name="nombre" id="nombre" required/>
+                        <label class="mt-3 text-white" name="descripcion">Descripción</label>
+                        <textarea rows="3" [(ngModel)]="juegomodificar.descripcion" #descripcion="ngModel" class="form-control" placeholder="Descripción del juego" name="descripcion" id="descripcion" required></textarea>
+                        <label class="mt-3 text-white" name="precio">Precio</label>
+                        <input type="number" [(ngModel)]="juegomodificar.precio" #precio="ngModel" class="form-control" name="precio" id="precio" required/>
+                        <label class="mt-3 text-white" name="stock">Stock</label>
+                        <input type="number" [(ngModel)]="juegomodificar.stock" #stock="ngModel" class="form-control" name="stock" id="stock" required/>
+                        <div *ngIf="listacategorias?.length > 0" class="mt-3 mb-3">
+                            <select [(ngModel)]="juegomodificar.idcategoria" #idcategoria="ngModel" name="idcategoria" id="idcategoria" class="w-50">
+                                <option *ngFor="let categoria of listacategorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
+                            </select>
+                        </div>
+                        <button type="submit" form="modificarJuego" class="btn btn-warning btn-block pagination_btn">Modificar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="nuevojuego">
+            <div class="modal-dialog">
+              <div class="modal-content caratula w-100">
+                <div class="modal-header contenidologin">
+                  <h3 class="modal-title text-white">Nuevo juego</h3>
+                  <button type="button" class="close rounded-circle" id="cerrarAnadir" data-dismiss="modal"><span class="icono-cross"></span></button>
+                </div>
+                <div class="modal-header contenidologin">
+                  <form role="form" (ngSubmit)="anadirjuego()" #anadirJuego="ngForm" id="anadirJuego">
+                    <!--<div *ngIf="errorlogin" class="bg-danger alert-dismissible fade show">
+                      <p>{{notificarError.title}}</p>
+                    </div> -->
+                    <div class="form-group">
+                        <label name="nombre" class="text-white">Nombre del juego</label>
+                        <input type="text" [(ngModel)]="productoNuevo.nombre" #nombre="ngModel" class="form-control" placeholder="Nombre del juego" name="nombre" id="nombre" required/>
+                        <label class="mt-3 text-white" name="descripcion">Descripción</label>
+                        <textarea rows="3" [(ngModel)]="productoNuevo.descripcion" #descripcion="ngModel" class="form-control" placeholder="Descripción del juego" name="descripcion" id="descripcion" required></textarea>
+                        <label class="mt-3 text-white" name="precio">Precio</label>
+                        <input type="number" [(ngModel)]="productoNuevo.precio" #precio="ngModel" class="form-control" name="precio" id="precio" required/>
+                        <label class="mt-3 text-white" name="stock">Stock</label>
+                        <input type="number" [(ngModel)]="productoNuevo.stock" #stock="ngModel" class="form-control" name="stock" id="stock" required/>
+                        <div *ngIf="listacategorias?.length > 0" class="mt-3 mb-3">
+                            <select [(ngModel)]="productoNuevo.idcategoria" #idcategoria="ngModel" name="idcategoria" id="idcategoria" class="w-50">
+                                <option *ngFor="let categoria of listacategorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
+                            </select>
+                        </div>
+                        <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+                        
+                        <button type="submit" form="anadirJuego" class="btn btn-warning btn-block pagination_btn">Añadir juego</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ import { DatosService } from 'src/app/services/datos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Location } from "@angular/common";
+import { Categoria } from 'src/app/models/categoria';
 
 @Component({
   selector: 'app-categoria',
@@ -16,7 +17,7 @@ export class CategoriaComponent implements OnInit {
 
   listajuegos: Producto[] = []
   public nuevojuego: Producto;
-  public categorianombre: string;
+  public categoria: Categoria;
 
   public notificarError: Error;
   public noHayJuegos: boolean;
@@ -71,7 +72,7 @@ export class CategoriaComponent implements OnInit {
       );
     }
 
-    this.categorianombre = this.datosService.categorias.find(x => x.id ==this.ruta.snapshot.params.id).nombre;
+    this.categoria = this.datosService.categorias.find(x => x.id ==this.ruta.snapshot.params.id);
   }
 
 }

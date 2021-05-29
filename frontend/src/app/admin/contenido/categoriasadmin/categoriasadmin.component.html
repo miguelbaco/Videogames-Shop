@@ -17,13 +17,67 @@
                 <p>{{categoria.descripcion}}</p>
             </div>
             <div class="col-2 border-bottom border-secondary">
-                <button class="btn btn-danger pagination_btn mt-1">Eliminar</button>
-                <button class="btn anadir pagination_btn mt-1 ml-3">Modificar</button>
+                <button class="btn anadir pagination_btn mt-1 ml-3" (click)="categoriaamodificar(categoria)" data-toggle="modal" data-target="#modificarcategoria">Modificar</button>
             </div>
         </div>
         <div class="row mt-3 justify-content-end">
             <div class="col-2">
-                <button class="btn nuevojuego pagination_btn mt-1 mr-5">Añadir categoría</button>
+                <button class="btn nuevojuego pagination_btn mt-1 mr-5" data-toggle="modal" data-target="#nuevacategoria">Añadir categoría</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modificarcategoria">
+            <div class="modal-dialog">
+              <div class="modal-content caratula w-100">
+                <div class="modal-header contenidologin w-100">
+                  <h3 class="modal-title text-white">Modificar categoría</h3>
+                  <button type="button" class="close rounded-circle" id="cerrarAnadir" data-dismiss="modal"><span class="icono-cross"></span></button>
+                </div>
+                <div class="modal-header contenidologin w-100">
+                  <form class="w-100" role="form" (ngSubmit)="modificarcategoria()" #modificarCategoria="ngForm" id="modificarCategoria">
+                    <!--<div *ngIf="errorlogin" class="bg-danger alert-dismissible fade show">
+                      <p>{{notificarError.title}}</p>
+                    </div> -->
+                    <div class="form-group w-100">
+                        <label name="nombre" class="text-white">Nombre de la categoría</label>
+                        <input type="text" [(ngModel)]="categoriaModificar.nombre" #nombre="ngModel" class="form-control" placeholder="Nombre de la categoria" name="nombre" id="nombre" required/>
+                        <label class="mt-3 text-white w-100">Descripción</label>
+                        <textarea rows="3" [(ngModel)]="categoriaModificar.descripcion" #descripcion="ngModel" class="form-control w-100" placeholder="Descripción de la categoria" name="descripcion" id="descripcion" required></textarea>
+                        <button type="submit" form="modificarCategoria" class="btn btn-warning btn-block pagination_btn">Modificar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="nuevacategoria">
+            <div class="modal-dialog">
+              <div class="modal-content caratula w-100">
+                <div class="modal-header contenidologin">
+                  <h3 class="modal-title text-white">Nueva Categoría</h3>
+                  <button type="button" class="close rounded-circle" id="cerrarAnadir" data-dismiss="modal"><span class="icono-cross"></span></button>
+                </div>
+                <div class="modal-header contenidologin">
+                  <form role="form" (ngSubmit)="anadircategoria()" #anadirCategoria="ngForm" id="anadirCategoria" class="w-100">
+                    <!--<div *ngIf="errorlogin" class="bg-danger alert-dismissible fade show">
+                      <p>{{notificarError.title}}</p>
+                    </div> -->
+                    <div class="form-group w-100">
+                        <label name="nombre" class="text-white">Nombre de la categoría</label>
+                        <input type="text" [(ngModel)]="nuevaCategoria.nombre" #nombre="ngModel" class="form-control" placeholder="Nombre de la categoria" name="nombre" id="nombre" required/>
+                        <label class="mt-3 text-white w-100">Descripción</label>
+                        <textarea rows="3" [(ngModel)]="nuevaCategoria.descripcion" #descripcion="ngModel" class="form-control w-100" placeholder="Descripción de la categoria" name="descripcion" id="descripcion" required></textarea>
+                        <button type="submit" form="anadirCategoria" class="btn btn-warning btn-block pagination_btn">Añadir categoría</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer contenidologin w-100">
+                    <button type="button" class="btn btn--transparent btn--font-12 menu-icon ion-navicon-round list-inline-item d-flex flex-row-reverse botonlogin" data-toggle="modal" data-target="#signin">
+                        <div class="list-inline-item float-right color-icons footercarrito"></div>
+                        <p class="list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin" data-dismiss="modal">Regístrate</p>
+                    </button>
+                </div>
+              </div>
             </div>
         </div>
     </div>
