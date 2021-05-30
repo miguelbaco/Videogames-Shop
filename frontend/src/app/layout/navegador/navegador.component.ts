@@ -19,6 +19,7 @@ export class NavegadorComponent implements OnInit {
 
   constructor(private datosService: DatosService, private categoriasService: CategoriasService) { }
 
+  // Este método coge por las class los tag y les quita o añade las siguientes claseses
   ngOnInit(): void {
     $('.btn-expand-collapse').click(function() {
       $('.navbar-primary').toggleClass('collapsed');
@@ -58,14 +59,17 @@ export class NavegadorComponent implements OnInit {
   }
 
   insertarEnMenu() {
-    this.categoriasmenu.push(this.categoriastotales[Math.floor(Math.random() * (this.categoriastotales.length))]);
-    let cantidadcategorias = 3;
-
-    if(this.categoriastotales.length = 2) {
+    // Primero meto uno para inicializarlo
+    if(this.categoriastotales.length != 0) {
+      this.categoriasmenu.push(this.categoriastotales[Math.floor(Math.random() * (this.categoriastotales.length))]);
+    }
+    let cantidadcategorias = 4;
+    // Por defecto aparecerán 4 categorías, si hay menos mostrará menos 
+    if(this.categoriastotales.length == 2) {
+      cantidadcategorias = 3;
+    } else if(this.categoriastotales.length == 1) {
       cantidadcategorias = 2;
-    } else if(this.categoriastotales.length = 1) {
-      cantidadcategorias = 1;
-    } else if(this.categoriastotales.length = 0) {
+    } else if(this.categoriastotales.length == 0) {
       cantidadcategorias = 0;
     }
 

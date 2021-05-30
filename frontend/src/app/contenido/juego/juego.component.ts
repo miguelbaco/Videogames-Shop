@@ -44,10 +44,6 @@ export class JuegoComponent implements OnInit {
           this.datosService.categorias.find(x => x.id == this.juego.idcategoria);
           this.juego.nombrecategoria = this.datosService.categorias.find(x => x.id == this.juego.idcategoria).nombre;
           this.juegoboolean = true;
-      }, (error) => {
- 
-      }, () => {
- 
       }
     );
   }
@@ -67,6 +63,8 @@ export class JuegoComponent implements OnInit {
    
         }
       );
+    } else {
+      this.notificarPopoverDeseo = "Inicia sesión o registrate";
     }
   }
 
@@ -80,6 +78,8 @@ export class JuegoComponent implements OnInit {
           this.notificarPopoverCarrito = this.notificarError.title;
         }
       );
+    } else {
+      this.notificarPopoverCarrito = "Inicia sesión o registrate";
     }
   }
 }

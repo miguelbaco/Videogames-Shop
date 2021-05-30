@@ -28,9 +28,9 @@ public class JuegoServiceImpl implements JuegoService {
 
 	@Autowired
 	ValoracionRepository valoracionRepository;
-	
+
 	@Value("${upload.path}")
-    private String uploadPath;
+	private String uploadPath;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -67,13 +67,13 @@ public class JuegoServiceImpl implements JuegoService {
 
 	@Override
 	public Valoracion saveValoracion(Valoracion valoracion) {
-		
+
 		return valoracionRepository.save(valoracion);
 	}
 
 	@Override
 	public void deleteJuego(Producto producto) {
-		
+
 		producto.setStock(0);
 		repository.save(producto);
 	}
@@ -81,6 +81,7 @@ public class JuegoServiceImpl implements JuegoService {
 	@Override
 	public void updateJuego(ProductoDTO productoDTO) {
 
+		/* Actualizo el juego con los cambios del DTO */
 		Producto producto = repository.findById(Long.valueOf(productoDTO.getId()))
 				.orElseThrow(NoSuchElementException::new);
 		producto.setDescripcion(productoDTO.getDescripcion());
@@ -93,21 +94,24 @@ public class JuegoServiceImpl implements JuegoService {
 		repository.save(producto);
 	}
 
+	/* Este método es el que coge el archivo de imagen y lo guarda en assets */
 	@Override
 	public void subirImagen(MultipartFile file) throws FileUploadException {
-		
+
 		try {
-            Path root = Paths.get(uploadPath);
-            Path resolve = root.resolve(file.getOriginalFilename());
-            if (resolve.toFile()
-                       .exists()) {
-                throw new FileUploadException("File already exists: " + file.getOriginalFilename());
-            }
-            Files.copy(file.getInputStream(), resolve);
-        } catch (Exception e) {
-            throw new FileUploadException("Could not store the file. Error: " + e.getMessage());
-        }
-		
+			/* uploadPath recoge de la variable del properties la ruta donde guardar la imagen  */
+			Path root = Paths.get(uploadPath);
+			//Se especifica la ruta que va a tener el archivo con su nombre en el sistema
+			Path resolve = root.resolve(file.getOriginalFilename());
+			if (resolve.toFile().exists()) { // Aqui comprueba que no se haya subido ya
+				throw new FileUploadException("File already exists: " + file.getOriginalFilename());
+			}
+			// Aquí el método copy de Files se encarga de coger el archivo y guardarlo en la ruta con su nombre
+			Files.copy(file.getInputStream(), resolve);
+		} catch (Exception e) {
+			throw new FileUploadException("Could not store the file. Error: " + e.getMessage());
+		}
+
 	}
 
 }

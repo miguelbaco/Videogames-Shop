@@ -43,7 +43,6 @@ export class JuegosadminComponent implements OnInit {
         }
       }
     );
-    this.listacategorias
   }
 
   categorias() {
@@ -69,6 +68,7 @@ export class JuegosadminComponent implements OnInit {
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
       this.adminService.eliminarJuego(producto, idusuario).subscribe(
         () => {
+          // Se borra la lista de juegos y se recogen de nuevo
           this.listajuegos = [];
           this.mostrarjuegos();
         }
@@ -79,15 +79,16 @@ export class JuegosadminComponent implements OnInit {
   anadirjuego() {
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
 
+      // Se comprueba que se hayan rellenado la información y se haya subido un archivo
       if(this.fileToUpload != null && this.productoNuevo.idcategoria != undefined && 
         this.productoNuevo.stock != null && this.productoNuevo.nombre != null && 
         this.productoNuevo.descripcion != null && this.productoNuevo.precio != null) {
           let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
           this.productoNuevo.imagen = this.fileToUpload.name;
-          this.adminService.anadirJuego(this.productoNuevo, idusuario).subscribe();
+          this.adminService.anadirJuego(this.productoNuevo, idusuario).subscribe(); // Se añade el juego a BD
           this.productoNuevo.nombrecategoria = this.datosService.categorias.find(x => x.id == this.nuevojuego.idcategoria).nombre;
           this.listajuegos.push(this.productoNuevo);
-          this.adminService.subirImagen(this.fileToUpload).subscribe();
+          this.adminService.subirImagen(this.fileToUpload).subscribe(); // Se guarda la imagen en servidor
       }
     }
   }

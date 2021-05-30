@@ -7,6 +7,7 @@ import { Valoracion } from 'src/app/models/valoracion';
 import { JuegosService } from 'src/app/services/juegos.service';
 import { FormControl } from '@angular/forms';
 import { Error } from 'src/app/models/error';
+import { DatosService } from 'src/app/services/datos.service';
 
 @Component({
   selector: 'app-valoracion',
@@ -28,11 +29,12 @@ export class ValoracionComponent implements OnInit {
   public notificarErrorValoraciones: Error = new Error;
   public errorValoraciones : boolean = false;
 
-  constructor(private juegosService: JuegosService, private ruta: ActivatedRoute) { }
+  constructor(private juegosService: JuegosService, private ruta: ActivatedRoute, private datosService: DatosService) { }
 
   ngOnInit(): void {
     this.valoracionesDelJuego();
 
+    // Eventos mouseOver y mouseOut para colorear las estrellas y las anteriores a la que se tiene encima
     $(document).ready(function(){
   
       /* 1. Visualizing things on Hover - See next part for action on click */
@@ -55,7 +57,8 @@ export class ValoracionComponent implements OnInit {
         });
       });
       
-      
+
+      // Evento de click para dejar seleccionada las estrellas hasta donde se ha clickado   
       /* 2. Action to perform on click */
       $('#stars li').on('click', function(){
         var onStar = parseInt($(this).data('value'), 10); // The star currently selected
@@ -92,8 +95,11 @@ export class ValoracionComponent implements OnInit {
     );
   }
 
+  // Una vez recogida todas las valoraciones y guardadas por ngOnInit
+  // empieza este método que recorre las valoraciones y le setea la puntuación
   ngAfterViewChecked() {
     let index = 0;
+    let sumaValoraciones = 0;
     for(let valoracion of this.valoraciones) {
       let selector = "#stars" + index + " li";
         var onStar = valoracion.puntuacion;
@@ -106,51 +112,69 @@ export class ValoracionComponent implements OnInit {
         for (let i = 0; i < onStar; i++) {
           $(stars[i]).addClass('selected');
         }
-
+      sumaValoraciones += valoracion.puntuacion;
       index++;
+    }
+    this.calculaNotaJuego(sumaValoraciones, index);
+  }
+
+  // Calcula la media y como se puntua sobre 5 y quiero la nota sobre 10 multiplico por 2
+  calculaNotaJuego(suma: number, cantidad: number) {
+    if(cantidad == 0) {
+      this.datosService.valoracionfinal = null;
+    } else {
+      this.datosService.valoracionfinal = ((suma * 2) / cantidad);
     }
   }
 
   enviarValoracion() {
-    let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
-    if(idusuario != null && this.notaDelUsuario != null && this.comentarioUsuario.value != undefined) {
-      this.nuevaValoracion = new Valoracion;
-      this.valoracionUsuario.usuario = new Usuario;
-      this.valoracionUsuario.usuario.id = null;
-      this.valoracionUsuario.producto = new Producto;
-      this.valoracionUsuario.producto.id = null;
-      this.valoracionUsuario.usuario.id = idusuario;
-      this.valoracionUsuario.producto.id = this.ruta.snapshot.params.id;
-      this.valoracionUsuario.puntuacion = this.notaDelUsuario;
-      this.juegosService.anadirValoracion(this.valoracionUsuario).subscribe(
-        (response) => {
-          this.valoracionUsuario = response.data;
-          this.valoraciones.push(this.valoracionUsuario);
-          this.valoracionUsuario = new Valoracion;
-          this.errorNuevaVal = false;
-          this.comentarioUsuario.reset();
-          let stars = $("#stars li").parent().children('li.star');
-          for (let i = 0; i < stars.length; i++) {
-            $(stars[i]).removeClass('selected');
+    if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
+      let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
+      if(idusuario != null && this.notaDelUsuario != null && this.comentarioUsuario.value != undefined) {
+        this.nuevaValoracion = new Valoracion;
+        this.valoracionUsuario.usuario = new Usuario;
+        this.valoracionUsuario.usuario.id = null;
+        this.valoracionUsuario.producto = new Producto;
+        this.valoracionUsuario.producto.id = null;
+        this.valoracionUsuario.usuario.id = idusuario;
+        this.valoracionUsuario.producto.id = this.ruta.snapshot.params.id;
+        this.valoracionUsuario.puntuacion = this.notaDelUsuario;
+        this.juegosService.anadirValoracion(this.valoracionUsuario).subscribe(
+          (response) => {
+            this.valoracionUsuario = response.data;
+            this.valoraciones.push(this.valoracionUsuario);
+            // Se resetea el menu de valorar y se restablecen las estrellas quitandole la class selected
+            this.valoracionUsuario = new Valoracion;
+            this.errorNuevaVal = false;
+            this.comentarioUsuario.reset();
+            let stars = $("#stars li").parent().children('li.star');
+            for (let i = 0; i < stars.length; i++) {
+              $(stars[i]).removeClass('selected');
+            }
+            this.errorValoraciones = false;
+            this.ngAfterViewChecked();
+          }, (error) => {
+            this.notificarErrorNuevaVal = error.error.error[0];
+            this.errorNuevaVal = true;
           }
-        }, (error) => {
-          this.notificarErrorNuevaVal = error.error.error[0];
-          this.errorNuevaVal = true;
+        );
+      } else { // Recoge errores
+        if(idusuario == null) {
+          this.notificarErrorNuevaVal.title = "No estas registrado para poder valorar este juego";
+        } else if(this.notaDelUsuario == null) {
+          this.notificarErrorNuevaVal.title = "No has seleccionado la puntuación que le vas a dar al juego";
+        } else if(this.comentarioUsuario.value == undefined) {
+          this.notificarErrorNuevaVal.title = "No has escrito una valoracion del juego";
         }
-      );
-    } else {
-      if(idusuario == null) {
-        this.notificarErrorNuevaVal.title = "No estas registrado para poder valorar este juego";
-      } else if(this.notaDelUsuario == null) {
-        this.notificarErrorNuevaVal.title = "No has seleccionado la puntuación que le vas a dar al juego";
-      } else if(this.comentarioUsuario.value == undefined) {
-        this.notificarErrorNuevaVal.title = "No has escrito una valoracion del juego";
+        this.errorNuevaVal = true;
       }
+    } else {
+      this.notificarErrorNuevaVal.title = "Inicia sesión o registrate para poder valorar el producto";
       this.errorNuevaVal = true;
     }
   }
 
-  valoracion(nota: number) {
+  valoracion(nota: number) { // Asi se recoge la nota con un evento de click sobre la estrella clickada que guarda una nota
     this.notaDelUsuario = nota;
   }
 

@@ -1,3 +1,4 @@
+import { NumberFormatStyle } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MenuadminComponent } from '../admin/layout/menuadmin/menuadmin.component';
 import { NavegadorComponent } from '../layout/navegador/navegador.component';
@@ -12,6 +13,7 @@ export class DatosService {
   categorias: Categoria[];
   usuariologeado: Usuario;
   logeado: boolean = false;
+  valoracionfinal: number;
   constructor() { }
   
 }

@@ -33,7 +33,7 @@ export class UsuarioComponent implements OnInit {
           }
         }
       );
-    } else {
+    } else { // Si no esta logeado, 404
       window.location.href= environment.url + "/notfound";
     }
   }

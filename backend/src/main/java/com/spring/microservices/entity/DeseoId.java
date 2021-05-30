@@ -4,41 +4,36 @@ import java.io.Serializable;
 
 public class DeseoId implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long usuario;
-    private Long producto;
+	private Long producto;
 
-    public DeseoId() {
+	public DeseoId() {
 
-    }
+	}
 
-	
 	public Long getUsuario() {
-	
+
 		return usuario;
 	}
 
-	
 	public void setUsuario(Long usuario) {
-	
+
 		this.usuario = usuario;
 	}
 
-	
 	public Long getProducto() {
-	
+
 		return producto;
 	}
 
-	
 	public void setProducto(Long producto) {
-	
+
 		this.producto = producto;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -49,7 +44,6 @@ public class DeseoId implements Serializable {
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -73,6 +67,5 @@ public class DeseoId implements Serializable {
 			return false;
 		return true;
 	}
-    
-	
+
 }

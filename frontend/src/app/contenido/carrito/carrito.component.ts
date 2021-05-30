@@ -38,14 +38,14 @@ export class CarritoComponent implements OnInit {
           for(let juego of response.data) {
             let anadido: boolean = true;
             if(this.listajuegos.length != 0) {
-              for(var juegolista of this.listajuegos) {
+              for(var juegolista of this.listajuegos) { //Se recorre la lista de juegos para añadir cantidad si se repite
                 if(juegolista.id == juego.id) {
                   juegolista.cantidad += 1;
                   anadido = false;
                 }
               }
             }
-            if(anadido) {
+            if(anadido) { // Si el juego es nuevo porque no se ha recogido aun se hace push
               this.nuevojuego = new Producto;
               this.nuevojuego.id = juego.id;
               this.nuevojuego.nombre = juego.nombre;
@@ -58,7 +58,7 @@ export class CarritoComponent implements OnInit {
               this.listajuegos.push(this.nuevojuego);
             }
           }
-          this.preciototal();
+          this.preciototal(); // Con todos los juegos se comprueba el precio total del carrito
         }, (error) => {
           this.notificarError = error.error.error[0];
           this.noHayCarrito = true;
@@ -71,6 +71,7 @@ export class CarritoComponent implements OnInit {
     let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
     this.pedidosService.eliminarCarrito(idusuario, idjuego).subscribe(
       (response) => {
+        //Una vez eliminado, se resetea y se vuelve a llamar al backend
         this.listajuegos = [];
         this.mostrarjuegos();
         this.preciototal();
@@ -97,7 +98,7 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  realizarCompra() {
+  realizarCompra() { // Realiza la compra y resetea listajuegos
     let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
     this.pedidosService.realizarCompra(idusuario).subscribe();
     this.listajuegos = [];

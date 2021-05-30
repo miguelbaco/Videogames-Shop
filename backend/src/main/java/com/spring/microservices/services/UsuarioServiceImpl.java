@@ -14,7 +14,7 @@ import com.spring.microservices.repository.UsuarioRepository;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
-	
+
 	@Autowired
 	UsuarioRepository repository;
 
@@ -22,22 +22,23 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<Usuario> allUsuarios() {
 		return repository.findAll();
 	}
-	
+
 	@Transactional
 	public Usuario save(Usuario producto) {
 		return repository.save(producto);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Optional<Usuario> findById(Long id) {
 		return repository.findById(id);
 	}
-	
+
 	public Optional<Usuario> findByEmail(String email) {
 		return repository.findByEmail(email);
 	}
-	
+
 	public void updateUsuario(UsuarioDTO usuarioDTO) {
+		/* Establezco los nuevos cambios sobre el usuario con el DTO */
 		Usuario usuario = repository.findById(Long.valueOf(usuarioDTO.getId()))
 				.orElseThrow(NoSuchElementException::new);
 		usuario.setApellidos(usuarioDTO.getApellidos());

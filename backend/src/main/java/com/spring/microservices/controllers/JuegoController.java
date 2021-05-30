@@ -28,58 +28,61 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 public class JuegoController {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(JuegoController.class);
-	
+
 	@Autowired
 	JuegoService juegoService;
-	
+
 	@Autowired
 	BackendUtils backendUtils;
-	
+
 	@GetMapping("/juegos/{aleatorio}")
 	public ResponseEntity<ResponseDTO> allJuegos(@PathVariable boolean aleatorio) {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
 		List<Producto> listajuegos = juegoService.allJuegos();
-		
-		if(listajuegos.isEmpty()) {
+
+		if (listajuegos.isEmpty()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGOS, HttpStatus.NOT_FOUND.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGOS, "No se encontraron juegos disponibles", ErrorDTO.CODE_ERROR_JUEGOS, log);
+					ErrorDTO.CODE_ERROR_JUEGOS, "No se encontraron juegos disponibles", ErrorDTO.CODE_ERROR_JUEGOS,
+					log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseDTO);
 		}
-		
+
 		Iterator<Producto> iterator = listajuegos.iterator();
-		
-		while(iterator.hasNext()) {
+
+		/* Aqui recorro la lista para solo recoger los productos con stock */
+		while (iterator.hasNext()) {
 			Producto producto = iterator.next();
-			if(producto.getStock() == 0) {
+			if (producto.getStock() == 0) {
 				iterator.remove();
 			}
 		}
-		
-		if(aleatorio) {
+
+		if (aleatorio) {
 			Collections.shuffle(listajuegos); // Para mostrar juegos de forma aleatoria
 		} else {
-			Collections.reverse(listajuegos); // El orden se invierte para que los modificados ultimamente (más vendidos), salgan los primeros 
+			// El orden se invierte para que los modificados ultimamente (más vendidos), salgan los primeros
+			Collections.reverse(listajuegos);
 		}
-		
+
 		responseDTO.setData(listajuegos);
 		return ResponseEntity.ok(responseDTO);
 	}
-	
+
 	@GetMapping("juego/{idjuego}")
 	public ResponseEntity<ResponseDTO> juego(@PathVariable int idjuego) {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
 		Optional<Producto> juego = juegoService.findById(Long.valueOf(idjuego));
-		
-		if(!juego.isPresent()) {
+
+		if (!juego.isPresent()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el juego que estas buscando", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "No existe el juego que estas buscando", ErrorDTO.CODE_ERROR_JUEGO, log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
@@ -88,16 +91,17 @@ public class JuegoController {
 		responseDTO.setData(juego.get());
 		return ResponseEntity.ok(responseDTO);
 	}
-	
+
 	@GetMapping("/juegosporcategoria/{idcategoria}")
 	public ResponseEntity<ResponseDTO> juegosByCategoria(@PathVariable int idcategoria) {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
 		List<Producto> listajuegos = juegoService.juegosByCategoria(idcategoria);
-		
-		if(listajuegos.isEmpty()) {
+
+		if (listajuegos.isEmpty()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGOS, HttpStatus.NOT_FOUND.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGOS, "No se encontraron juegos disponibles", ErrorDTO.CODE_ERROR_JUEGOS, log);
+					ErrorDTO.CODE_ERROR_JUEGOS, "No se encontraron juegos disponibles", ErrorDTO.CODE_ERROR_JUEGOS,
+					log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
@@ -106,57 +110,59 @@ public class JuegoController {
 		responseDTO.setData(listajuegos);
 		return ResponseEntity.ok(responseDTO);
 	}
-	
+
 	@GetMapping("/valoraciones/{idjuego}")
 	public ResponseEntity<ResponseDTO> valoracionesJuego(@PathVariable int idjuego) {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
 		Optional<Producto> juego = juegoService.findById(Long.valueOf(idjuego));
-		
-		if(!juego.isPresent()) {
+
+		if (!juego.isPresent()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el juego que estas buscando", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "No existe el juego que estas buscando", ErrorDTO.CODE_ERROR_JUEGO, log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
 		}
-		
+
 		List<Valoracion> valoraciones = juegoService.valoracionesJuego(juego.get());
-		
-		if(valoraciones.isEmpty()) {
+
+		if (valoraciones.isEmpty()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "No hay valoraciones para este juego aún, sé el primero", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "No hay valoraciones para este juego aún, sé el primero",
+					ErrorDTO.CODE_ERROR_JUEGO, log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
 		}
-		
+
 		responseDTO.setData(valoraciones);
 		return ResponseEntity.ok(responseDTO);
 	}
-	
+
 	@PostMapping("/anadirvaloracion")
 	public ResponseEntity<ResponseDTO> anadirValoracion(@RequestBody ValoracionDTO valoracionDTO) {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
-		
+
+		/* Convierto el DTO en una entidad JPA */
 		Valoracion valoracion = backendUtils.valoracionDTOtoValoracion(valoracionDTO);
-		
-		if(valoracion == null) {
+
+		if (valoracion == null) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "El juego o usuario de la valoración no existe", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "El juego o usuario de la valoración no existe",
+					ErrorDTO.CODE_ERROR_JUEGO, log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
 		}
-		
+
 		Valoracion nueva = juegoService.saveValoracion(valoracion);
 		responseDTO.setData(nueva);
 		return ResponseEntity.ok(responseDTO);
 	}
-	
-	
+
 }

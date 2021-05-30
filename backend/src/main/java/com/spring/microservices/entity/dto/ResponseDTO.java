@@ -24,7 +24,7 @@ public class ResponseDTO {
 
 		this.data = data;
 	}
-	
+
 	public List<ErrorDTO> getError() {
 
 		return error;

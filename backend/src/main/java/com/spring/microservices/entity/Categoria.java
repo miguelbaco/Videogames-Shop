@@ -8,52 +8,47 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Categoria {
-	
-	@Id @GeneratedValue
-	@Column(name="id_categoria")
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id_categoria")
 	private long id;
 
-	@Column(name="nombre_categoria", length = 20)
+	@Column(name = "nombre_categoria", length = 20)
 	@Size(max = 20)
 	private String nombre;
-	
-	@Column(name="descripcion_categoria", length = 250)
+
+	@Column(name = "descripcion_categoria", length = 250)
 	@Size(max = 250)
 	private String descripcion;
 
-
 	public long getId() {
-	
+
 		return id;
 	}
 
-	
 	public void setId(long id) {
-	
+
 		this.id = id;
 	}
 
-	
 	public String getNombre() {
-	
+
 		return nombre;
 	}
 
-	
 	public void setNombre(String nombre) {
-	
+
 		this.nombre = nombre;
 	}
 
-	
 	public String getDescripcion() {
-	
+
 		return descripcion;
 	}
 
-	
 	public void setDescripcion(String descripcion) {
-	
+
 		this.descripcion = descripcion;
 	}
 

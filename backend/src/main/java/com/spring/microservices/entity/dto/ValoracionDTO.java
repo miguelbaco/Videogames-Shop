@@ -5,9 +5,9 @@ public class ValoracionDTO {
 	private ProductoDTO producto;
 	private String comentario;
 	private int puntuacion;
-	
+
 	public ValoracionDTO() {
-		
+
 	}
 
 	public ValoracionDTO(UsuarioDTO usuario, ProductoDTO producto, String comentario, int puntuacion) {
@@ -49,7 +49,5 @@ public class ValoracionDTO {
 	public void setPuntuacion(int puntuacion) {
 		this.puntuacion = puntuacion;
 	}
-	
-	
-	
+
 }

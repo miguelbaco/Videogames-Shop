@@ -17,15 +17,8 @@ public class ProductoDTO {
 		super();
 	}
 
-	public ProductoDTO(int id,
-	                   String nombre,
-	                   String descripcion,
-	                   double precio,
-	                   int stock,
-	                   String imagen,
-	                   int idcategoria,
-	                   String nombrecategoria,
-	                   int cantidad) {
+	public ProductoDTO(int id, String nombre, String descripcion, double precio, int stock, String imagen,
+			int idcategoria, String nombrecategoria, int cantidad) {
 
 		super();
 		this.id = id;

@@ -24,13 +24,13 @@ export class MenuadminComponent implements OnInit {
             this.datosService.usuariologeado = response.data;
             this.nombreusuario = this.datosService.usuariologeado.nombre;
             this.logeado = true;
-            if(!this.datosService.usuariologeado.admin) {
+            if(!this.datosService.usuariologeado.admin) { // Si no es admin lo lleva a index
               window.location.href= environment.url;
             }
           }
         }
       );
-    } else {
+    } else {// Si no esta logeado lo lleva a index
       window.location.href= environment.url;
     }
   }
@@ -39,7 +39,7 @@ export class MenuadminComponent implements OnInit {
     sessionStorage.removeItem("usuarioIDgamepoint");
     this.logeado = false;
 
-    //TODO: Adaptar para despliegue y separar parte de admin para el componente de admin
+    // Si cierra sesión y se encuentra en estos sitios vuelve a index
     if(window.location.href == environment.url + "/carrito" ||
      window.location.href == environment.url + "/lista-de-deseos" || 
      window.location.href == environment.url + "/usuario" ||

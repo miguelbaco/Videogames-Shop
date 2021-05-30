@@ -25,6 +25,12 @@ export class CategoriaComponent implements OnInit {
   route: string;
 
   constructor(location: Location, router: Router, private ruta: ActivatedRoute, private juegosService: JuegosService, private datosService: DatosService, private categoriasService: CategoriasService) {
+   
+   // Este método es necesario para cuando se navega entre categorías
+   // porque mientras estas en una, y pinchas en otra en el menu de la izquierda
+   // se resetea la lista de juegos y la categoría actual
+   // porque este evento se activa cuando la url es modificada
+   // estando dentro de este componente
     router.events.subscribe(val => {
       if (val instanceof NavigationStart) {
         this.listajuegos = [];

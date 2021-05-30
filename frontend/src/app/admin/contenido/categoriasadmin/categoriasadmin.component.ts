@@ -40,14 +40,16 @@ export class CategoriasadminComponent implements OnInit {
   anadircategoria() {
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
+      //Se comprueba que se hayan metido los datos
       if(this.nuevaCategoria.nombre != null && this.nuevaCategoria.descripcion != null) {
         this.adminService.anadirCategoria(this.nuevaCategoria, idusuario).subscribe();
-        this.listacategorias.push(this.nuevaCategoria);
-        this.nuevaCategoria = new Categoria();
+        this.listacategorias.push(this.nuevaCategoria); // Se añade manualmente este mismo
+        this.nuevaCategoria = new Categoria(); //Vuelve a null para poder añadir más
       }
     }
   }
 
+  // Evento de click para mostrar el modal con los datos ya escritos
   categoriaamodificar(categoria: Categoria) {
     this.categoriaModificar = categoria;
   }
@@ -55,6 +57,7 @@ export class CategoriasadminComponent implements OnInit {
   modificarcategoria() {
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
+      //Se comprueba que se hayan metido los datos
       if(this.categoriaModificar.nombre != null && this.categoriaModificar.descripcion != null) {
         this.adminService.modificarCategoria(this.categoriaModificar, idusuario).subscribe();
       }

@@ -25,24 +25,25 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 public class UsuarioController {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
-	
+
 	@Autowired
 	UsuarioService usuarioService;
-	
+
 	@Autowired
 	BackendUtils backendUtils;
-	
+
 	@GetMapping("/usuarios")
 	public ResponseEntity<ResponseDTO> allUsuarios() {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
 		List<Usuario> listausuarios = usuarioService.allUsuarios();
-		
-		if(listausuarios.isEmpty()) {
+
+		if (listausuarios.isEmpty()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGOS, HttpStatus.NOT_FOUND.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGOS, "No se encontraron usuarios disponibles", ErrorDTO.CODE_ERROR_JUEGOS, log);
+					ErrorDTO.CODE_ERROR_JUEGOS, "No se encontraron usuarios disponibles", ErrorDTO.CODE_ERROR_JUEGOS,
+					log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
@@ -51,16 +52,17 @@ public class UsuarioController {
 		responseDTO.setData(listausuarios);
 		return ResponseEntity.ok(responseDTO);
 	}
-	
+
 	@GetMapping("/usuario/{idusuario}")
 	public ResponseEntity<ResponseDTO> encontrarUsuario(@PathVariable int idusuario) {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
 		Optional<Usuario> usuario = usuarioService.findById(Long.valueOf(idusuario));
-		
-		if(!usuario.isPresent()) {
+
+		if (!usuario.isPresent()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "No existe el usuario que estas buscando", ErrorDTO.CODE_ERROR_JUEGO,
+					log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
@@ -69,50 +71,54 @@ public class UsuarioController {
 		responseDTO.setData(usuario.get());
 		return ResponseEntity.ok(responseDTO);
 	}
-	
+
 	@PostMapping("/loginusuario")
 	public ResponseEntity<ResponseDTO> loginUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-		
+
 		ResponseDTO responseDTO = new ResponseDTO();
 		Optional<Usuario> usuario = usuarioService.findByEmail(usuarioDTO.getEmail());
-		
-		if(!usuario.isPresent()) {
+
+		if (!usuario.isPresent()) {
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "No hay ningún usuario registrado con ese email", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "No hay ningún usuario registrado con ese email",
+					ErrorDTO.CODE_ERROR_JUEGO, log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);
 		}
-		
-		if(!usuarioDTO.getPassword().equals(usuario.get().getPassword())) {
+
+		if (!usuarioDTO.getPassword().equals(usuario.get().getPassword())) { /* Verifico la contraseña de logeo */
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "El correo y la contraseña no coinciden", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "El correo y la contraseña no coinciden", ErrorDTO.CODE_ERROR_JUEGO,
+					log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);			
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);
 		}
-		responseDTO.setData(usuario);		
+		responseDTO.setData(usuario);
 		return ResponseEntity.ok(responseDTO);
 	}
-	
+
 	@PostMapping("/registrarusuario")
 	public ResponseEntity<ResponseDTO> registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
 		ResponseDTO responseDTO = new ResponseDTO();
-		
+
 		Optional<Usuario> usuarioyaregistrado = usuarioService.findByEmail(usuarioDTO.getEmail());
-		
-		if(usuarioyaregistrado.isPresent()) {
+
+		if (usuarioyaregistrado.isPresent()) { /* Si el email añadido ya existe no se registra */
 			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
-			        ErrorDTO.CODE_ERROR_JUEGO, "Ya existe un usuario con ese correo electrónico", ErrorDTO.CODE_ERROR_JUEGO, log);
+					ErrorDTO.CODE_ERROR_JUEGO, "Ya existe un usuario con ese correo electrónico",
+					ErrorDTO.CODE_ERROR_JUEGO, log);
 			List<ErrorDTO> errors = new ArrayList<>();
 			errors.add(error);
 			responseDTO.setError(errors);
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);
 		}
-		
-		Usuario nuevoUsuario = 	backendUtils.usuarioDTOtoUsuario(usuarioDTO);
+
+		/* Paso de DTO al JPA */
+		Usuario nuevoUsuario = backendUtils.usuarioDTOtoUsuario(usuarioDTO);
 		Usuario usregistrado = usuarioService.save(nuevoUsuario);
 		responseDTO.setData(usregistrado);
 		return ResponseEntity.ok(responseDTO);

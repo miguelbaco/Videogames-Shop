@@ -36,7 +36,7 @@ export class MenuComponent implements OnInit {
     this.logeado = false;
     this.datosService.logeado = false;
 
-    //TODO: Adaptar para despliegue y separar parte de admin para el componente de admin
+    // Si se cierra sesión en estas url se vuelve a index
     if(window.location.href == environment.url + "/carrito" ||
      window.location.href == environment.url + "/lista-de-deseos" || 
      window.location.href == environment.url + "/usuario" ||

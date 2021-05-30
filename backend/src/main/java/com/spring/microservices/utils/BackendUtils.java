@@ -18,13 +18,13 @@ import com.spring.microservices.services.UsuarioService;
 
 @Component
 public class BackendUtils {
-	
+
 	@Autowired
 	JuegoService juegoService;
-	
+
 	@Autowired
 	UsuarioService usuarioService;
-	
+
 	public Usuario usuarioDTOtoUsuario(UsuarioDTO usuarioDTO) {
 		Usuario usuario = new Usuario();
 		usuario.setNombre(usuarioDTO.getNombre());
@@ -32,7 +32,7 @@ public class BackendUtils {
 		usuario.setDireccion(usuarioDTO.getDireccion());
 		usuario.setEmail(usuarioDTO.getEmail());
 		usuario.setPassword(usuarioDTO.getPassword());
-		if(usuarioDTO.isAdmin()) {
+		if (usuarioDTO.isAdmin()) {
 			usuario.setAdmin(usuarioDTO.isAdmin());
 		}
 		return usuario;
@@ -49,24 +49,24 @@ public class BackendUtils {
 		producto.setStock(productoDTO.getStock());
 		return producto;
 	}
-	
+
 	public Valoracion valoracionDTOtoValoracion(ValoracionDTO valoracionDTO) {
 		Valoracion valoracion = new Valoracion();
 		valoracion.setComentario(valoracionDTO.getComentario());
 		valoracion.setPuntuacion(valoracionDTO.getPuntuacion());
-		
+
 		Optional<Producto> juego = juegoService.findById(Long.valueOf(valoracionDTO.getProducto().getId()));
-		if(!juego.isPresent()) {
+		if (!juego.isPresent()) {
 			return null;
 		}
 		valoracion.setProducto(juego.get());
-		
+
 		Optional<Usuario> usuario = usuarioService.findById(Long.valueOf(valoracionDTO.getUsuario().getId()));
-		if(!usuario.isPresent()) {
+		if (!usuario.isPresent()) {
 			return null;
 		}
 		valoracion.setUsuario(usuario.get());
-		
+
 		return valoracion;
 	}
 

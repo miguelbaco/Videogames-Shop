@@ -1,29 +1,111 @@
 <div class="col-9 contenido float-right mt-5">
-    <h2 class="mr-5 mt-4"><span class="icono-dribbble"></span>Juegos adquiridos</h2>
-    <p class="text-secondary">Estos son los juegos que tu has comprado en nuestra tienda</p>
+    <h2 class="mr-5 mt-4"><span class="icono-dribbble"></span>Juegos en camino</h2>
+    <p class="text-secondary">Estos juegos llegarán a tu casa en menos de 3 días</p>
 
     <div> <!-- Div que contiene cada uno de los divs juegos -->
-        <div *ngFor="let juego of listajuegos; let i = index" class="d-flex flex-row juegocarrito">
-            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
+        <div *ngFor="let pedido of pedidosCamino; let i = index" class="d-flex flex-row juegocarrito">
+            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{pedido.producto.imagen}}');">
                 <div class="caratula">
                     <div class="spanjuego"></div>
                 </div>
             </div>
             <div>
                 <div class="w-75">
-                    <h4 class="juegocarritotext">{{juego.nombre}}</h4>
-                    <p class="juegocarritotext">{{juego.descripcion}}</p>
+                    <h4 class="juegocarritotext">{{pedido.producto.nombre}}</h4>
+                    <p class="juegocarritotext">{{pedido.producto.descripcion}}</p>
                 </div>
                 <footer class="section_footer footercarrito">
-                    <p class="text-secondary d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
-                    <p class="ml-5 pl-5 fs-4 text-center juegocarritotext">Cantidad: {{juego.cantidad}}</p>
-                    <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{juego.precio}}€</p>
-                    <button class="btn btn-danger pagination_btn">Devolución</button>
+                    <p class="text-secondary d-flex flex-row juegocarritotext">{{pedido.producto.nombrecategoria}}</p>
+                    <p class="ml-5 pl-5 fs-4 text-center juegocarritotext">Cantidad: {{pedido.cantidad}}</p>
+                    <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{pedido.producto.precio}}€</p>
+                    <p class="mr-5 pr-5 fs-4 text-right juegocarritotext">Fecha de compra: {{pedido.pedido.fecha}}</p>
+                    <div *ngIf="pedido.devuelto">
+                        <p class="btn btn-danger">Devuelto</p>
+                    </div>
+                    <div *ngIf="!pedido.devuelto">
+                        <button (click)="devolverPedido(pedido)" class="btn btn-danger pagination_btn">Cancelar pedido</button>
+                    </div>
                 </footer>
             </div>
         </div>
-        <div *ngIf="noHayJuegos || listajuegos.length == 0">
-            <p>{{this.notificarError.title}}</p>
+        <div *ngIf="noHayJuegosCamino || pedidosCamino.length == 0">
+            <p>{{this.notificarErrorCamino.title}}</p>
+        </div>
+        <div class="w-100 d-flex justify-content-center">
+            <div class="span6 diferenciar-nav w-50 text-center">
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-9 contenido float-right mt-5">
+    <h2 class="mr-5 mt-4"><span class="icono-dribbble"></span>Juegos en fase de devolución</h2>
+    <p class="text-secondary">Tienes 15 días desde la fecha de compra para poder devolver estos juegos</p>
+
+    <div> <!-- Div que contiene cada uno de los divs juegos -->
+        <div *ngFor="let pedido of pedidosDevolucion; let i = index" class="d-flex flex-row juegocarrito">
+            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{pedido.producto.imagen}}');">
+                <div class="caratula">
+                    <div class="spanjuego"></div>
+                </div>
+            </div>
+            <div>
+                <div class="w-75">
+                    <h4 class="juegocarritotext">{{pedido.producto.nombre}}</h4>
+                    <p class="juegocarritotext">{{pedido.producto.descripcion}}</p>
+                </div>
+                <footer class="section_footer footercarrito">
+                    <p class="text-secondary d-flex flex-row juegocarritotext">{{pedido.producto.nombrecategoria}}</p>
+                    <p class="ml-5 pl-5 fs-4 text-center juegocarritotext">Cantidad: {{pedido.cantidad}}</p>
+                    <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{pedido.producto.precio}}€</p>
+                    <p class="mr-5 pr-5 fs-4 text-right juegocarritotext">Fecha de compra: {{pedido.pedido.fecha}}</p>
+                    <div *ngIf="pedido.devuelto">
+                        <p class="btn btn-danger">Devuelto</p>
+                    </div>
+                    <div *ngIf="!pedido.devuelto">
+                        <button (click)="devolverPedido(pedido)" class="btn btn-danger pagination_btn">Devolución</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div *ngIf="noHayJuegosDevolucion || pedidosCamino.length == 0">
+            <p>{{this.notificarErrorDevolucion.title}}</p>
+        </div>
+        <div class="w-100 d-flex justify-content-center">
+            <div class="span6 diferenciar-nav w-50 text-center">
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-9 contenido float-right mt-5">
+    <h2 class="mr-5 mt-4"><span class="icono-dribbble"></span>Juegos adquiridos</h2>
+    <p class="text-secondary">Estos juegos están comprados desde hace más de 15 días</p>
+
+    <div> <!-- Div que contiene cada uno de los divs juegos -->
+        <div *ngFor="let pedido of pedidosSinDevolucion; let i = index" class="d-flex flex-row juegocarrito">
+            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{pedido.producto.imagen}}');">
+                <div class="caratula">
+                    <div class="spanjuego"></div>
+                </div>
+            </div>
+            <div>
+                <div class="w-75">
+                    <h4 class="juegocarritotext">{{pedido.producto.nombre}}</h4>
+                    <p class="juegocarritotext">{{pedido.producto.descripcion}}</p>
+                </div>
+                <footer class="section_footer footercarrito">
+                    <p class="text-secondary d-flex flex-row juegocarritotext">{{pedido.producto.nombrecategoria}}</p>
+                    <p class="ml-5 pl-5 fs-4 text-center juegocarritotext">Cantidad: {{pedido.cantidad}}</p>
+                    <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{pedido.producto.precio}}€</p>
+                    <p class="mr-5 pr-5 fs-4 text-right juegocarritotext">Fecha de compra: {{pedido.pedido.fecha}}</p>
+                </footer>
+            </div>
+        </div>
+        <div *ngIf="noHayJuegosSinDevolucion || pedidosCamino.length == 0">
+            <p>{{this.notificarErrorSinDevolucion.title}}</p>
         </div>
         <div class="w-100 d-flex justify-content-center">
             <div class="span6 diferenciar-nav w-50 text-center">

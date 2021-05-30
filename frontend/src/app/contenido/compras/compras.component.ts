@@ -3,8 +3,8 @@ import { Usuario } from 'src/app/models/usuario';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { DatosService } from 'src/app/services/datos.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
-import { Producto } from '../../models/producto';
 import { Error } from '../../models/error';
+import { DetallePedido } from 'src/app/models/detallePedido';
 
 @Component({
   selector: 'app-compras',
@@ -17,16 +17,28 @@ export class ComprasComponent implements OnInit {
 
   usuariolog: Usuario;
 
-  public nuevojuego: Producto;
-  listajuegos: Producto[] = []
+  // Variables de productos en camino
+  pedidosCamino: DetallePedido[] = []
+  public notificarErrorCamino: Error;
+  public noHayJuegosCamino: boolean;
 
-  public notificarError: Error;
-  public noHayJuegos: boolean;
+  // Variables de productos en fase de devolución
+  pedidosDevolucion: DetallePedido[] = []
+  public notificarErrorDevolucion: Error;
+  public noHayJuegosDevolucion: boolean;
+
+  // Variables de productos sin devolución
+  pedidosSinDevolucion: DetallePedido[] = []
+  public notificarErrorSinDevolucion: Error;
+  public noHayJuegosSinDevolucion: boolean;
 
   ngOnInit(): void {
-    this.notificarError = new Error;
-    this.noHayJuegos = false;
-    this.usuariolog = this.datosService.usuariologeado;
+    this.notificarErrorCamino = new Error;
+    this.noHayJuegosCamino = false;
+    this.notificarErrorDevolucion = new Error;
+    this.noHayJuegosDevolucion = false;
+    this.notificarErrorSinDevolucion = new Error;
+    this.noHayJuegosSinDevolucion = false;
     this.mostrarjuegosadquiridos();
   }
 
@@ -34,33 +46,38 @@ export class ComprasComponent implements OnInit {
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
       this.categorias();
       let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
-      this.pedidosService.juegosComprados(idusuario).subscribe(
+      this.pedidosService.comprasEnCamino(idusuario).subscribe(
         (response) => {
-          for(let juego of response.data) {
-            let anadido: boolean = true;
-            if(this.listajuegos.length != 0) {
-              for(var juegolista of this.listajuegos) {
-                if(juegolista.id == juego.id) {
-                  juegolista.cantidad += 1;
-                  anadido = false;
-                }
-              }
-            }
-            if(anadido) {
-              this.nuevojuego = juego;
-              this.nuevojuego.nombrecategoria = this.datosService.categorias.find(x => x.id == this.nuevojuego.idcategoria).nombre;
-              this.nuevojuego.cantidad = 1;
-              this.listajuegos.push(this.nuevojuego);
-            }
-          }
+          this.pedidosCamino = response.data;
         }, (error) => {
-          this.notificarError = error.error.error[0];
-          this.noHayJuegos = true;
-        }, () => {
-  
+          this.notificarErrorCamino = error.error.error[0];
+          this.noHayJuegosCamino = true;
+        }
+      );
+
+      this.pedidosService.comprasEnDevolucion(idusuario).subscribe(
+        (response) => {
+          this.pedidosDevolucion = response.data;
+        }, (error) => {
+          this.notificarErrorDevolucion = error.error.error[0];
+          this.noHayJuegosDevolucion = true;
+        }
+      );
+
+      this.pedidosService.comprasSinDevolucion(idusuario).subscribe(
+        (response) => {
+          this.pedidosSinDevolucion = response.data;
+        }, (error) => {
+          this.notificarErrorSinDevolucion = error.error.error[0];
+          this.noHayJuegosSinDevolucion = true;
         }
       );
     }
+  }
+
+  devolverPedido(pedido: DetallePedido) { // setea como true el pedido en BD y se cambia en cliente 
+    this.pedidosService.devolverDetalleProducto(pedido.pedido.id, pedido.producto.id).subscribe();
+    pedido.devuelto = true;
   }
 
   categorias() {
@@ -68,9 +85,6 @@ export class ComprasComponent implements OnInit {
       this.categoriasService.allCategorias().subscribe(
         (response) => {
           this.datosService.categorias = response.data;
-        }, (error) => {
-        }, () => {
-
         }
       );
     }

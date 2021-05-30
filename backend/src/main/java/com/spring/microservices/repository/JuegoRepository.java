@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spring.microservices.entity.Producto;
 
-public interface JuegoRepository extends JpaRepository<Producto, Long>{
-	
+public interface JuegoRepository extends JpaRepository<Producto, Long> {
+
 	List<Producto> findByIdCategoria(Long idCategoria);
-	//List<Producto> findByNameContaining(String name);
+	// List<Producto> findByNameContaining(String name);
 }

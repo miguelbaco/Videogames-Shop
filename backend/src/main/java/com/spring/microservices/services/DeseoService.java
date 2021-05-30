@@ -10,10 +10,10 @@ import com.spring.microservices.entity.Usuario;
 public interface DeseoService {
 
 	public List<Deseo> findByIdUsuario(Long idusuario);
-	
+
 	public Deseo save(Deseo deseo);
-	
+
 	public Optional<Deseo> findByUsuarioAndProducto(Usuario usuario, Producto Producto);
-	
+
 	public void delete(Deseo deseo);
 }

@@ -38,7 +38,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 		return repository.findById(id);
 	}
-	
+
 	@Override
 	public void updateCategoria(CategoriaDTO categoriaDTO) {
 

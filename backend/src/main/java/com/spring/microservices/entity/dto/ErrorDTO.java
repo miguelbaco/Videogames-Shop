@@ -25,13 +25,8 @@ public class ErrorDTO {
 		this.details = details;
 	}
 
-	public static ErrorDTO creaErrorLogger(
-	        String id,
-	        int status,
-	        String code,
-	        String title,
-	        String details,
-	        Logger log) {
+	public static ErrorDTO creaErrorLogger(String id, int status, String code, String title, String details,
+			Logger log) {
 
 		ErrorDTO errorDTO = new ErrorDTO();
 		id = id.concat(String.valueOf(System.currentTimeMillis()));

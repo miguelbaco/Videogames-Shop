@@ -29,7 +29,6 @@ import { MenuadminComponent } from './admin/layout/menuadmin/menuadmin.component
 import { AdminComponent } from './admin/admin.component';
 import { CategoriasadminComponent } from './admin/contenido/categoriasadmin/categoriasadmin.component';
 import { UsuariosadminComponent } from './admin/contenido/usuariosadmin/usuariosadmin.component';
-import { RandomOrderPipe } from './pipes/random-order.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -58,8 +57,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MenuadminComponent,
     AdminComponent,
     CategoriasadminComponent,
-    UsuariosadminComponent,
-    RandomOrderPipe,
+    UsuariosadminComponent
   ],
   imports: [
     BrowserModule,

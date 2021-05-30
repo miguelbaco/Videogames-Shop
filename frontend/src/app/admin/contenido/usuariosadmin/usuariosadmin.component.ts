@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { AdminService } from 'src/app/services/admin.service';
-import { DatosService } from 'src/app/services/datos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -44,9 +43,10 @@ export class UsuariosadminComponent implements OnInit {
       (response) => {
         if(response.data != null) {
           this.registroexitoso = true;
+          // Para no tener que volver a recogerlo de backend se añade a mano
           this.listaUsuarios.push(this.usuarioregistrar);
           this.repitecontrasena = "";
-          this.usuarioregistrar = new Usuario();
+          this.usuarioregistrar = new Usuario(); // A null de nuevo para poder añadir nuevos
         }
       }, (error) => {
         this.notificarError = error.error.error[0];
@@ -55,7 +55,7 @@ export class UsuariosadminComponent implements OnInit {
     );
   }
 
-  cambiaradmin() {
+  cambiaradmin() { // Evento de click para despues al hacer siginusuario meterle el booleano
     if(this.adminregistrar == false) {
       this.adminregistrar = true;
     } else {
@@ -63,11 +63,11 @@ export class UsuariosadminComponent implements OnInit {
     }
   }
 
-  usuarioamodificar(usuario: Usuario) {
+  usuarioamodificar(usuario: Usuario) { // Evento de click de modificar para mostrar datos del usuario
     this.usuariomodificar = usuario;
   }
 
-  modificarusuario() {
+  modificarusuario() { //Modifica el usuario en BD
     if(sessionStorage.getItem("usuarioIDgamepoint") != null) {
           let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
           this.adminService.modificarUsuario(this.usuariomodificar, idusuario).subscribe();
