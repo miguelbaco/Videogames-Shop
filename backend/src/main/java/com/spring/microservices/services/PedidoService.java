@@ -3,7 +3,10 @@ package com.spring.microservices.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+
 import com.spring.microservices.entity.Pedido;
+import com.spring.microservices.entity.Usuario;
 
 public interface PedidoService {
 
@@ -13,7 +16,7 @@ public interface PedidoService {
 
 	public Pedido save(Long idUsuario);
 
-	public void realizarCompra(Pedido pedido);
+	public void realizarCompra(Pedido pedido, Usuario usuario) throws MessagingException;
 
 	public List<Pedido> pedidosEnCamino(Long idUsuario);
 

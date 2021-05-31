@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,7 +80,7 @@ public class DetallePedidoController {
 	}
 
 	@GetMapping("realizarcompra/{idusuario}")
-	public ResponseEntity<ResponseDTO> comprarCarrito(@PathVariable int idusuario) {
+	public ResponseEntity<ResponseDTO> comprarCarrito(@PathVariable int idusuario) throws MessagingException {
 
 		ResponseDTO responseDTO = new ResponseDTO();
 
@@ -123,7 +125,8 @@ public class DetallePedidoController {
 			juegoService.save(producto);
 		}
 
-		pedidoService.realizarCompra(pedido.get()); // Aqui marco nueva fecha (actual) y true como comprado
+		// Aqui marco nueva fecha (actual), true como comprado y mando el correo
+		pedidoService.realizarCompra(pedido.get(), usuario.get());
 
 		return ResponseEntity.ok(responseDTO);
 	}

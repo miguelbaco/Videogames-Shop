@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.microservices.entity.Pedido;
+import com.spring.microservices.entity.Usuario;
 import com.spring.microservices.repository.PedidoRepository;
 
 @Service
@@ -18,6 +21,9 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Autowired
 	PedidoRepository repository;
+	
+	@Autowired
+	DetallePedidoService detallePedidoService;
 
 	@Override
 	public Optional<Pedido> findById(Long id) {
@@ -40,15 +46,16 @@ public class PedidoServiceImpl implements PedidoService {
 		return repository.save(pedido);
 	}
 
-	public void realizarCompra(Pedido pedido) {
+	public void realizarCompra(Pedido pedido, Usuario usuario) throws MessagingException {
 
 		pedido.setComprado(true);
-		LocalDate date = LocalDate.now(); // Con datemtimeformatter digo la estructura del string
+		LocalDate date = LocalDate.now(); // Con datetimeformatter digo la estructura del string
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		String fecha = date.format(formatter);
 		pedido.setFecha(fecha);
 		repository.save(pedido);
-
+		
+		detallePedidoService.sendEmail(usuario,pedido); // Aqui se recogen los datos y se envían por correo
 	}
 
 	public List<Pedido> pedidosEnCamino(Long idUsuario) {
