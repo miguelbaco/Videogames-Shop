@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DatosService } from 'src/app/services/datos.service';
 
 @Component({
   selector: 'app-busqueda',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusquedaComponent implements OnInit {
 
-  constructor() { }
+  public busqueda: string;
+
+  constructor(private datosService: DatosService) { }
 
   ngOnInit(): void {
+    this.busqueda = this.datosService.busqueda;
   }
 
 }

@@ -74,6 +74,24 @@ public class JuegoController {
 		return ResponseEntity.ok(responseDTO);
 	}
 
+	@GetMapping("buscarjuegos/{nombrejuego}")
+	public ResponseEntity<ResponseDTO> buscarJuegos(@PathVariable String nombrejuego) {
+
+		ResponseDTO responseDTO = new ResponseDTO();
+		List<Producto> juegos = juegoService.findByNameContaining(nombrejuego);
+
+		if (juegos.isEmpty()) {
+			ErrorDTO error = ErrorDTO.creaErrorLogger(ErrorDTO.CODE_ERROR_JUEGO, HttpStatus.BAD_REQUEST.ordinal(),
+					ErrorDTO.CODE_ERROR_JUEGO, "No existen resultados que contengan el nombre " + nombrejuego, ErrorDTO.CODE_ERROR_JUEGO, log);
+			List<ErrorDTO> errors = new ArrayList<>();
+			errors.add(error);
+			responseDTO.setError(errors);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDTO);
+		}
+		responseDTO.setData(juegos);
+		return ResponseEntity.ok(responseDTO);
+	}
+	
 	@GetMapping("juego/{idjuego}")
 	public ResponseEntity<ResponseDTO> juego(@PathVariable int idjuego) {
 

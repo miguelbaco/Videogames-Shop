@@ -1,6 +1,32 @@
-<div class="search">
-    <input type="text" class="searchTerm" placeholder="Que juego estas buscando?">
-    <button type="submit" class="searchButton">
-      <i class="fa icono-search"></i>
-    </button>
+<div *ngIf="furula" class="search">
+  <form role="form" (ngSubmit)="mostrarjuegos()" #busqueda="ngForm" id="busqueda">
+    <input type="text" class="searchTerm" [(ngModel)]="strbusqueda" placeholder="Que juego estas buscando?">
+    <button type="submit" data-toggle="modal" data-target="#modalbusqueda" class="searchButton"><i class="fa icono-search"></i></button>
+  </form>
+</div>
+
+<div class="modal fade" id="modalbusqueda" data-backdrop="false" >
+  <div class="modal-dialog">
+    <div class="modal-content caratula w-100">
+      <div class="modal-header contenidologin">
+        <h3 class="modal-title text-white">Resultados de la busqueda: {{strbusqueda}}</h3>
+        <button type="button" class="close rounded-circle" data-dismiss="modal"><span class="icono-cross"></span></button>
+      </div>
+      <div class="modal-header contenidologin d-block">
+        <div *ngFor="let juego of juegosbusqueda; let i = index" class="d-block p-2 w-100">
+          <div class="hovereado" data-dismiss="modal" routerLink="/juego/{{juego.id}}">
+              <h5>{{juego.nombre}}</h5>
+              <p class="text-secondary">{{juego.nombrecategoria}}</p>
+              <p class="text-warning">{{juego.precio | number:'1.0-2'}}€</p>
+          </div>
+      </div>        
+      </div>
+      <div class="modal-footer contenidologin">
+          <button type="button" class="btn btn--transparent btn--font-12 menu-icon ion-navicon-round list-inline-item d-flex flex-row-reverse botonlogin">
+              <div class="list-inline-item float-right color-icons footercarrito"></div>
+              <p class="list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin" data-dismiss="modal">No lo he encontrado ;(</p>
+          </button>
+      </div>
+    </div>
+  </div>
 </div>

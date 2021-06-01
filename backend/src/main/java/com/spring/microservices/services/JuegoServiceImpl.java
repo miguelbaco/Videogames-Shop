@@ -93,6 +93,11 @@ public class JuegoServiceImpl implements JuegoService {
 
 		repository.save(producto);
 	}
+	
+	@Override
+	public List<Producto> findByNameContaining(String nombrejuego) {
+		return repository.findByNombreContaining(nombrejuego);
+	}
 
 	/* Este método es el que coge el archivo de imagen y lo guarda en assets */
 	@Override

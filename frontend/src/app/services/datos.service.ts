@@ -14,6 +14,7 @@ export class DatosService {
   usuariologeado: Usuario;
   logeado: boolean = false;
   valoracionfinal: number;
+  busqueda: string;
   constructor() { }
   
 }

@@ -27,6 +27,8 @@ public interface JuegoService {
 	public void deleteJuego(Producto producto);
 
 	public void updateJuego(ProductoDTO productoDTO);
+	
+	public List<Producto> findByNameContaining(String nombrejuego);
 
 	public void subirImagen(MultipartFile file) throws FileUploadException;
 }

@@ -78,6 +78,7 @@ export class ValoracionComponent implements OnInit {
   }
 
   valoracionesDelJuego() {
+    this.valoraciones = [];
     this.juegosService.valoracionesJuego(this.ruta.snapshot.params.id).subscribe(
       (response) => {
         for(let valoracion of response.data) {

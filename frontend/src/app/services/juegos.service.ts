@@ -31,6 +31,13 @@ export class JuegosService {
     return this.http.get<ResponseData>(`${environment.apiUrl}/juego/` + idjuego, { headers: headers });
   }
 
+  public buscarjuegos(busqueda: string): Observable<ResponseData> {
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.set("Access-Control-Allow-Methods","GET, POST, OPTIONS, PUT, DELETE");
+    return this.http.get<ResponseData>(`${environment.apiUrl}/buscarjuegos/` + busqueda, { headers: headers });
+  }
+
   public juegosCategoria(idcategoria: number): Observable<ResponseData> {
     let headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
