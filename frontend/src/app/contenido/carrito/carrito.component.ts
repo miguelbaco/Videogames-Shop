@@ -102,6 +102,8 @@ export class CarritoComponent implements OnInit {
     let idusuario = +sessionStorage.getItem("usuarioIDgamepoint");
     this.pedidosService.realizarCompra(idusuario).subscribe();
     this.listajuegos = [];
+    this.notificarError.title = "Compra realizada";
+    this.noHayCarrito = true;
   }
 
 }

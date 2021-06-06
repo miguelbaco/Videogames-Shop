@@ -1,5 +1,5 @@
 .search {
-    width: 100%;
+    width: 120%;
     position: relative;
     display: flex;
     top: 10px;
@@ -8,7 +8,7 @@
   }
   
   .searchTerm {
-    width: 100%;
+    width: 80%;
     border: 3px solid rgba(255,255,255,0.3);
     border-right: none;
     padding: 5px;
@@ -25,7 +25,7 @@
   
   .searchButton {
     width: 40px;
-    height: 35px;
+    height: 37px;
     border: 1px solid #00B4CC;
     background: rgba(255,255,255,0.3);
     text-align: center;

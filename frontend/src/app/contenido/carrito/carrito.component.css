@@ -137,3 +137,22 @@ h2, p, h4, h5 {
 	border-bottom: solid 1px #444;
 	padding: 14px 0px; 
 }
+
+
+
+.botonlogin {
+    position: relative;
+    top: 10px;
+    z-index: 10px !important;
+}
+
+.interiorbotonlogin {
+    position: relative;
+    bottom: 12px;
+}
+
+.contenidologin {
+    background-color: rgba(57, 79, 130, 1);
+    border-radius: 7px;
+    padding: 23px;
+}

@@ -33,6 +33,44 @@
     </div>
     <div class="d-flex flex-row juegocarrito sectioncarritofinal float-right">
         <p class="preciototal">Coste total: {{preciocarrito}}€</p>
-        <a class="comprarboton"><button (click)="realizarCompra()" class="btn comprarboton">Comprar ahora</button></a>
+        <a class="comprarboton"><button data-toggle="modal" data-target="#modalcompra" class="btn comprarboton">Comprar ahora</button></a>
     </div>
 </div>
+
+<div class="modal fade" id="modalcompra" data-backdrop="false" >
+    <div class="modal-dialog">
+      <div class="modal-content caratula w-100">
+        <div class="modal-header contenidologin">
+          <h3 class="modal-title text-white">Estas a punto de realizar la compra</h3>
+          <button type="button" class="close rounded-circle" data-dismiss="modal"><span class="icono-cross"></span></button>
+        </div>
+        <div *ngIf="!noHayCarrito; else nopuedes" class="modal-header contenidologin d-block">
+            <div class="d-flex flex-row juegocarrito sectioncarritofinal float-left">
+                <p class="preciototal">El coste total es de: {{preciocarrito}}€</p>
+            </div>
+            <div class="d-flex flex-row juegocarrito sectioncarritofinal float-right">
+                <a class="comprarboton"><button (click)="realizarCompra()" class="btn comprarboton">Confirmar compra</button></a>
+            </div>       
+        </div>
+        <ng-template #nopuedes>
+            <div class="modal-header contenidologin d-block">
+                <div class="d-flex flex-row juegocarrito sectioncarritofinal float-left">
+                    <p class="preciototal">{{this.notificarError.title}}</p>
+                </div>      
+            </div>
+        </ng-template>
+        <div class="modal-footer contenidologin">
+            <button type="button" class="btn btn--transparent btn--font-12 menu-icon ion-navicon-round list-inline-item d-flex flex-row-reverse botonlogin">
+                <div class="list-inline-item float-right color-icons footercarrito">
+                    <div *ngIf="!noHayCarrito; else nopuedesbotton">
+                        <p class="btn btn-danger list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin" data-dismiss="modal">No estoy seguro</p>
+                    </div>
+                    <ng-template #nopuedesbotton>
+                        <p class="btn btn-danger list-inline-item float-right text-white px-2 mx-1 mt-1 mb-0 interiorbotonlogin" data-dismiss="modal">¡Perfecto!</p>
+                    </ng-template>
+                </div>
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>

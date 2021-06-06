@@ -126,6 +126,7 @@ export class ValoracionComponent implements OnInit {
     } else {
       this.datosService.valoracionfinal = ((suma * 2) / cantidad);
     }
+    this.datosService.numerovaloraciones = cantidad;
   }
 
   enviarValoracion() {
@@ -144,6 +145,7 @@ export class ValoracionComponent implements OnInit {
           (response) => {
             this.valoracionUsuario = response.data;
             this.valoraciones.push(this.valoracionUsuario);
+            this.datosService.numerovaloraciones += 1;
             // Se resetea el menu de valorar y se restablecen las estrellas quitandole la class selected
             this.valoracionUsuario = new Valoracion;
             this.errorNuevaVal = false;

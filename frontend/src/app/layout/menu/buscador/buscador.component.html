@@ -1,8 +1,8 @@
 <div *ngIf="furula" class="search">
-  <form role="form" (ngSubmit)="mostrarjuegos()" #busqueda="ngForm" id="busqueda">
     <input type="text" class="searchTerm" [(ngModel)]="strbusqueda" placeholder="Que juego estas buscando?">
-    <button type="submit" data-toggle="modal" data-target="#modalbusqueda" class="searchButton"><i class="fa icono-search"></i></button>
-  </form>
+    <form role="form" (ngSubmit)="mostrarjuegos()" #busqueda="ngForm" id="busqueda">
+      <button type="submit" data-toggle="modal" data-target="#modalbusqueda" class="searchButton"><i class="fa icono-search"></i></button>
+    </form>
 </div>
 
 <div class="modal fade" id="modalbusqueda" data-backdrop="false" >
