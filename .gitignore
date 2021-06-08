@@ -85,3 +85,4 @@ build/
 
 backend/.metadata/
 backend/.attach_pid**
+/.metadata/
