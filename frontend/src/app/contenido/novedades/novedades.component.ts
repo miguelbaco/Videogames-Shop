@@ -16,7 +16,11 @@ export class NovedadesComponent implements OnInit {
   listajuegos: Producto[] = []
   listajuegosfinal: Producto[] = [];
   public nuevojuego: Producto;
+  indice: number = 0;
+  numeroPaginas: number = 0;
 
+  btnSiguiente: boolean = false;
+  btnAtras: Boolean = false;
   public notificarError: Error;
   public noHayJuegos: boolean;
 
@@ -26,11 +30,6 @@ export class NovedadesComponent implements OnInit {
     this.notificarError = new Error;
     this.noHayJuegos = false;
     this.mostrarjuegos();
-    if(this.listajuegos != null) {
-      for(let juego of this.listajuegos) {
-        this.listajuegosfinal.unshift(juego);
-      }
-    }
   }
 
   mostrarjuegos() {
@@ -47,6 +46,8 @@ export class NovedadesComponent implements OnInit {
           this.nuevojuego.nombrecategoria = this.datosService.categorias.find(x => x.id == this.nuevojuego.idcategoria).nombre;
           this.listajuegos.push(this.nuevojuego);
         }
+        this.ensenaJuegos();
+        this.paginacion();
       }, (error) => {
         this.notificarError = error.error.error[0];
           this.noHayJuegos = true;
@@ -54,20 +55,69 @@ export class NovedadesComponent implements OnInit {
     );
   }
 
-  ordenarjuegos() {
-    let numerorandom = this.getRandomValue(0, this.listajuegos.length);
-    const productorandom = this.listajuegos[numerorandom];
-    this.listajuegosfinal.push(productorandom);
-    this.listajuegos.splice(numerorandom, 1);
-    if (this.listajuegos.length === 1) {
-      this.listajuegosfinal.push(productorandom);
-    } else {
-      this.ordenarjuegos();
+  ensenaJuegos() {
+    if(this.listajuegos != null) {
+      this.listajuegosfinal = [];
+      let indiceAnterior: number = this.indice;
+      while(this.indice < (indiceAnterior + 6)) {
+        this.listajuegosfinal.push(this.listajuegos[this.indice]);
+        this.indice++;
+      }
     }
   }
 
-  getRandomValue(min, max) { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min);
+  cambiaEnsenaJuegos(nuevoindice: number) {
+    this.listajuegosfinal = [];
+    this.indice = nuevoindice;
+    let indiceAnterior: number = this.indice;
+    while(this.indice < (indiceAnterior + 6)) {
+      this.listajuegosfinal.push(this.listajuegos[this.indice]);
+      this.indice++;
+    }
+    if(this.indice >= this.listajuegos.length) {
+      this.btnSiguiente = false;
+    } else {
+      this.btnSiguiente = true;
+    }
+    if(this.indice == 6) {
+      this.btnAtras = false;
+    } else {
+      this.btnAtras = true;
+    }
+  }
+
+  siguiente() {
+    this.listajuegosfinal = [];
+    let indiceAnterior: number = this.indice;
+    while(this.indice < (indiceAnterior + 6)) {
+      this.listajuegosfinal.push(this.listajuegos[this.indice]);
+      this.indice++;
+    }
+    if(this.indice >= this.listajuegos.length) {
+      this.btnSiguiente = false;
+    }
+    this.btnAtras = true;
+  }
+
+  atras() {
+    this.listajuegosfinal = [];
+    this.indice -= 12;
+    let indiceAnterior: number = this.indice;
+    while(this.indice < (indiceAnterior + 6)) {
+      this.listajuegosfinal.push(this.listajuegos[this.indice]);
+      this.indice++;
+    }
+    if(this.indice == 6) {
+      this.btnAtras = false;
+    }
+    this.btnSiguiente = true;
+  }
+
+  paginacion() {
+    this.numeroPaginas = Math.floor(this.listajuegos.length / 6);
+    if(this.numeroPaginas > 1) {
+      this.btnSiguiente = true;
+    }
   }
 
   categorias() {

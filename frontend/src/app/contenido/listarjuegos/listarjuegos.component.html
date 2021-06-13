@@ -9,7 +9,7 @@
                     <div class="infojuego">
                         <h5>{{juego.nombre}}</h5>
                         <p class="text-secondary">{{juego.nombrecategoria}}</p>
-                        <p class="text-warning mr-1 p-1 d-flex flex-column-reverse align-right text-right fs-4">{{juego.precio | number:'1.0-2'}}€</p>
+                        <p class="text-warning p-1 preciojuego fs-4">{{juego.precio | number:'1.0-2'}}€</p>
                     </div>
                 </div>
             </div>
@@ -18,14 +18,4 @@
             <p>{{this.notificarError.title}}</p>
         </div>
     </div>
-    <footer class="section_footer">
-        <div class="pagination">
-            <button class="pagination_btn">Atrás</button>
-            <button class="pagination_btn">1</button>
-            <button class="pagination_btn">2</button>
-            <button class="pagination_btn">3</button>
-            <button class="pagination_btn">4</button>
-            <button class="pagination_btn">Siguiente</button>
-        </div>
-    </footer>
 </div>

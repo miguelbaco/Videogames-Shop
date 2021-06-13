@@ -9,7 +9,7 @@
                     <div class="spanjuego"></div>
                 </div>
             </div>
-            <div>
+            <div class="ml-3 w-25">
                 <div class="w-100">
                     <h4 class="juegocarritotext" routerLink="/juego/{{juego.id}}">{{juego.nombre}}</h4>
                     <p class="juegocarritotext">{{juego.descripcion}}</p>
@@ -17,8 +17,12 @@
                 <footer class="section_footer footercarrito">
                     <p class="text-secondary d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
                     <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{juego.precio}}€</p>
-                    <button (click)="eliminardeseo(juego.id)" class="btn btn-danger pagination_btn">Quitar de la lista</button>
-                    <button (click)="anadirCarrito(juego.id)" class="btn anadir pagination_btn mb-1 popover-warning" placement="right" ngbPopover="{{notificarPopoverCarrito}}">Añadir al carrito</button>
+                    <div class="mb-1">
+                        <button (click)="eliminardeseo(juego.id)" class="btn btn-danger pagination_btn">Quitar de la lista</button>
+                    </div>
+                    <div>
+                        <button (click)="anadirCarrito(juego.id)" class="btn anadir pagination_btn mb-1 popover-warning" placement="right" ngbPopover="{{notificarPopoverCarrito}}">Añadir al carrito</button>
+                    </div>
                 </footer>
             </div>
         </div>

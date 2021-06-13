@@ -38,11 +38,12 @@
     </div>
     <div *ngFor="let valoracion of valoraciones; let i = index" class="valoraciones section_footer contenidointerior separar">
         <div class="d-flex flex-row">
-            <div class="border border-warning">
-                <span class="icono-smile d-flex flex-row mr-5"></span>
+            <div>
+                <span *ngIf="valoracion.puntuacion > 2" class="icono-smile d-flex flex-row mr-2 ml-2"></span>
+                <span *ngIf="valoracion.puntuacion < 3" class="icono-frown d-flex flex-row mr-2 ml-2"></span>
             </div>
             <p class="fs-5">{{valoracion.usuario.nombre}} {{valoracion.usuario.apellidos}}</p>
-            <div class='rating-stars text-center'>
+            <div class='rating-stars text-center ml-2 mt-1'>
                 <ul id='stars{{i}}'>
                   <li class='star otravals' title='Poor' data-value='1'>
                     <i class='fa otraval fa-star fa-fw'></i>
@@ -62,14 +63,14 @@
                 </ul>
             </div>
         </div>
-        <div class="row contenidointerior text-left mt-2">
+        <div class="row contenidointerior text-left mt-2 ml-2">
             <div>
                 <p>{{valoracion.comentario}}</p>
             </div>
         </div>
     </div>
     <div *ngIf="errorValoraciones" class="valoraciones section_footer contenidointerior separar">
-      <div class="row contenidointerior text-left mt-2">
+      <div class="row contenidointerior text-left mt-2 ml-2">
         <div>
             <p>{{notificarErrorValoraciones.title}}</p>
         </div>

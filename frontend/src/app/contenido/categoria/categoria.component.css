@@ -20,10 +20,6 @@
 	animation: ampliar 3s forwards !important;
 }
 
-.caratula:hover::after{
-    animation: desampliar !important;
-    }
-
 .caratula h5, p {
 	margin: 0px;
 	margin: 0px 3px;
@@ -35,6 +31,12 @@
 
 .spanjuego {
 	height: 60%;
+}
+
+.infojuego {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 .section_footer {
@@ -80,4 +82,16 @@
 	border-radius: 7px;
 	padding: 17px;
   right: 100px;
+}
+
+.encapsulacion {
+    margin-bottom: 25px;
+}
+
+.row {
+    background-color: unset;
+}
+
+.preciojuego {
+    text-align: right;
 }

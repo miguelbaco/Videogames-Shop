@@ -17,6 +17,7 @@
 
 .caratula:hover {
     transition:all 0.3s ease;
+    z-index: 6000;
 	animation: ampliar 3s forwards !important;
 }
 
@@ -33,11 +34,8 @@
 	background-size: cover;
 }
 
-.spanjuego {
-	height: 60%;
-}
-
 .infojuego {
+    width: 100%;
     position: absolute;
     bottom: 0;
 }
@@ -89,4 +87,8 @@
 
 .row {
     background-color: unset;
+}
+
+.preciojuego {
+    text-align: right;
 }

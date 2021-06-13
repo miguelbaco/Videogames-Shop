@@ -1,17 +1,21 @@
 <div class="col-9 contenido float-right mt-5">
     <h2 class="mr-5 mt-4"><span class="icono-search mr-4"></span>Categoría: {{categoria.nombre}}</h2>
     <p class="text-secondary mb-5">{{categoria.descripcion}}</p>
-    <div *ngFor="let juego of listajuegos; let i = index" routerLink="/juego/{{juego.id}}"> <!-- Div que contiene cada uno de los divs juegos -->
-        <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
-            <div class="caratula">
-                <div class="spanjuego"></div>
-                <h5>{{juego.nombre}}</h5>
-                <p class="text-secondary">{{juego.nombrecategoria}}</p>
-                <p class="text-warning m-0 p-0 d-flex flex-row-reverse fs-4">{{juego.precio}}€</p>
+    <div class="row">
+        <div *ngFor="let juego of listajuegos; let i = index" class="d-inline col-2" routerLink="/juego/{{juego.id}}">
+            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
+                <div class="caratula">
+                    <div class="spanjuego"></div>
+                    <div class="infojuego">
+                        <h5>{{juego.nombre}}</h5>
+                        <p class="text-secondary">{{juego.nombrecategoria}}</p>
+                        <p class="text-warning p-1 preciojuego fs-4">{{juego.precio | number:'1.0-2'}}€</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div *ngIf="noHayJuegos || listajuegos.length == 0">
-        <p>{{this.notificarError.title}}</p>
+        <p class="m-3">{{this.notificarError.title}}</p>
     </div>
 </div>

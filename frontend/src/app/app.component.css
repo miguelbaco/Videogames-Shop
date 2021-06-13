@@ -12,8 +12,8 @@ h2, p, h4, h5 {
 
 @keyframes ampliar {
     0% {transform: scale(1.0);}
-    50% {transform: scale(1.2);}
-    0% {transform: scale(1.0);}
+    50% {transform: scale(1.2); position: relative; z-index: 1;}
+    100% {transform: scale(1.0);}
 }
 
 @keyframes desampliar {
