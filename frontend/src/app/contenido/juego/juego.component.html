@@ -1,7 +1,7 @@
-<div class="col-9 contenido float-right mt-5">
-    <div *ngIf="juegoboolean" class="d-flex flex-row juegocarrito">
-        <div>
-            <div class="caratulajuego caratulaimagenjuego" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
+<div class="col-lg-9 col-md-8 col-8 contenido float-right mt-5">
+    <div *ngIf="juegoboolean" class="d-block d-lg-flex flex-lg-row juegocarrito">
+        <div class="d-block mx-auto">
+            <div class="caratulajuego caratulaimagenjuego img-center d-flex mx-auto" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
                 <div class="caratulajuego">
                     <div class="spancaratulajuego"></div>
                 </div>
@@ -12,8 +12,8 @@
             </div>
         </div>
         <div>
-            <div class="w-75">
-                <h2 class="juegocarritotext ml-5 pl-5">{{juego.nombre}}</h2>
+            <div class="d-none d-lg-block w-75">
+                <h2 class="juegocarritotext ml-xl-5 pl-5">{{juego.nombre}}</h2>
                 <p class="juegocarritotext pb-3">{{juego.descripcion}}</p>
                 <h4 class="juegocarritotext mt-5">Puntuación de los usuarios</h4>
                 <div *ngIf="datosService.valoracionfinal != undefined; else noHayValoracion" class="estrellas d-flex flex-row mr-5">
@@ -22,10 +22,21 @@
                     <p class="fs-9 d-flex flex-row notamaxima">/ 10</p>
                     <p class="juegocarritotext pb-3 d-flex flex-row totalvotos"> {{datosService.numerovaloraciones}} voto/s</p>
                 </div>
-                <ng-template #noHayValoracion>
-                    <p class="juegocarritotext pb-3">Este juego no ha sido valorado por ningún usuario.</p>
-                </ng-template>
             </div>
+            <div class="d-block d-lg-none w-100">
+                <h2 class="juegocarritotext ml-xl-5 pl-5">{{juego.nombre}}</h2>
+                <p class="juegocarritotext pb-3">{{juego.descripcion}}</p>
+                <h4 class="juegocarritotext mt-5">Puntuación de los usuarios</h4>
+                <div *ngIf="datosService.valoracionfinal != undefined; else noHayValoracion" class="estrellas d-flex flex-row mr-5">
+                    <i class="fa fs-4 fa-star checked d-flex flex-row ml-5"></i>
+                    <p class="fs-1 d-flex flex-row notadejuego">{{datosService.valoracionfinal | number:'1.2-2' }}</p>
+                    <p class="fs-9 d-flex flex-row notamaxima">/ 10</p>
+                    <p class="juegocarritotext pb-3 d-flex flex-row totalvotos"> {{datosService.numerovaloraciones}} voto/s</p>
+                </div>
+            </div>
+            <ng-template #noHayValoracion>
+                <p class="juegocarritotext pb-3">Este juego no ha sido valorado por ningún usuario.</p>
+            </ng-template>
             <footer class="section_footer footercarrito">
                 <p class="text-secondary fs-4 d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
                 <p class="text-warning fs-1 mr-5 pr-5 text-right juegocarritotext">{{juego.precio | number:'1.0-2'}}€</p>

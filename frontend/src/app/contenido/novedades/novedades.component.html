@@ -1,13 +1,13 @@
-<div class="col-9 contenido float-right mt-5">
+<div class="col-lg-9 col-md-8 col-8 contenido float-right mt-5">
     <h2 class="mr-5 mt-4"><span class="icono-eye mr-3"></span>Novedades</h2>
     <p class="text-secondary">Disfruta de los últimos juegos añadidos a la página ;)</p>
 
     <h4 class="mt-5">Últimas publicaciones</h4>
-    <div class="row">
-        <div *ngFor="let juego of listajuegosfinal" class="encapsulacion col-2"  routerLink="/juego/{{juego.id}}">
-            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
-                <div class="caratula">
-                    <div class="infojuego">
+    <div class="row container-fluid">
+        <div *ngFor="let juego of listajuegosfinal" class="container-fluid encapsulacion col-9 col-md-6 col-lg-4 col-xl-2"  routerLink="/juego/{{juego.id}}">
+            <div class="caratula caratulaimagen img-fluid" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
+                <div class="caratula img-fluid">
+                    <div class="infojuego img-fluid">
                         <h5>{{juego.nombre}}</h5>
                         <p class="text-secondary">{{juego.nombrecategoria}}</p>
                         <p class="text-warning p-1 preciojuego fs-4">{{juego.precio}}€</p>
@@ -27,19 +27,19 @@
             </div>
 
             <div *ngIf="numeroPaginas > 0">
-                <button (click)="cambiaEnsenaJuegos(0)" class="pagination_btn">1</button>
+                <button (click)="cambiaEnsenaJuegos(0)" class="pagination_btn pagina1 dejaractivado">1</button>
             </div>
             <div *ngIf="numeroPaginas > 1">
-                <button (click)="cambiaEnsenaJuegos(6)" class="pagination_btn">2</button>
+                <button (click)="cambiaEnsenaJuegos(6)" class="pagination_btn pagina2">2</button>
             </div>
             <div *ngIf="numeroPaginas > 2">
-                <button (click)="cambiaEnsenaJuegos(12)" class="pagination_btn">3</button>
+                <button (click)="cambiaEnsenaJuegos(12)" class="pagination_btn pagina3">3</button>
             </div>
             <div *ngIf="numeroPaginas > 3">
-                <button (click)="cambiaEnsenaJuegos(18)" class="pagination_btn">4</button>
+                <button (click)="cambiaEnsenaJuegos(18)" class="pagination_btn pagina4">4</button>
             </div>
             <div *ngIf="numeroPaginas > 4">
-                <button (click)="cambiaEnsenaJuegos(24)" class="pagination_btn">5</button>
+                <button (click)="cambiaEnsenaJuegos(24)" class="pagination_btn pagina5">5</button>
             </div>
 
             <div *ngIf="btnSiguiente">

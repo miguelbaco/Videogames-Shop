@@ -84,6 +84,33 @@ export class NovedadesComponent implements OnInit {
     } else {
       this.btnAtras = true;
     }
+
+    let pagina: number;
+    switch(nuevoindice) {
+      case 0: pagina=1;
+              break;
+      case 6: pagina=2;
+              break;
+      case 12: pagina=3;
+              break;
+      case 18: pagina=4;
+              break;
+      case 24: pagina=5;
+              break;
+      default: pagina=null;
+    }
+    if(pagina!=null) {
+        let clase = "pagina" + pagina;
+        let i:number = 1;
+        while(i <6) {
+            if(clase == ("pagina" + i)) {
+              $('.' + clase).addClass('dejaractivado');
+            } else {
+              $('.pagina' + i).removeClass('dejaractivado');
+            }
+            i++;
+        }
+    }
   }
 
   siguiente() {
@@ -97,6 +124,33 @@ export class NovedadesComponent implements OnInit {
       this.btnSiguiente = false;
     }
     this.btnAtras = true;
+
+    let pagina: number;
+    switch(indiceAnterior) {
+      case 0: pagina=1;
+              break;
+      case 6: pagina=2;
+              break;
+      case 12: pagina=3;
+              break;
+      case 18: pagina=4;
+              break;
+      case 24: pagina=5;
+              break;
+      default: pagina=null;
+    }
+    if(pagina!=null) {
+        let clase = "pagina" + pagina;
+        let i:number = 1;
+        while(i <6) {
+            if(clase == ("pagina" + i)) {
+              $('.' + clase).addClass('dejaractivado');
+            } else {
+              $('.pagina' + i).removeClass('dejaractivado');
+            }
+            i++;
+        }
+    }
   }
 
   atras() {
@@ -111,6 +165,33 @@ export class NovedadesComponent implements OnInit {
       this.btnAtras = false;
     }
     this.btnSiguiente = true;
+
+    let pagina: number;
+    switch(indiceAnterior) {
+      case 0: pagina=1;
+              break;
+      case 6: pagina=2;
+              break;
+      case 12: pagina=3;
+              break;
+      case 18: pagina=4;
+              break;
+      case 24: pagina=5;
+              break;
+      default: pagina=null;
+    }
+    if(pagina!=null) {
+        let clase = "pagina" + pagina;
+        let i:number = 1;
+        while(i <6) {
+            if(clase == ("pagina" + i)) {
+              $('.' + clase).addClass('dejaractivado');
+            } else {
+              $('.pagina' + i).removeClass('dejaractivado');
+            }
+            i++;
+        }
+    }
   }
 
   paginacion() {

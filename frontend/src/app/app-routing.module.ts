@@ -8,7 +8,6 @@ import { JuegoComponent } from './contenido/juego/juego.component';
 import { NovedadesComponent } from './contenido/novedades/novedades.component';
 import { ListarcategoriasComponent } from './contenido/listarcategorias/listarcategorias.component';
 import { CategoriaComponent } from './contenido/categoria/categoria.component';
-import { BusquedaComponent } from './contenido/busqueda/busqueda.component';
 import { UsuarioComponent } from './contenido/usuario/usuario.component';
 import { InicioComponent } from './contenido/inicio/inicio.component';
 import { ErrorpageComponent } from './layout/errorpage/errorpage.component';
@@ -26,7 +25,6 @@ const routes: Routes = [
   {path : 'novedades', component: NovedadesComponent},
   {path : 'categorias', component: ListarcategoriasComponent},
   {path : 'categoria/:id', component: CategoriaComponent},
-  {path : 'busqueda', component: BusquedaComponent},
   {path : 'usuario', component: UsuarioComponent},
   {path : 'notfound', component: ErrorpageComponent},
 

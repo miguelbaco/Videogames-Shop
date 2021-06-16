@@ -1,15 +1,14 @@
-<div class="col-9 contenido float-right mt-5">
+<div class="col-lg-9 col-md-8 col-8 contenido float-right mt-5">
     <h2 class="mr-5 mt-4"><span class="icono-search mr-4"></span>Categoría: {{categoria.nombre}}</h2>
     <p class="text-secondary mb-5">{{categoria.descripcion}}</p>
-    <div class="row">
-        <div *ngFor="let juego of listajuegos; let i = index" class="d-inline col-2" routerLink="/juego/{{juego.id}}">
-            <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
-                <div class="caratula">
-                    <div class="spanjuego"></div>
-                    <div class="infojuego">
+    <div class="row container-fluid">
+        <div *ngFor="let juego of listajuegos" class="container-fluid encapsulacion col-9 col-md-6 col-lg-4 col-xl-2"  routerLink="/juego/{{juego.id}}">
+            <div class="caratula caratulaimagen img-fluid" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
+                <div class="caratula img-fluid">
+                    <div class="infojuego img-fluid">
                         <h5>{{juego.nombre}}</h5>
                         <p class="text-secondary">{{juego.nombrecategoria}}</p>
-                        <p class="text-warning p-1 preciojuego fs-4">{{juego.precio | number:'1.0-2'}}€</p>
+                        <p class="text-warning p-1 preciojuego fs-4">{{juego.precio}}€</p>
                     </div>
                 </div>
             </div>

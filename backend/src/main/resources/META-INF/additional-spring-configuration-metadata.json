@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "upload.path",
+  "type": "java.lang.String",
+  "description": "path donde se guardan las imagenes de videojuegos"
+}]}

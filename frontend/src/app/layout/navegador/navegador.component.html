@@ -1,32 +1,32 @@
-<div class="col-2 desplegable">
+<div class="col-1 col-lg-3 desplegable">
     <nav class="navbar-primary">
-      <a class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left icono-caretLeft"></span></a>
+      <a class="d-none d-xl-inline-block btn-expand-collapse"><span class="glyphicon glyphicon-menu-left icono-caretLeft"></span></a>
       <ul class="navbar-primary-menu">
         <div *ngIf="logeado">
           <li routerLink="/carrito">
-            <a><span class="icono-cart"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Carrito</p></span></a>
+            <a><span class="icono-cart"></span><span class="nav-label px-2"><p class="d-none d-xl-inline-block list-inline-item mb-0 pb-0">Carrito</p></span></a>
           </li>
           <li routerLink="/lista-de-deseos">
-            <a><span class="icono-heart"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Lista de deseos</p></span></a>
+            <a><span class="icono-heart"></span><span class="nav-label px-2"><p class="d-none d-xl-inline-block list-inline-item mb-0 pb-0">Lista de deseos</p></span></a>
           </li>
         </div>
           <div class="span6 diferenciar-nav">
             </div>
         <li routerLink="/">
-          <a><span class="icono-market"></span><span class="nav-label px-2 ml-0 pl-0"><p class="list-inline-item mb-0 pb-0">Inicio</p></span></a>
+          <a><span class="icono-market"></span><span class="nav-label px-2 ml-0 pl-0"><p class="d-none d-xl-inline-block list-inline-item mb-0 pb-0">Inicio</p></span></a>
           </li>
           <li routerLink="/novedades">
-          <a><span class="icono-eye"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Novedades</p></span></a>
+          <a><span class="icono-eye"></span><span class="nav-label px-2"><p class="d-none d-xl-inline-block list-inline-item mb-0 pb-0">Novedades</p></span></a>
         </li>
         <li routerLink="/juegos">
-          <a><span class="icono-play"></span><span class="nav-label px-2"><p class="list-inline-item mb-0 pb-0">Juegos</p></span></a>
+          <a><span class="icono-play"></span><span class="nav-label px-2"><p class="d-none d-xl-inline-block list-inline-item mb-0 pb-0">Juegos</p></span></a>
         </li>
         <div class="span6 diferenciar-nav">
         </div>
         <li routerLink="/categorias">
-          <a><span class="icono-tag"></span><span class="nav-label px-2 ml-0 pl-0">Categorías</span></a>
+          <a><span class="icono-tag"></span><span class="nav-label px-2"><p class="d-none d-xl-inline-block list-inline-item mb-0 pb-0">Categorías</p></span></a>
         </li>
-        <div *ngFor="let categoriamenu of categoriasmenu">
+        <div class="d-none d-xl-block" *ngFor="let categoriamenu of categoriasmenu">
           <li *ngIf="categoriasboolean">
             <a routerLink="/categoria/{{categoriamenu.id}}"><span class="nav-label px-2">{{categoriamenu.nombre}}</span></a>
           </li>
@@ -34,14 +34,3 @@
       </ul>
     </nav>
 </div>
-
-<script type="text/javascript">
-  $('.btn-expand-collapse').click(function(e) {
-    $('.navbar-primary').toggleClass('collapsed');
-    $('.glyphicon-menu-left').toggleClass('icono-caretLeft');
-    $('.glyphicon-menu-left').toggleClass('icono-caretRight');
-    $('.contenido').toggleClass('col-10');
-    $('.contenido').toggleClass('position-relative');
-    $('.desplegable').toggleClass('col-1');
-  });
-</script>

@@ -1,4 +1,4 @@
-<div *ngIf="furula" class="search">
+<div *ngIf="furula" class="float-right search">
     <input type="text" class="searchTerm" [(ngModel)]="strbusqueda" placeholder="Que juego estas buscando?">
     <form role="form" (ngSubmit)="mostrarjuegos()" #busqueda="ngForm" id="busqueda">
       <button type="submit" data-toggle="modal" data-target="#modalbusqueda" class="searchButton"><i class="fa icono-search"></i></button>

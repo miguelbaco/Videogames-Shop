@@ -78,6 +78,10 @@
 	background-color: #f1601c;
 }
 
+.dejaractivado {
+	background-color: #f1601c !important;
+}
+
 .contenido {
 	background-color: rgba(67, 89, 142, 0.35);
 	border-radius: 7px;

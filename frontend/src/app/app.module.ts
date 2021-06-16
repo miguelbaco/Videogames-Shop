@@ -18,7 +18,6 @@ import { ComprasComponent } from './contenido/compras/compras.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InicioComponent } from './contenido/inicio/inicio.component';
 import { NovedadesComponent } from './contenido/novedades/novedades.component';
-import { BusquedaComponent } from './contenido/busqueda/busqueda.component';
 import { ListarcategoriasComponent } from './contenido/listarcategorias/listarcategorias.component';
 import { CategoriaComponent } from './contenido/categoria/categoria.component';
 import { UsuarioComponent } from './contenido/usuario/usuario.component';
@@ -47,7 +46,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ComprasComponent,
     InicioComponent,
     NovedadesComponent,
-    BusquedaComponent,
     ListarcategoriasComponent,
     CategoriaComponent,
     UsuarioComponent,

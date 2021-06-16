@@ -46,6 +46,11 @@
   top: 30px;
 }
 
+.fecha {
+  position: relative;
+  right: 12px;
+}
+
 .section_footer {
 	margin-top: 3rem;
 	align-items: center;
@@ -85,4 +90,7 @@
 	padding: 14px 0px; 
 }
 
+.separador {
+  padding-bottom: 25px;
+}
 

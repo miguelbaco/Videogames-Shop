@@ -1,9 +1,9 @@
-<div class="col-9 contenido float-right mt-5">
+<div class="col-lg-9 col-md-8 col-8 contenido float-right mt-5">
     <h2 class="mr-5 mt-4"><span class="icono-tag mr-3"></span>Categorías</h2>
     <p class="text-secondary mb-3">Estas son las categorías de las que disponemos en nuestra página</p>
 
-    <div class="row">
-        <div *ngFor="let categoria of listacategorias;" class="col-md-2 ml-2 mr-2 mt-4">
+    <div class="row container-fluid">
+        <div *ngFor="let categoria of listacategorias;" class=" col-7 col-xs-4 col-lg-3 col-xl-2 ml-2 mr-2 mt-4">
             <div routerLink="/categoria/{{categoria.id}}" class="caratula caratulaimagen" style="background-image: url('../../../assets/categoria.jpg');">
                 <div class="caratula align-items-center text-center d-flex justify-content-center">
                     <h5 class="text-center">{{categoria.nombre}}</h5>

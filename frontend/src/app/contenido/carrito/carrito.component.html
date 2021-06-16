@@ -1,9 +1,9 @@
-<div class="col-9 contenido float-right mt-5">
+<div class="col-lg-9 col-md-8 col-8 contenido float-right mt-5">
     <h2 class="mr-5 mt-4"><span class="icono-cart"></span>Carrito</h2>
     <p class="text-secondary">Estos son los productos que quieres comprar</p>
 
     <div> <!-- Div que contiene cada uno de los divs juegos -->
-        <div *ngFor="let juego of listajuegos; let i = index" class="d-flex juegocarrito flex-row w-100 mb-4 pb-5">
+        <div *ngFor="let juego of listajuegos; let i = index" class="d-block d-md-flex juegocarrito flex-md-row w-100 mb-4 pb-5">
             <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
                 <div class="caratula">
                     <div class="spanjuego"></div>
@@ -11,12 +11,12 @@
             </div>
             <div class="w-100">
                 <div class="w-75">
-                    <h4 class="juegocarritotext" routerLink="/juego/{{juego.id}}">{{juego.nombre}}</h4>
-                    <p class="juegocarritotext">{{juego.descripcion}}</p>
+                    <h4 class="d-block d-md-flex juegocarritotext" routerLink="/juego/{{juego.id}}">{{juego.nombre}}</h4>
+                    <p class="d-block d-md-flex juegocarritotext">{{juego.descripcion}}</p>
                 </div>
                 <footer class="section_footer footercarrito">
-                    <p class="text-secondary d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
-                    <p class="ml-5 pl-5 fs-4 text-center juegocarritotext">Cantidad: {{juego.cantidad}}</p>
+                    <p class="text-secondary d-md-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
+                    <p class="ml-5 pl-5 fs-4 d-md-flex text-center juegocarritotext">Cantidad: {{juego.cantidad}}</p>
                     <p class="text-warning ml-5 pl-5 fs-4 text-center juegocarritotext">{{juego.precio}}€</p>
                     <button (click)="eliminarcarrito(juego.id)" class="btn btn-danger pagination_btn">Eliminar del carrito</button>
                 </footer>

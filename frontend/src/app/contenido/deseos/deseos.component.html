@@ -1,20 +1,20 @@
-<div class="col-9 contenido float-right mt-5">
+<div class="col-lg-9 col-md-8 col-8 contenido float-right mt-5">
     <h2 class="mr-5 mt-4"><span class="icono-heart"></span> Lista de deseos</h2>
     <p class="text-secondary">Esta es tu lista de videojuegos que quieres comprar en un futuro</p>
 
     <div> <!-- Div que contiene cada uno de los divs juegos -->
-        <div *ngFor="let juego of listajuegos; let i = index" class="d-flex flex-row juegocarrito">
+        <div *ngFor="let juego of listajuegos; let i = index" class="d-md-flex juegocarrito flex-md-row w-100">
             <div class="caratula caratulaimagen" style="background-image: url('../../../assets/juegos/{{juego.imagen}}');">
                 <div class="caratula">
                     <div class="spanjuego"></div>
                 </div>
             </div>
-            <div class="ml-3 w-25">
+            <div class="d-none d-md-block ml-3 w-25 container-fluid">
                 <div class="w-100">
-                    <h4 class="juegocarritotext" routerLink="/juego/{{juego.id}}">{{juego.nombre}}</h4>
+                    <h4 class="juegocarritotext w-100" routerLink="/juego/{{juego.id}}">{{juego.nombre}}</h4>
                     <p class="juegocarritotext">{{juego.descripcion}}</p>
                 </div>
-                <footer class="section_footer footercarrito">
+                <footer class="section_footer mt-md-3 mt-0 footercarrito">
                     <p class="text-secondary d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
                     <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{juego.precio}}€</p>
                     <div class="mb-1">
@@ -23,6 +23,21 @@
                     <div>
                         <button (click)="anadirCarrito(juego.id)" class="btn anadir pagination_btn mb-1 popover-warning" placement="right" ngbPopover="{{notificarPopoverCarrito}}">Añadir al carrito</button>
                     </div>
+                </footer>
+            </div>
+            <div class="d-block d-md-none ml-3 w-75 container-fluid">
+                <div class="w-100">
+                    <h4 class="mt-4 w-100" routerLink="/juego/{{juego.id}}">{{juego.nombre}}</h4>
+                    <p class="text-secondary d-flex flex-row juegocarritotext">{{juego.nombrecategoria}}</p>
+                    <p class="text-warning mr-5 pr-5 fs-4 text-right juegocarritotext">{{juego.precio}}€</p>
+                    <div class="mb-1">
+                        <button (click)="eliminardeseo(juego.id)" class="btn btn-danger pagination_btn">Quitar de la lista</button>
+                    </div>
+                    <div>
+                        <button (click)="anadirCarrito(juego.id)" class="btn anadir pagination_btn mb-1 popover-warning" placement="right" ngbPopover="{{notificarPopoverCarrito}}">Añadir al carrito</button>
+                    </div>
+                </div>
+                <footer class="section_footer mt-md-3 mt-0 footercarrito">
                 </footer>
             </div>
         </div>

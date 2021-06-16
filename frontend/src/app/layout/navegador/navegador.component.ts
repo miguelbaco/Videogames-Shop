@@ -21,11 +21,12 @@ export class NavegadorComponent implements OnInit {
 
   // Este método coge por las class los tag y les quita o añade las siguientes claseses
   ngOnInit(): void {
-    $('.btn-expand-collapse').click(function() {
+    $('.btn-expand-collapse').click(function(e) {
       $('.navbar-primary').toggleClass('collapsed');
       $('.glyphicon-menu-left').toggleClass('icono-caretLeft');
       $('.glyphicon-menu-left').toggleClass('icono-caretRight');
-      $('.contenido').toggleClass('col-10');
+      $('.contenido').toggleClass('col-lg-9');
+      $('.contenido').toggleClass('col-xl-10');
       $('.contenido').toggleClass('position-relative');
       $('.desplegable').toggleClass('col-1');
     });
