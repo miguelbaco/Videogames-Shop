@@ -74,7 +74,7 @@ export class NovedadesComponent implements OnInit {
       this.listajuegosfinal.push(this.listajuegos[this.indice]);
       this.indice++;
     }
-    if(this.indice >= this.listajuegos.length) {
+    if(this.indice+ 6 >= this.listajuegos.length) {
       this.btnSiguiente = false;
     } else {
       this.btnSiguiente = true;
@@ -120,7 +120,7 @@ export class NovedadesComponent implements OnInit {
       this.listajuegosfinal.push(this.listajuegos[this.indice]);
       this.indice++;
     }
-    if(this.indice >= this.listajuegos.length) {
+    if(this.indice + 6 >= this.listajuegos.length) {
       this.btnSiguiente = false;
     }
     this.btnAtras = true;
