@@ -418,7 +418,9 @@ COPY public.producto (id_producto, nombre_producto, descripcion_producto, precio
 1	FIFA 19	Es un videojuego de simulación de fútbol desarrollado por EA, como parte de la serie FIFA de Electronic Arts. Juega con los mejores futbolistas del mundo	45.50	19	FIFA22.jpg	1	\N
 14	Cyberpunk 2077	Cyberpunk 2077 es una historia de acción y aventura en mundo abierto ambientada en Night City, una megalópolis obsesionada con el poder. Tu personaje es V, un mercenario que persigue un implante único que permite alcanzar la inmortalidad.	50.00	73	cyberpunk.jpg	2	\N
 2	Red Dead Redemption 2	Arthur Morgan y su banda son forajidos en busca y captura. Mientras los agentes federales y los mejores cazarrecompensas de la nación les pisan los talones.	65.50	13	RedDead2.jpg	2	\N
+57	Kingdom Hearts III	Donald y Goofy, dos emisarios enviados por el Rey Mickey desde el Castillo de Disney, se unen a Sora para impedir que una fuerza maligna conocida como los Sincorazón invada el universo	60.00	12	Kingdomhearts3.jpg	19	\N
 13	Days Gone	Days Gone nos lleva a un futuro apocalíptico dominado por zombies, o más bien, que no son sino humanos infectados por un virus que los ha convertido en criaturas salvajes y hambrientas.	40.00	57	DaysGone.jpg	2	\N
+58	WWE 2K15	WWE 2K15 es un juego de simulación de lucha que da comienzo a una nueva era de videojuegos de la WWE!	15.00	20	WWE.jpg	20	\N
 \.
 
 
@@ -472,7 +474,7 @@ SELECT pg_catalog.setval('public.categoria_id_categoria_seq', 2, true);
 -- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.hibernate_sequence', 56, true);
+SELECT pg_catalog.setval('public.hibernate_sequence', 58, true);
 
 
 --
